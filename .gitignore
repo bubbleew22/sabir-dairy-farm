@@ -1,0 +1,13 @@
+node_modules/
+android/
+ios/
+.capacitor/
+*.apk
+*.aab
+*.keystore
+*.jks
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
