@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🐄 Sabir Dairy Farm - FINAL</title>
+<title>🐄 Sabir Dairy Farm</title>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -20,18 +20,13 @@
     min-height: 100vh;
     padding: 15px;
   }
-  
-  @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+  @keyframes gradientBG { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
   
   /* LOCK SCREEN */
   #lockScreen {
     position: fixed; top: 0; left: 0;
     width: 100%; height: 100%;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4a9d4e 100%);
+    background: linear-gradient(135deg, #1e3c72, #2a5298, #4a9d4e);
     z-index: 99999;
     display: flex; justify-content: center; align-items: center;
     padding: 20px;
@@ -45,8 +40,7 @@
     max-width: 420px; width: 100%;
     text-align: center;
     box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
   }
   .lock-box::before {
     content: ''; position: absolute; top: 0; left: 0;
@@ -88,8 +82,8 @@
   .pin-modal h3 { color: #2c5f2d; font-size: 20px; margin-bottom: 8px; font-weight: 800; }
   .pin-modal p { color: #7f8c8d; font-size: 13px; margin-bottom: 20px; }
   
-  /* MAIN */
-  .container { max-width: 1500px; margin: 0 auto; background: #fff; border-radius: 25px; box-shadow: 0 30px 90px rgba(0,0,0,0.5); overflow: hidden; }
+  /* MAIN APP */
+  .container { max-width: 1600px; margin: 0 auto; background: #fff; border-radius: 25px; box-shadow: 0 30px 90px rgba(0,0,0,0.5); overflow: hidden; }
   
   header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
@@ -98,8 +92,7 @@
     color: white;
     padding: 30px 25px 25px;
     text-align: center;
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
     border-bottom: 5px solid #ffeb3b;
   }
   @keyframes headerGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
@@ -114,7 +107,6 @@
     font-family: 'Georgia', serif;
     position: relative; z-index: 2;
   }
-  
   header .subtitle { font-size: 14px; letter-spacing: 4px; margin-top: 5px; position: relative; z-index: 2; }
   
   .status-badge { position: absolute; top: 12px; right: 15px; padding: 7px 14px; border-radius: 30px; font-size: 11px; font-weight: 700; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); z-index: 10; letter-spacing: 1px; }
@@ -148,7 +140,7 @@
   .stat-card p { color: #7f8c8d; font-size: 10px; font-weight: 700; text-transform: uppercase; }
   
   .tabs { display: flex; background: linear-gradient(135deg, #1e3c72, #2a5298); padding: 8px 10px; overflow-x: auto; gap: 5px; }
-  .tab { padding: 11px 16px; border: none; background: rgba(255,255,255,0.1); font-size: 12px; font-weight: 700; color: #e0f2fe; border-radius: 10px; cursor: pointer; transition: all 0.3s; white-space: nowrap; }
+  .tab { padding: 11px 14px; border: none; background: rgba(255,255,255,0.1); font-size: 11px; font-weight: 700; color: #e0f2fe; border-radius: 10px; cursor: pointer; transition: all 0.3s; white-space: nowrap; }
   .tab:hover { background: rgba(255,255,255,0.2); }
   .tab.active { background: linear-gradient(135deg, #ffeb3b, #f39c12); color: #2c3e50; box-shadow: 0 6px 20px rgba(243,156,18,0.5); }
   
@@ -202,6 +194,7 @@
   .summary-card .amount.red { color: #e74c3c; }
   .summary-card .amount.green { color: #27ae60; }
   .summary-card .amount.orange { color: #e67e22; }
+  .summary-card .amount.blue { color: #3498db; }
   
   .cat-btn { padding: 7px 14px; border: 2px solid #e0e6ed; background: white; border-radius: 25px; cursor: pointer; font-size: 11px; font-weight: 700; transition: all 0.3s; color: #555; margin: 2px; }
   .cat-btn:hover { border-color: #4a9d4e; color: #4a9d4e; }
@@ -238,33 +231,16 @@
   .settings-form .form-group { margin-bottom: 15px; }
   .settings-form input { width: 100%; padding: 12px; border: 2px solid #e0e6ed; border-radius: 10px; font-size: 15px; letter-spacing: 2px; text-align: center; font-weight: 700; }
   
-  /* MILK ALL BADGE */
-  .milk-all-badge {
-    display: inline-block;
-    background: linear-gradient(135deg, #ffeb3b, #f39c12);
-    color: #2c3e50;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 10px;
-    font-weight: 800;
-    margin-left: 8px;
-    letter-spacing: 1px;
-  }
-  
-  /* USER REQUEST CARD */
-  .request-card {
-    background: white;
-    border-left: 5px solid #9b59b6;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-    transition: all 0.3s;
-  }
-  .request-card:hover { transform: translateX(5px); box-shadow: 0 5px 20px rgba(155,89,182,0.2); }
+  .request-card { background: white; border-left: 5px solid #9b59b6; padding: 15px; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 3px 15px rgba(0,0,0,0.08); transition: all 0.3s; }
+  .request-card:hover { transform: translateX(5px); }
   .request-card h4 { color: #2c3e50; font-size: 15px; margin-bottom: 6px; }
   .request-card p { color: #666; font-size: 12px; line-height: 1.6; }
   .request-card .actions { margin-top: 12px; }
+  
+  .profit-breakdown { padding: 20px; border-radius: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; color: white; }
+  .profit-breakdown .label { font-size: 13px; letter-spacing: 1px; }
+  .profit-breakdown .sub { font-size: 11px; opacity: 0.85; margin-top: 4px; }
+  .profit-breakdown .value { font-size: 28px; font-weight: 900; }
   
   @media (max-width: 600px) {
     header h1 { font-size: 22px; letter-spacing: 1px; }
@@ -274,11 +250,7 @@
     .lock-btn, .settings-btn, .requests-btn { font-size: 9px; padding: 5px 8px; }
     .settings-btn { left: 75px; }
     .requests-btn { left: 145px; }
-  }
-  
-  @media print {
-    body { background: white; }
-    .tabs, .btn, .search-box, .cat-btn, .chart-tabs, .lock-btn, .settings-btn, .requests-btn { display: none !important; }
+    .profit-breakdown .value { font-size: 22px; }
   }
 </style>
 </head>
@@ -290,14 +262,9 @@
     <div class="lock-logo">🔐</div>
     <h1>SABIR DAIRY FARM</h1>
     <p class="subtitle">PIN Daalein</p>
-    
     <div class="pin-display" id="pinDisplay">
-      <div class="pin-dot"></div>
-      <div class="pin-dot"></div>
-      <div class="pin-dot"></div>
-      <div class="pin-dot"></div>
+      <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
     </div>
-    
     <div class="keypad">
       <button class="key" onclick="pinInput('1')">1</button>
       <button class="key" onclick="pinInput('2')">2</button>
@@ -312,7 +279,6 @@
       <button class="key" onclick="pinInput('0')">0</button>
       <button class="key delete" onclick="pinDelete()">⌫</button>
     </div>
-    
     <button class="btn btn-success" style="width:100%;margin-top:15px;padding:14px;font-size:14px;" onclick="pinSubmit()">🔓 Unlock</button>
     <div class="lock-message" id="lockMessage"></div>
   </div>
@@ -325,10 +291,7 @@
     <h3 id="pinVerifyTitle">PIN Confirm Karein</h3>
     <p id="pinVerifyMsg">Is action ke liye PIN zaroori hai</p>
     <div class="pin-display" id="pinVerifyDisplay">
-      <div class="pin-dot"></div>
-      <div class="pin-dot"></div>
-      <div class="pin-dot"></div>
-      <div class="pin-dot"></div>
+      <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
     </div>
     <div class="keypad" style="margin-top:15px;">
       <button class="key" onclick="verifyInput('1')">1</button>
@@ -355,43 +318,31 @@
   <div class="modal-box" style="max-width:450px;">
     <button class="modal-close" onclick="closeSettings()">✕</button>
     <h2 style="color:#1e3c72;margin-bottom:20px;">⚙️ Settings</h2>
-    
     <div style="background:#f0f4f8;padding:15px;border-radius:12px;margin-bottom:20px;">
       <h3 style="color:#1e3c72;font-size:13px;margin-bottom:8px;">👤 MASTER ACCOUNT</h3>
       <p style="font-size:12px;color:#555;line-height:1.8;">
-        📧 Email: <strong>hayatsarwar1989@gmail.com</strong><br>
-        📱 Phone: <strong>+92 301 8020176</strong>
+        📧 hayatsarwar1989@gmail.com<br>
+        📱 +92 301 8020176
       </p>
     </div>
-    
     <div class="settings-form">
       <h3 style="color:#1e3c72;font-size:13px;margin-bottom:12px;">🔑 PIN CHANGE</h3>
-      <div class="form-group">
-        <label>Purana PIN</label>
-        <input type="password" id="oldPin" maxlength="4" inputmode="numeric" placeholder="••••">
-      </div>
-      <div class="form-group">
-        <label>Naya PIN (4 digit)</label>
-        <input type="password" id="newPin" maxlength="4" inputmode="numeric" placeholder="••••">
-      </div>
-      <div class="form-group">
-        <label>Naya PIN Dobara</label>
-        <input type="password" id="confirmPin" maxlength="4" inputmode="numeric" placeholder="••••">
-      </div>
+      <div class="form-group"><label>Purana PIN</label><input type="password" id="oldPin" maxlength="4" inputmode="numeric" placeholder="••••"></div>
+      <div class="form-group"><label>Naya PIN (4 digit)</label><input type="password" id="newPin" maxlength="4" inputmode="numeric" placeholder="••••"></div>
+      <div class="form-group"><label>Naya PIN Dobara</label><input type="password" id="confirmPin" maxlength="4" inputmode="numeric" placeholder="••••"></div>
       <button class="btn btn-success" style="width:100%;padding:14px;font-size:14px;margin-top:10px;" onclick="changePIN()">🔑 PIN Change Karein</button>
     </div>
-    
     <div class="lock-message" id="settingsMessage" style="text-align:center;margin-top:15px;"></div>
   </div>
 </div>
 
-<!-- USER REQUESTS MODAL -->
+<!-- REQUESTS MODAL -->
 <div class="modal-overlay" id="requestsModal">
   <div class="modal-box" style="max-width:600px;">
     <button class="modal-close" onclick="closeRequests()">✕</button>
     <h2 style="color:#1e3c72;margin-bottom:20px;">👥 User Requests</h2>
     <div style="background:#fff3cd;padding:12px;border-radius:10px;margin-bottom:15px;font-size:12px;color:#856404;border-left:4px solid #f39c12;">
-      ⚠️ Naye users approve karne ke liye <strong>MASTER PIN</strong> lagta hai. Approve karne pe unka account ban jayega.
+      ⚠️ Approve karne ke liye <strong>MASTER PIN</strong> chahiye.
     </div>
     <div id="requestsList"></div>
   </div>
@@ -405,7 +356,7 @@
     <button class="requests-btn" onclick="openRequests()">👥 Requests <span id="reqCount" style="background:#e74c3c;padding:1px 6px;border-radius:10px;font-size:10px;">0</span></button>
     <div class="status-badge syncing" id="statusBadge">🔄 Syncing...</div>
     <h1>🐄 SABIR DAIRY FARM</h1>
-    <div class="subtitle">FINAL SECURE SYSTEM</div>
+    <div class="subtitle">ADVANCED MANAGEMENT SYSTEM</div>
   </header>
   
   <div class="stats">
@@ -415,7 +366,7 @@
     <div class="stat-card"><div class="icon">💚</div><h3 id="healthyCount">0</h3><p>Healthy</p></div>
     <div class="stat-card orange"><div class="icon">🐄💫</div><h3 id="pregnantCount">0</h3><p>Pregnant</p></div>
     <div class="stat-card red"><div class="icon">💊</div><h3 id="sickCount">0</h3><p>Beemar</p></div>
-    <div class="stat-card purple"><div class="icon">🏛️</div><h3 id="assetCount">0</h3><p>Assets</p></div>
+    <div class="stat-card purple"><div class="icon">🎁</div><h3 id="totalBabies">0</h3><p>Bache Hue</p></div>
     <div class="stat-card pink"><div class="icon">💰</div><h3 id="totalExpense">Rs. 0</h3><p>Kharcha</p></div>
     <div class="stat-card teal"><div class="icon">📈</div><h3 id="netProfitCard">Rs. 0</h3><p>Munfa</p></div>
   </div>
@@ -429,6 +380,7 @@
     <button class="tab" onclick="switchTab('labor', this)">👷 Mazdoor</button>
     <button class="tab" onclick="switchTab('civil', this)">🏗️ Civil</button>
     <button class="tab" onclick="switchTab('breeding', this)">🐣 Breeding</button>
+    <button class="tab" onclick="switchTab('profit', this)">🎁 Faida</button>
     <button class="tab" onclick="switchTab('sales', this)">💵 Sale</button>
     <button class="tab" onclick="switchTab('charts', this)">📈 Charts</button>
     <button class="tab" onclick="switchTab('assets', this)">🏛️ Assets</button>
@@ -453,96 +405,140 @@
   <!-- ANIMALS -->
   <div id="animals" class="tab-content">
     <div id="alertBox"></div>
-    <div class="section-header"><h2>🐮 Animals</h2></div>
-    <h3 style="color:#1e3c72;margin-bottom:12px;font-size:14px;">➕ Naya Animal</h3>
-    <div class="form-grid">
-      <div class="form-group"><label>Tag/Naam *</label><input type="text" id="animalName" placeholder="Ganga / T-101"></div>
-      <div class="form-group"><label>Qism *</label>
-        <select id="animalType"><option value="Cow">🐄 Cow</option><option value="Buffalo">🐃 Buffalo</option><option value="Calf">🐮 Calf</option><option value="Bull">🐂 Bull</option><option value="Heifer">🐄 Heifer</option></select>
+    <div class="section-header"><h2>🐮 Animals Management</h2></div>
+    
+    <div class="summary-grid">
+      <div class="summary-card" style="border-left-color:#4a9d4e;">
+        <h4>🐄 Bade Janwar</h4>
+        <div class="amount" id="countAdult">0</div>
+        <div style="font-size:11px;color:#666;margin-top:4px;">Kharcha <span id="sumAdultCost">Rs. 0</span></div>
       </div>
-      <div class="form-group"><label>Category</label><select id="animalCategory"><option value="Adult">Bada</option><option value="Calf">Bacha</option></select></div>
-      <div class="form-group"><label>Gender</label><select id="animalGender"><option value="Female">♀️ Mada</option><option value="Male">♂️ Nar</option></select></div>
-      <div class="form-group"><label>Umar</label><input type="number" id="animalAge" placeholder="3" step="0.1"></div>
-      <div class="form-group"><label>Weight (kg)</label><input type="number" id="animalWeight" placeholder="250"></div>
-      <div class="form-group"><label>Health</label>
-        <select id="animalHealth"><option value="Healthy">💚 Healthy</option><option value="Sick">🤒 Sick</option><option value="Pregnant">🐄💫 Pregnant</option></select>
+      <div class="summary-card" style="border-left-color:#3498db;">
+        <h4>🐮 Bache (Calf)</h4>
+        <div class="amount" id="countCalf">0</div>
+        <div style="font-size:11px;color:#666;margin-top:4px;">Kharcha <span id="sumCalfCost">Rs. 0</span></div>
       </div>
-      <div class="form-group"><label>Kharid Date</label><input type="date" id="animalDate"></div>
-      <div class="form-group"><label>Qeemat (Rs.)</label><input type="number" id="animalPrice" placeholder="50000"></div>
-      <div class="form-group"><label>📷 Photo</label><input type="file" id="animalPhoto" accept="image/*"></div>
-      <div class="form-group"><label>📝 Notes</label><input type="text" id="animalNotes"></div>
+      <div class="summary-card" style="border-left-color:#e67e22;">
+        <h4>🐄💫 Pregnant</h4>
+        <div class="amount" id="countPregnant">0</div>
+        <div style="font-size:11px;color:#666;margin-top:4px;">Kharcha <span id="sumPregnantCost">Rs. 0</span></div>
+      </div>
+      <div class="summary-card" style="border-left-color:#e74c3c;">
+        <h4>🤒 Beemar</h4>
+        <div class="amount" id="countSick">0</div>
+        <div style="font-size:11px;color:#666;margin-top:4px;">Kharcha <span id="sumSickCost">Rs. 0</span></div>
+      </div>
+      <div class="summary-card" style="border-left-color:#9b59b6;">
+        <h4>📊 Kul Animal Kharcha</h4>
+        <div class="amount red" id="sumTotalAnimalCost">Rs. 0</div>
+      </div>
+      <div class="summary-card" style="border-left-color:#27ae60;">
+        <h4>📈 Net (Doodh - Kharcha)</h4>
+        <div class="amount green" id="sumNetProfit">Rs. 0</div>
+      </div>
     </div>
-    <button class="btn btn-primary" onclick="addAnimal()">➕ Add Animal</button>
-    <div style="margin-top:15px;"><input type="text" class="search-box" id="searchAnimal" placeholder="🔍 Search..." oninput="renderAnimals()"></div>
-    <div style="margin-bottom:10px;">
-      <button class="cat-btn active" onclick="filterAnimals('all', this)">Sab</button>
+    
+    <div style="background:linear-gradient(135deg,#f0f4f8,#e8f5e9);padding:18px;border-radius:15px;margin-bottom:20px;">
+      <h3 id="animalFormTitle" style="color:#1e3c72;margin-bottom:12px;font-size:14px;">➕ Naya Animal Add Karein</h3>
+      <div class="form-grid">
+        <div class="form-group"><label>Tag/Naam *</label><input type="text" id="animalName" placeholder="Ganga / T-101"></div>
+        <div class="form-group"><label>Qism *</label>
+          <select id="animalType"><option value="Cow">🐄 Cow</option><option value="Buffalo">🐃 Buffalo</option><option value="Calf">🐮 Calf</option><option value="Bull">🐂 Bull</option><option value="Heifer">🐄 Heifer</option></select>
+        </div>
+        <div class="form-group"><label>Category *</label>
+          <select id="animalCategory">
+            <option value="Adult">🐄 Bada (Adult)</option>
+            <option value="Calf">🐮 Bacha (Calf)</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Gender</label>
+          <select id="animalGender"><option value="Female">♀️ Mada</option><option value="Male">♂️ Nar</option></select>
+        </div>
+        <div class="form-group"><label>Umar (saal)</label><input type="number" id="animalAge" placeholder="3" step="0.1"></div>
+        <div class="form-group"><label>Weight (kg)</label><input type="number" id="animalWeight" placeholder="250"></div>
+        <div class="form-group"><label>Health</label>
+          <select id="animalHealth"><option value="Healthy">💚 Healthy</option><option value="Sick">🤒 Sick</option><option value="Pregnant">🐄💫 Pregnant</option></select>
+        </div>
+        <div class="form-group"><label>Kharid Date</label><input type="date" id="animalDate"></div>
+        <div class="form-group"><label>Qeemat (Rs.)</label><input type="number" id="animalPrice" placeholder="50000"></div>
+        <div class="form-group"><label>📷 Photo</label><input type="file" id="animalPhoto" accept="image/*"></div>
+        <div class="form-group"><label>📝 Notes</label><input type="text" id="animalNotes"></div>
+      </div>
+      <button class="btn btn-primary" id="animalSubmitBtn" onclick="addAnimal()">➕ Add Animal</button>
+      <button class="btn btn-danger" id="animalCancelBtn" onclick="resetAnimalForm()" style="display:none;">❌ Cancel Edit</button>
+    </div>
+    
+    <div style="margin-bottom:12px;">
+      <button class="cat-btn active" onclick="filterAnimals('all', this)">📋 Sab</button>
       <button class="cat-btn" onclick="filterAnimals('Adult', this)">🐄 Bade</button>
       <button class="cat-btn" onclick="filterAnimals('Calf', this)">🐮 Bache</button>
       <button class="cat-btn" onclick="filterAnimals('Pregnant', this)">🐄💫 Pregnant</button>
       <button class="cat-btn" onclick="filterAnimals('Sick', this)">🤒 Beemar</button>
+      <button class="cat-btn" onclick="filterAnimals('Male', this)">♂️ Nar</button>
+      <button class="cat-btn" onclick="filterAnimals('Female', this)">♀️ Mada</button>
     </div>
+    
+    <input type="text" class="search-box" id="searchAnimal" placeholder="🔍 Naam se search karein..." oninput="renderAnimals()">
+    
     <table id="animalsTable">
-      <thead><tr><th>Photo</th><th>Tag</th><th>Qism</th><th>Cat</th><th>Gender</th><th>Umar</th><th>Weight</th><th>Health</th><th>Qeemat</th><th>Action</th></tr></thead>
+      <thead>
+        <tr>
+          <th>Photo</th>
+          <th>Tag</th>
+          <th>Type</th>
+          <th>Cat</th>
+          <th>Gender</th>
+          <th>Age</th>
+          <th>Weight</th>
+          <th>Health</th>
+          <th>Buy</th>
+          <th>Doctor</th>
+          <th>Khana</th>
+          <th>Breeding</th>
+          <th>Milk Value</th>
+          <th>Net</th>
+          <th>Action</th>
+        </tr>
+      </thead>
       <tbody id="animalsBody"></tbody>
     </table>
     <div id="animalsEmpty" class="empty"><div class="empty-icon">🐄</div><p>Koi animal nahi</p></div>
+    
+    <div style="margin-top:25px;background:linear-gradient(135deg,#e74c3c,#c0392b);color:white;padding:22px;border-radius:18px;text-align:center;">
+      <h3 style="font-size:13px;letter-spacing:2px;">💸 KUL ANIMAL KHARCHA</h3>
+      <div style="font-size:38px;font-weight:900;" id="grandAnimalCost">Rs. 0</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#16a085,#27ae60);color:white;padding:22px;border-radius:18px;margin-top:12px;text-align:center;">
+      <h3 style="font-size:13px;letter-spacing:2px;">🥛 DOODH SE VALUE</h3>
+      <div style="font-size:38px;font-weight:900;" id="grandAnimalMilk">Rs. 0</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#34495e,#2c3e50);color:white;padding:22px;border-radius:18px;margin-top:12px;text-align:center;">
+      <h3 style="font-size:13px;letter-spacing:2px;">📊 NET (Value - Kharcha)</h3>
+      <div style="font-size:38px;font-weight:900;" id="grandNetProfit">Rs. 0</div>
+    </div>
   </div>
   
   <!-- MILK -->
   <div id="milk" class="tab-content">
-    <div class="section-header"><h2>🥛 Doodh Record <span class="milk-all-badge">MILK ALL AUTO</span></h2></div>
-    
+    <div class="section-header"><h2>🥛 Doodh Record <span class="badge badge-milkall">MILK ALL</span></h2></div>
     <div class="summary-grid">
-      <div class="summary-card">
-        <h4>🥛 Aaj Kul Doodh</h4>
-        <div class="amount green" id="milkTodayTotal">0 kg</div>
-      </div>
-      <div class="summary-card">
-        <h4>💵 Aaj ki Aamdani</h4>
-        <div class="amount green" id="milkTodayIncome">Rs. 0</div>
-      </div>
-      <div class="summary-card">
-        <h4>📅 Is Mahine ka Doodh</h4>
-        <div class="amount" id="milkMonthTotal">0 kg</div>
-      </div>
-      <div class="summary-card">
-        <h4>💰 Is Mahine ki Aamdani</h4>
-        <div class="amount green" id="milkMonthIncome">Rs. 0</div>
-      </div>
+      <div class="summary-card"><h4>🥛 Aaj Kul Doodh</h4><div class="amount green" id="milkTodayTotal">0 kg</div></div>
+      <div class="summary-card"><h4>💵 Aaj ki Aamdani</h4><div class="amount green" id="milkTodayIncome">Rs. 0</div></div>
+      <div class="summary-card"><h4>📅 Is Mahine ka Doodh</h4><div class="amount" id="milkMonthTotal">0 kg</div></div>
+      <div class="summary-card"><h4>💰 Is Mahine ki Aamdani</h4><div class="amount green" id="milkMonthIncome">Rs. 0</div></div>
     </div>
-    
     <div style="background:linear-gradient(135deg,#fff3cd,#ffe0b2);padding:12px;border-radius:10px;margin-bottom:15px;font-size:12px;color:#856404;border-left:4px solid #f39c12;">
-      💡 <strong>Tip:</strong> "MILK ALL" select karein sab janwaron ka total doodh ek saath add karne ke liye. Rate/kg aur total weight daalein — total khud calculate hoga!
+      💡 <strong>Tip:</strong> "MILK ALL" select karein sab janwaron ka total doodh add karne ke liye. Rate/kg aur weight daalein — total khud calculate hoga!
     </div>
-    
-    <h3 style="color:#1e3c72;margin-bottom:12px;font-size:14px;">➕ Naya Doodh Record</h3>
     <div class="form-grid">
-      <div class="form-group">
-        <label>Animal *</label>
-        <select id="milkAnimal">
-          <option value="__MILK_ALL__">🥛🥛 MILK ALL (Sab Janwar)</option>
-        </select>
-      </div>
+      <div class="form-group"><label>Animal *</label><select id="milkAnimal"><option value="__MILK_ALL__">🥛🥛 MILK ALL (Sab Janwar)</option></select></div>
       <div class="form-group"><label>Tareekh *</label><input type="date" id="milkDate"></div>
-      <div class="form-group">
-        <label>Weight (KG) *</label>
-        <input type="number" id="milkWeight" placeholder="10" step="0.1" oninput="calculateMilkTotal()">
-      </div>
-      <div class="form-group">
-        <label>Rate per KG (Rs.) *</label>
-        <input type="number" id="milkRate" placeholder="120" value="120" oninput="calculateMilkTotal()">
-      </div>
-      <div class="form-group">
-        <label>Total (Rs.) - AUTO</label>
-        <input type="number" id="milkTotal" placeholder="0" readonly style="background:#e8f5e9;font-weight:800;color:#2c5f2d;">
-      </div>
+      <div class="form-group"><label>Weight (KG) *</label><input type="number" id="milkWeight" placeholder="10" step="0.1" oninput="calculateMilkTotal()"></div>
+      <div class="form-group"><label>Rate per KG (Rs.) *</label><input type="number" id="milkRate" placeholder="120" value="120" oninput="calculateMilkTotal()"></div>
+      <div class="form-group"><label>Total (Rs.) - AUTO</label><input type="number" id="milkTotal" placeholder="0" readonly style="background:#e8f5e9;font-weight:800;color:#2c5f2d;"></div>
     </div>
     <button class="btn btn-primary" onclick="addMilk()">➕ Add Doodh Record</button>
-    
-    <table>
-      <thead><tr><th>Tareekh</th><th>Animal</th><th>Weight</th><th>Rate/kg</th><th>Total</th><th>Action</th></tr></thead>
-      <tbody id="milkBody"></tbody>
-    </table>
+    <table><thead><tr><th>Tareekh</th><th>Animal</th><th>Weight</th><th>Rate/kg</th><th>Total</th><th>Action</th></tr></thead><tbody id="milkBody"></tbody></table>
     <div id="milkEmpty" class="empty"><div class="empty-icon">🥛</div><p>Koi record nahi</p></div>
   </div>
   
@@ -628,6 +624,110 @@
     <div id="breedingEmpty" class="empty"><div class="empty-icon">🐣</div><p>Koi record nahi</p></div>
   </div>
   
+  <!-- PROFIT / FAIDA -->
+  <div id="profit" class="tab-content">
+    <div class="section-header"><h2>🎁 Faida (Profit) - Bachon ki Value</h2></div>
+    
+    <div class="summary-grid">
+      <div class="summary-card" style="border-left-color:#3498db;">
+        <h4>👶 Male (Larke)</h4>
+        <div class="amount blue" id="profitMaleCount">0</div>
+        <div style="font-size:11px;color:#666;margin-top:4px;">Value: <span id="profitMaleValue">Rs. 0</span></div>
+      </div>
+      <div class="summary-card" style="border-left-color:#e91e63;">
+        <h4>👧 Female (Larkiyan)</h4>
+        <div class="amount" id="profitFemaleCount" style="color:#e91e63;">0</div>
+        <div style="font-size:11px;color:#666;margin-top:4px;">Value: <span id="profitFemaleValue">Rs. 0</span></div>
+      </div>
+      <div class="summary-card" style="border-left-color:#27ae60;">
+        <h4>💰 Kul Bachon ki Value</h4>
+        <div class="amount green" id="profitBabyTotalValue">Rs. 0</div>
+      </div>
+      <div class="summary-card" style="border-left-color:#f39c12;">
+        <h4>🥛 Doodh Value</h4>
+        <div class="amount orange" id="profitMilkTotalValue">Rs. 0</div>
+      </div>
+      <div class="summary-card" style="border-left-color:#e74c3c;">
+        <h4>💸 Kul Kharcha</h4>
+        <div class="amount red" id="profitTotalCost">Rs. 0</div>
+      </div>
+      <div class="summary-card" style="border-left-color:#9b59b6;">
+        <h4>🎯 NET FAIDA</h4>
+        <div class="amount green" id="profitNetFaida">Rs. 0</div>
+      </div>
+    </div>
+    
+    <div style="background:linear-gradient(135deg,#f0f4f8,#e8f5e9);padding:18px;border-radius:15px;margin-bottom:20px;">
+      <h3 style="color:#1e3c72;margin-bottom:12px;font-size:14px;">➕ Naya Bacha (Offspring) Add Karein</h3>
+      <div class="form-grid">
+        <div class="form-group"><label>Bache ka Naam/Tag *</label><input type="text" id="profitBabyName" placeholder="e.g. Chotu"></div>
+        <div class="form-group"><label>Ma (Mother)</label><select id="profitMother"><option value="">-- Select --</option></select></div>
+        <div class="form-group"><label>Gender *</label><select id="profitBabyGender"><option value="Male">👶 Larka</option><option value="Female">👧 Larki</option></select></div>
+        <div class="form-group"><label>Breed</label><input type="text" id="profitBabyBreed" placeholder="Sahiwal, Friesian"></div>
+        <div class="form-group"><label>Birth Date</label><input type="date" id="profitBabyBirth"></div>
+        <div class="form-group"><label>Age (months)</label><input type="number" id="profitBabyAge" placeholder="6" step="0.5"></div>
+        <div class="form-group"><label>Weight (kg)</label><input type="number" id="profitBabyWeight" placeholder="80"></div>
+        <div class="form-group"><label>Current Value (Rs.) *</label><input type="number" id="profitBabyValue" placeholder="30000"></div>
+        <div class="form-group"><label>Future Value (Rs.)</label><input type="number" id="profitBabyFuture" placeholder="80000"></div>
+        <div class="form-group"><label>Health</label><select id="profitBabyHealth"><option value="Healthy">💚 Healthy</option><option value="Sick">🤒 Sick</option></select></div>
+        <div class="form-group"><label>Status</label><select id="profitBabyStatus"><option value="With Us">🏠 Farm pe</option><option value="Sold">💵 Bech diya</option><option value="Reserved">⭐ Reserved</option></select></div>
+        <div class="form-group"><label>Notes</label><input type="text" id="profitBabyNotes"></div>
+      </div>
+      <button class="btn btn-primary" id="profitSubmitBtn" onclick="addProfitBaby()">➕ Add Bacha</button>
+      <button class="btn btn-danger" id="profitCancelBtn" onclick="resetProfitForm()" style="display:none;">❌ Cancel Edit</button>
+    </div>
+    
+    <div style="margin-bottom:12px;">
+      <button class="cat-btn active" onclick="filterProfit('all', this)">📋 Sab</button>
+      <button class="cat-btn" onclick="filterProfit('Male', this)">👶 Larke</button>
+      <button class="cat-btn" onclick="filterProfit('Female', this)">👧 Larkiyan</button>
+      <button class="cat-btn" onclick="filterProfit('With Us', this)">🏠 Farm pe</button>
+      <button class="cat-btn" onclick="filterProfit('Sold', this)">💵 Bech diye</button>
+      <button class="cat-btn" onclick="filterProfit('Reserved', this)">⭐ Reserved</button>
+    </div>
+    
+    <table id="profitTable">
+      <thead>
+        <tr>
+          <th>Name</th><th>Mother</th><th>Gender</th><th>Breed</th><th>Age</th><th>Weight</th>
+          <th>Birth</th><th>Current Value</th><th>Future Value</th><th>Status</th><th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="profitBody"></tbody>
+    </table>
+    <div id="profitEmpty" class="empty"><div class="empty-icon">🎁</div><p>Abhi koi bacha add nahi kiya</p></div>
+    
+    <div style="margin-top:25px;">
+      <h3 style="color:#1e3c72;margin-bottom:12px;font-size:16px;">📊 FAIDA BREAKDOWN</h3>
+      
+      <div class="profit-breakdown" style="background:linear-gradient(135deg,#3498db,#2980b9);">
+        <div><div class="label">+ BACHON KI VALUE</div><div class="sub">Male + Female total value</div></div>
+        <div class="value" id="breakBabyValue">Rs. 0</div>
+      </div>
+      
+      <div class="profit-breakdown" style="background:linear-gradient(135deg,#27ae60,#16a085);">
+        <div><div class="label">+ DOODH KI VALUE</div><div class="sub">Sab animals ka doodh</div></div>
+        <div class="value" id="breakMilkValue">Rs. 0</div>
+      </div>
+      
+      <div class="profit-breakdown" style="background:linear-gradient(135deg,#e74c3c,#c0392b);">
+        <div><div class="label">- KUL KHARCHA</div><div class="sub">Doctor + Khana + Breeding + Labor + Civil</div></div>
+        <div class="value" id="breakTotalCost">Rs. 0</div>
+      </div>
+      
+      <div style="background:linear-gradient(135deg,#34495e,#2c3e50);color:white;padding:28px;border-radius:18px;text-align:center;margin-top:15px;">
+        <h3 style="font-size:14px;letter-spacing:2px;">🎯 NET FAIDA (NET PROFIT)</h3>
+        <div style="font-size:48px;font-weight:900;margin-top:8px;" id="breakNetFaida">Rs. 0</div>
+        <div style="font-size:12px;margin-top:8px;opacity:0.9;">= Baby Value + Milk Value - Total Cost</div>
+      </div>
+    </div>
+    
+    <div style="margin-top:25px;background:linear-gradient(135deg,#f8f9fa,#e8f5e9);padding:18px;border-radius:15px;border-left:5px solid #27ae60;">
+      <h3 style="color:#2c5f2d;margin-bottom:12px;font-size:14px;">💵 Sale se Faida (Sold Babies)</h3>
+      <div id="soldBabySummary"></div>
+    </div>
+  </div>
+  
   <!-- SALES -->
   <div id="sales" class="tab-content">
     <div class="section-header"><h2>💵 Sale / Purchase</h2></div>
@@ -638,7 +738,6 @@
       <div class="summary-card"><h4>💸 Aaj ki Purchase</h4><div class="amount red" id="purchaseToday">Rs. 0</div></div>
       <div class="summary-card"><h4>📊 Net</h4><div class="amount green" id="saleNet">Rs. 0</div></div>
     </div>
-    <h3 style="color:#1e3c72;margin-bottom:12px;font-size:14px;">➕ Naya Record</h3>
     <div class="form-grid">
       <div class="form-group"><label>Type *</label><select id="saleType"><option value="Sale">💵 Sale</option><option value="Purchase">🛒 Purchase</option></select></div>
       <div class="form-group"><label>Category *</label><select id="saleCategory"><option value="Milk">🥛 Doodh</option><option value="Animal">🐄 Janwar</option><option value="Dung">💩 Gobar</option><option value="Feed">🌾 Chara</option><option value="Other">📋 Other</option></select></div>
@@ -681,7 +780,6 @@
       <div class="summary-card"><h4>🐄 Livestock</h4><div class="amount orange" id="assetLivestock">Rs. 0</div></div>
       <div class="summary-card"><h4>🏗️ Property</h4><div class="amount" id="assetProperty">Rs. 0</div></div>
     </div>
-    <h3 style="color:#1e3c72;margin-bottom:12px;font-size:14px;">➕ Naya Asset</h3>
     <div class="form-grid">
       <div class="form-group"><label>Asset Name *</label><input type="text" id="assetName"></div>
       <div class="form-group"><label>Qism *</label><select id="assetType"><option value="Property">🏠 Property</option><option value="Vehicle">🚜 Vehicle</option><option value="Equipment">⚙️ Equipment</option><option value="Furniture">🪑 Furniture</option><option value="Livestock">🐄 Livestock</option><option value="Other">📋 Other</option></select></div>
@@ -749,8 +847,7 @@
 </div>
 
 <script>
-// ==================== FIREBASE CONFIG ====================
-// ⚠️ APNA FIREBASE CONFIG YAHAN DAALEIN
+// ==================== FIREBASE ====================
 const firebaseConfig = {
   apiKey: "AIzaSyBt27g85yOxN_zvxWAvTvmPIYfZ_e231Z4",
   authDomain: "sabirdairyfarm.firebaseapp.com",
@@ -760,314 +857,138 @@ const firebaseConfig = {
   appId: "1:871852404814:web:7be42351c082ddd5a8931f",
   measurementId: "G-DJDWGN0ZPJ"
 };
+let FIREBASE_ON = false, db = null;
+try { firebase.initializeApp(firebaseConfig); db = firebase.firestore(); FIREBASE_ON = true; } catch(e) { console.log(e); }
 
-let FIREBASE_ON = false;
-let db = null;
-
-if (!firebaseConfig.apiKey.includes("YOUR_")) {
-  try {
-    firebase.initializeApp(firebaseConfig);
-    db = firebase.firestore();
-    FIREBASE_ON = true;
-  } catch(e) { console.log("Firebase fail:", e); }
-}
-
-// ==================== MASTER INFO ====================
+// ==================== CONSTANTS ====================
 const MASTER_EMAIL = "hayatsarwar1989@gmail.com";
 const MASTER_PHONE = "923018020176";
 const DEFAULT_PIN = "2015";
 const MILK_ALL_KEY = "__MILK_ALL__";
 
-// ==================== SECURITY / PIN ====================
-function getMasterPin() {
-  return localStorage.getItem('sdf_master_pin') || DEFAULT_PIN;
-}
-
+// ==================== PIN ====================
+function getMasterPin() { return localStorage.getItem('sdf_master_pin') || DEFAULT_PIN; }
 function setMasterPin(pin) {
   localStorage.setItem('sdf_master_pin', pin);
-  if (FIREBASE_ON && db) {
-    db.collection('farms').doc('sabir').set({
-      masterPin: pin,
-      masterEmail: MASTER_EMAIL,
-      masterPhone: MASTER_PHONE,
-      pinUpdatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    }, { merge: true }).catch(e => console.log("PIN sync fail:", e));
-  }
+  if (FIREBASE_ON && db) db.collection('farms').doc('sabir').set({ masterPin: pin }, { merge: true }).catch(e => console.log(e));
 }
-
 async function loadPinFromFirebase() {
   if (!FIREBASE_ON || !db) return;
   try {
-    const doc = await db.collection('farms').doc('sabir').get();
-    if (doc.exists && doc.data().masterPin) {
-      localStorage.setItem('sdf_master_pin', doc.data().masterPin);
-    }
-  } catch(e) { console.log("PIN load fail:", e); }
+    const d = await db.collection('farms').doc('sabir').get();
+    if (d.exists && d.data().masterPin) localStorage.setItem('sdf_master_pin', d.data().masterPin);
+  } catch(e) {}
 }
 
-// ==================== LOCK SCREEN ====================
 let currentPinInput = "";
-
-function pinInput(num) {
-  if (currentPinInput.length >= 4) return;
-  currentPinInput += num;
-  updatePinDots('pinDisplay', currentPinInput);
-  if (currentPinInput.length === 4) setTimeout(pinSubmit, 200);
-}
-
-function pinClear() {
-  currentPinInput = "";
-  updatePinDots('pinDisplay', "");
-  document.getElementById('lockMessage').textContent = "";
-}
-
-function pinDelete() {
-  currentPinInput = currentPinInput.slice(0, -1);
-  updatePinDots('pinDisplay', currentPinInput);
-}
-
-function updatePinDots(displayId, pin) {
-  const dots = document.querySelectorAll('#' + displayId + ' .pin-dot');
-  dots.forEach((dot, i) => {
-    dot.classList.remove('filled', 'error');
-    if (i < pin.length) dot.classList.add('filled');
-  });
-}
-
+function pinInput(n) { if (currentPinInput.length >= 4) return; currentPinInput += n; updatePinDots('pinDisplay', currentPinInput); if (currentPinInput.length === 4) setTimeout(pinSubmit, 200); }
+function pinClear() { currentPinInput = ""; updatePinDots('pinDisplay', ""); document.getElementById('lockMessage').textContent = ""; }
+function pinDelete() { currentPinInput = currentPinInput.slice(0, -1); updatePinDots('pinDisplay', currentPinInput); }
+function updatePinDots(id, pin) { document.querySelectorAll('#' + id + ' .pin-dot').forEach((d, i) => { d.classList.remove('filled', 'error'); if (i < pin.length) d.classList.add('filled'); }); }
 function pinSubmit() {
   if (currentPinInput.length !== 4) return;
-  const correctPin = getMasterPin();
-  const msgEl = document.getElementById('lockMessage');
-  
-  if (currentPinInput === correctPin) {
-    msgEl.className = 'lock-message success';
-    msgEl.textContent = '✅ Sahi PIN! Khul raha hai...';
-    setTimeout(() => {
-      document.getElementById('lockScreen').classList.add('hide');
-      currentPinInput = "";
-      updatePinDots('pinDisplay', "");
-      msgEl.textContent = '';
-    }, 500);
+  const m = document.getElementById('lockMessage');
+  if (currentPinInput === getMasterPin()) {
+    m.className = 'lock-message success'; m.textContent = '✅ Sahi PIN!';
+    setTimeout(() => { document.getElementById('lockScreen').classList.add('hide'); currentPinInput = ""; updatePinDots('pinDisplay', ""); m.textContent = ''; }, 500);
   } else {
-    msgEl.className = 'lock-message error';
-    msgEl.textContent = '❌ Ghalat PIN! Dobara koshish karein';
-    const dots = document.querySelectorAll('#pinDisplay .pin-dot');
-    dots.forEach(d => d.classList.add('error'));
+    m.className = 'lock-message error'; m.textContent = '❌ Ghalat PIN!';
+    document.querySelectorAll('#pinDisplay .pin-dot').forEach(d => d.classList.add('error'));
     setTimeout(() => { currentPinInput = ""; updatePinDots('pinDisplay', ""); }, 800);
   }
 }
-
 function lockApp() {
-  if (!confirm('App lock karni hai?')) return;
-  currentPinInput = "";
-  updatePinDots('pinDisplay', "");
+  if (!confirm('Lock karni hai?')) return;
+  currentPinInput = ""; updatePinDots('pinDisplay', "");
   document.getElementById('lockMessage').textContent = "";
   document.getElementById('lockScreen').classList.remove('hide');
 }
 
 // ==================== PIN VERIFY ====================
-let verifyPinInput = "";
-let verifyCallback = null;
-
-function openPinVerify(callback, title = "PIN Confirm Karein", msg = "Is action ke liye PIN zaroori hai") {
-  verifyCallback = callback;
-  verifyPinInput = "";
+let verifyPinInput = "", verifyCallback = null;
+function openPinVerify(cb, title = "PIN Confirm", msg = "Is action ke liye PIN zaroori hai") {
+  verifyCallback = cb; verifyPinInput = "";
   updatePinDots('pinVerifyDisplay', "");
   document.getElementById('pinVerifyTitle').textContent = title;
   document.getElementById('pinVerifyMsg').textContent = msg;
   document.getElementById('pinVerifyMessage').textContent = "";
   document.getElementById('pinVerifyModal').classList.add('show');
 }
-
-function closePinVerify() {
-  document.getElementById('pinVerifyModal').classList.remove('show');
-  verifyPinInput = "";
-  verifyCallback = null;
-}
-
-function verifyInput(num) {
-  if (verifyPinInput.length >= 4) return;
-  verifyPinInput += num;
-  updatePinDots('pinVerifyDisplay', verifyPinInput);
-  if (verifyPinInput.length === 4) setTimeout(verifySubmit, 200);
-}
-
-function verifyClear() {
-  verifyPinInput = "";
-  updatePinDots('pinVerifyDisplay', "");
-  document.getElementById('pinVerifyMessage').textContent = "";
-}
-
-function verifyDelete() {
-  verifyPinInput = verifyPinInput.slice(0, -1);
-  updatePinDots('pinVerifyDisplay', verifyPinInput);
-}
-
+function closePinVerify() { document.getElementById('pinVerifyModal').classList.remove('show'); verifyPinInput = ""; verifyCallback = null; }
+function verifyInput(n) { if (verifyPinInput.length >= 4) return; verifyPinInput += n; updatePinDots('pinVerifyDisplay', verifyPinInput); if (verifyPinInput.length === 4) setTimeout(verifySubmit, 200); }
+function verifyClear() { verifyPinInput = ""; updatePinDots('pinVerifyDisplay', ""); document.getElementById('pinVerifyMessage').textContent = ""; }
+function verifyDelete() { verifyPinInput = verifyPinInput.slice(0, -1); updatePinDots('pinVerifyDisplay', verifyPinInput); }
 function verifySubmit() {
   if (verifyPinInput.length !== 4) return;
-  const msgEl = document.getElementById('pinVerifyMessage');
-  
+  const m = document.getElementById('pinVerifyMessage');
   if (verifyPinInput === getMasterPin()) {
-    msgEl.className = 'lock-message success';
-    msgEl.textContent = '✅ Verified!';
-    setTimeout(() => {
-      const cb = verifyCallback;
-      closePinVerify();
-      if (cb) cb();
-    }, 400);
+    m.className = 'lock-message success'; m.textContent = '✅ Verified!';
+    setTimeout(() => { const cb = verifyCallback; closePinVerify(); if (cb) cb(); }, 400);
   } else {
-    msgEl.className = 'lock-message error';
-    msgEl.textContent = '❌ Ghalat PIN!';
-    const dots = document.querySelectorAll('#pinVerifyDisplay .pin-dot');
-    dots.forEach(d => d.classList.add('error'));
+    m.className = 'lock-message error'; m.textContent = '❌ Ghalat PIN!';
+    document.querySelectorAll('#pinVerifyDisplay .pin-dot').forEach(d => d.classList.add('error'));
     setTimeout(() => { verifyPinInput = ""; updatePinDots('pinVerifyDisplay', ""); }, 800);
   }
 }
 
 // ==================== SETTINGS ====================
-function openSettings() {
-  document.getElementById('settingsModal').classList.add('show');
-  document.getElementById('oldPin').value = '';
-  document.getElementById('newPin').value = '';
-  document.getElementById('confirmPin').value = '';
-  document.getElementById('settingsMessage').textContent = '';
-}
-
-function closeSettings() {
-  document.getElementById('settingsModal').classList.remove('show');
-}
-
+function openSettings() { document.getElementById('settingsModal').classList.add('show'); ['oldPin','newPin','confirmPin'].forEach(i => document.getElementById(i).value = ''); document.getElementById('settingsMessage').textContent = ''; }
+function closeSettings() { document.getElementById('settingsModal').classList.remove('show'); }
 function changePIN() {
-  const oldPin = document.getElementById('oldPin').value.trim();
-  const newPin = document.getElementById('newPin').value.trim();
-  const confirmPin = document.getElementById('confirmPin').value.trim();
-  const msgEl = document.getElementById('settingsMessage');
-  
-  if (oldPin !== getMasterPin()) { msgEl.className = 'lock-message error'; msgEl.textContent = '❌ Purana PIN ghalat!'; return; }
-  if (newPin.length !== 4 || !/^\d{4}$/.test(newPin)) { msgEl.className = 'lock-message error'; msgEl.textContent = '❌ 4 digit PIN!'; return; }
-  if (newPin !== confirmPin) { msgEl.className = 'lock-message error'; msgEl.textContent = '❌ Match nahi!'; return; }
-  
-  setMasterPin(newPin);
-  msgEl.className = 'lock-message success';
-  msgEl.textContent = '✅ PIN change ho gayi!';
+  const o = document.getElementById('oldPin').value.trim(), n = document.getElementById('newPin').value.trim(), c = document.getElementById('confirmPin').value.trim();
+  const m = document.getElementById('settingsMessage');
+  if (o !== getMasterPin()) { m.className = 'lock-message error'; m.textContent = '❌ Purana PIN ghalat!'; return; }
+  if (n.length !== 4 || !/^\d{4}$/.test(n)) { m.className = 'lock-message error'; m.textContent = '❌ 4 digit PIN!'; return; }
+  if (n !== c) { m.className = 'lock-message error'; m.textContent = '❌ Match nahi!'; return; }
+  setMasterPin(n); m.className = 'lock-message success'; m.textContent = '✅ PIN change!';
   setTimeout(() => closeSettings(), 1500);
 }
 
-// ==================== USER REQUESTS ====================
+// ==================== REQUESTS ====================
 let userRequests = JSON.parse(localStorage.getItem('sdf_user_requests') || '[]');
-
 function saveRequests() {
   localStorage.setItem('sdf_user_requests', JSON.stringify(userRequests));
-  if (FIREBASE_ON && db) {
-    db.collection('farms').doc('sabir').set({ userRequests }, { merge: true }).catch(e => console.log(e));
-  }
+  if (FIREBASE_ON && db) db.collection('farms').doc('sabir').set({ userRequests }, { merge: true }).catch(e => console.log(e));
 }
-
 function loadRequestsFromFirebase() {
   if (!FIREBASE_ON || !db) return;
-  db.collection('farms').doc('sabir').onSnapshot(doc => {
-    if (doc.exists && doc.data().userRequests) {
-      userRequests = doc.data().userRequests;
+  db.collection('farms').doc('sabir').onSnapshot(d => {
+    if (d.exists && d.data().userRequests) {
+      userRequests = d.data().userRequests;
       localStorage.setItem('sdf_user_requests', JSON.stringify(userRequests));
       updateRequestsCount();
       if (document.getElementById('requestsModal').classList.contains('show')) renderRequests();
     }
   });
 }
-
 function updateRequestsCount() {
-  const pending = userRequests.filter(r => r.status === 'pending').length;
-  const el = document.getElementById('reqCount');
-  if (el) el.textContent = pending;
+  const p = userRequests.filter(r => r.status === 'pending').length;
+  const el = document.getElementById('reqCount'); if (el) el.textContent = p;
 }
-
-function openRequests() {
-  document.getElementById('requestsModal').classList.add('show');
-  renderRequests();
-}
-
-function closeRequests() {
-  document.getElementById('requestsModal').classList.remove('show');
-}
-
+function openRequests() { document.getElementById('requestsModal').classList.add('show'); renderRequests(); }
+function closeRequests() { document.getElementById('requestsModal').classList.remove('show'); }
 function renderRequests() {
-  const list = document.getElementById('requestsList');
-  if (!list) return;
-  
-  if (userRequests.length === 0) {
-    list.innerHTML = '<div style="text-align:center;padding:30px;color:#999;"><div style="font-size:50px;">📭</div><p>Abhi koi request nahi</p></div>';
-    return;
-  }
-  
-  list.innerHTML = '';
+  const l = document.getElementById('requestsList'); if (!l) return;
+  if (userRequests.length === 0) { l.innerHTML = '<div style="text-align:center;padding:30px;color:#999;"><div style="font-size:50px;">📭</div><p>Koi request nahi</p></div>'; return; }
+  l.innerHTML = '';
   [...userRequests].reverse().forEach(r => {
-    const statusBadge = r.status === 'pending' ? '<span style="background:#f39c12;color:white;padding:3px 10px;border-radius:15px;font-size:10px;font-weight:700;">⏳ PENDING</span>' :
-                       r.status === 'approved' ? '<span style="background:#27ae60;color:white;padding:3px 10px;border-radius:15px;font-size:10px;font-weight:700;">✅ APPROVED</span>' :
-                       '<span style="background:#e74c3c;color:white;padding:3px 10px;border-radius:15px;font-size:10px;font-weight:700;">❌ REJECTED</span>';
-    
-    list.innerHTML += `
-      <div class="request-card">
-        <h4>👤 ${r.name} ${statusBadge}</h4>
-        <p>
-          📧 <strong>Email:</strong> ${r.email || '-'}<br>
-          📱 <strong>Phone:</strong> ${r.phone || '-'}<br>
-          📅 <strong>Date:</strong> ${r.date}<br>
-          ${r.notes ? '📝 <strong>Note:</strong> ' + r.notes : ''}
-        </p>
-        ${r.status === 'pending' ? `
-          <div class="actions">
-            <button class="btn btn-success" style="padding:6px 14px;font-size:11px;" onclick="approveRequest(${r.id})">✅ Approve</button>
-            <button class="btn btn-danger" style="padding:6px 14px;font-size:11px;" onclick="rejectRequest(${r.id})">❌ Reject</button>
-          </div>
-        ` : ''}
-      </div>
-    `;
+    const sb = r.status === 'pending' ? '<span style="background:#f39c12;color:white;padding:3px 10px;border-radius:15px;font-size:10px;font-weight:700;">⏳ PENDING</span>' : r.status === 'approved' ? '<span style="background:#27ae60;color:white;padding:3px 10px;border-radius:15px;font-size:10px;font-weight:700;">✅ APPROVED</span>' : '<span style="background:#e74c3c;color:white;padding:3px 10px;border-radius:15px;font-size:10px;font-weight:700;">❌ REJECTED</span>';
+    l.innerHTML += `<div class="request-card"><h4>👤 ${r.name} ${sb}</h4><p>📧 ${r.email || '-'}<br>📱 ${r.phone || '-'}<br>📅 ${r.date}</p>${r.status === 'pending' ? `<div class="actions"><button class="btn btn-success" style="padding:6px 14px;font-size:11px;" onclick="approveRequest(${r.id})">✅ Approve</button><button class="btn btn-danger" style="padding:6px 14px;font-size:11px;" onclick="rejectRequest(${r.id})">❌ Reject</button></div>` : ''}</div>`;
   });
 }
-
 function approveRequest(id) {
   openPinVerify(() => {
-    const req = userRequests.find(r => r.id === id);
-    if (!req) return;
-    req.status = 'approved';
-    req.approvedAt = new Date().toISOString();
-    saveRequests();
-    renderRequests();
-    updateRequestsCount();
-    alert('✅ ' + req.name + ' ka account approve ho gaya!\n\nUnka login:\n📧 ' + req.email + '\n📱 ' + req.phone);
-  }, "👑 Master Approve", "Approve karne ke liye MASTER PIN daalein");
+    const r = userRequests.find(x => x.id === id); if (!r) return;
+    r.status = 'approved'; r.approvedAt = new Date().toISOString();
+    saveRequests(); renderRequests(); updateRequestsCount();
+    alert('✅ ' + r.name + ' ka account approve!');
+  }, "👑 Master Approve", "PIN daalein");
 }
-
 function rejectRequest(id) {
   openPinVerify(() => {
-    const req = userRequests.find(r => r.id === id);
-    if (!req) return;
-    req.status = 'rejected';
-    saveRequests();
-    renderRequests();
-    updateRequestsCount();
-  }, "❌ Reject Request", "Reject karne ke liye MASTER PIN daalein");
-}
-
-// Function to submit a new user request (from a new user's browser)
-function submitUserRequest() {
-  const name = prompt("Aapka naam:");
-  if (!name) return;
-  const email = prompt("Aapka email:");
-  if (!email) return;
-  const phone = prompt("Aapka phone number:");
-  if (!phone) return;
-  
-  userRequests.push({
-    id: Date.now(),
-    name, email, phone,
-    date: new Date().toLocaleDateString('en-PK'),
-    status: 'pending',
-    notes: ''
-  });
-  saveRequests();
-  updateRequestsCount();
-  alert('✅ Request bhej di gayi!\nMaster (Sabir) approve karne ke baad aap login kar sakte hain.');
+    const r = userRequests.find(x => x.id === id); if (!r) return;
+    r.status = 'rejected'; saveRequests(); renderRequests(); updateRequestsCount();
+  }, "❌ Reject", "PIN daalein");
 }
 
 // ==================== DATA ====================
@@ -1082,53 +1003,46 @@ let data = {
   sales: JSON.parse(localStorage.getItem('sdf_sales') || '[]'),
   assets: JSON.parse(localStorage.getItem('sdf_assets') || '[]')
 };
+let profitBabies = JSON.parse(localStorage.getItem('sdf_profit_babies') || '[]');
 
 let currentAnimalFilter = 'all';
+let currentProfitFilter = 'all';
 let currentChartType = 'daily';
-let mainChartInstance = null;
-let dashChartInstance = null;
-let currentPhotoBase64 = null;
+let mainChartInstance = null, dashChartInstance = null;
+let currentPhotoBase64 = null, editingAnimalId = null, editingProfitId = null;
 
 // ==================== SAVE ====================
 function save() {
   Object.keys(data).forEach(k => localStorage.setItem('sdf_' + k, JSON.stringify(data[k])));
   if (FIREBASE_ON && db) {
     updateStatus('syncing');
-    db.collection('farms').doc('sabir').set({
-      data: data,
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    }, { merge: true }).then(() => updateStatus('online'))
-      .catch(err => { console.error(err); updateStatus('offline'); });
+    db.collection('farms').doc('sabir').set({ data: data, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true }).then(() => updateStatus('online')).catch(() => updateStatus('offline'));
   }
 }
-
+function saveProfitBabies() {
+  localStorage.setItem('sdf_profit_babies', JSON.stringify(profitBabies));
+  if (FIREBASE_ON && db) db.collection('farms').doc('sabir').set({ profitBabies }, { merge: true }).catch(e => console.log(e));
+}
 function setupFirebaseSync() {
   if (!FIREBASE_ON || !db) { updateStatus('offline'); return; }
   updateStatus('syncing');
-  db.collection('farms').doc('sabir').onSnapshot(doc => {
-    if (doc.exists) {
-      const remoteData = doc.data().data;
-      if (remoteData && remoteData.animals && remoteData.animals.length > 0) {
-        const remoteTotal = Object.values(remoteData).reduce((s, arr) => s + (arr?.length || 0), 0);
-        const localTotal = Object.values(data).reduce((s, arr) => s + (arr?.length || 0), 0);
-        if (remoteTotal > localTotal) {
-          data = { ...data, ...remoteData };
-          Object.keys(data).forEach(k => localStorage.setItem('sdf_' + k, JSON.stringify(data[k])));
-          renderAll();
-        }
+  db.collection('farms').doc('sabir').onSnapshot(d => {
+    if (d.exists) {
+      const rd = d.data().data;
+      if (rd && rd.animals && rd.animals.length > 0) {
+        const rt = Object.values(rd).reduce((s, arr) => s + (arr?.length || 0), 0);
+        const lt = Object.values(data).reduce((s, arr) => s + (arr?.length || 0), 0);
+        if (rt > lt) { data = { ...data, ...rd }; Object.keys(data).forEach(k => localStorage.setItem('sdf_' + k, JSON.stringify(data[k]))); renderAll(); }
       }
+      if (d.data().profitBabies) { profitBabies = d.data().profitBabies; localStorage.setItem('sdf_profit_babies', JSON.stringify(profitBabies)); renderProfit(); }
       updateStatus('online');
-    } else {
-      save();
-    }
-  }, err => { console.error(err); updateStatus('offline'); });
+    } else { save(); }
+  }, err => { updateStatus('offline'); });
 }
-
-function updateStatus(status) {
-  const b = document.getElementById('statusBadge');
-  if (!b) return;
-  if (status === 'online') { b.className = 'status-badge online'; b.textContent = '🟢 Online'; }
-  else if (status === 'syncing') { b.className = 'status-badge syncing'; b.textContent = '🔄 Syncing'; }
+function updateStatus(s) {
+  const b = document.getElementById('statusBadge'); if (!b) return;
+  if (s === 'online') { b.className = 'status-badge online'; b.textContent = '🟢 Online'; }
+  else if (s === 'syncing') { b.className = 'status-badge syncing'; b.textContent = '🔄 Syncing'; }
   else { b.className = 'status-badge offline'; b.textContent = '🔴 Offline'; }
 }
 
@@ -1139,7 +1053,6 @@ function showAlert(msg, type = 'success') {
   box.innerHTML = `<div class="alert alert-${type}">${msg}</div>`;
   setTimeout(() => box.innerHTML = '', 3000);
 }
-
 function switchTab(id, btn) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
@@ -1148,21 +1061,22 @@ function switchTab(id, btn) {
   updateStats();
   if (id === 'charts') setTimeout(() => drawChart(currentChartType), 100);
   if (id === 'dashboard') setTimeout(() => drawDashChart(), 100);
+  if (id === 'profit') { renderProfit(); renderProfitMotherSelect(); }
 }
 
-document.getElementById('animalPhoto')?.addEventListener('change', function(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => { currentPhotoBase64 = ev.target.result; };
-  reader.readAsDataURL(file);
-});
+// ==================== COST CALC ====================
+function calcAnimalCost(name) {
+  const doctor = data.health.filter(h => h.animal === name).reduce((s, h) => s + (h.cost || 0), 0);
+  const food = data.food.filter(f => f.animal === name).reduce((s, f) => s + (f.cost || 0), 0);
+  const breeding = data.breeding.filter(b => b.animal === name).reduce((s, b) => s + (b.cost || 0), 0);
+  return { doctor, food, breeding, total: doctor + food + breeding };
+}
+function calcAnimalMilkValue(name) { return data.milk.filter(m => m.animal === name).reduce((s, m) => s + (m.total || 0), 0); }
 
 // ==================== ANIMALS ====================
 function addAnimal() {
   const name = document.getElementById('animalName').value.trim();
   if (!name) return showAlert('❌ Naam zaroori!', 'error');
-  
   data.animals.push({
     id: Date.now(), name,
     type: document.getElementById('animalType').value,
@@ -1176,70 +1090,89 @@ function addAnimal() {
     photo: currentPhotoBase64,
     notes: document.getElementById('animalNotes').value || ''
   });
-  save();
-  ['animalName','animalAge','animalWeight','animalPrice','animalNotes'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('animalPhoto').value = '';
-  currentPhotoBase64 = null;
-  showAlert('✅ Animal add!');
-  renderAnimals();
-  renderAllSelects();
-  updateStats();
+  save(); resetAnimalForm(); showAlert('✅ Animal add!');
+  renderAnimals(); renderAllSelects(); renderProfitMotherSelect(); updateStats();
 }
-
 function filterAnimals(type, btn) {
   currentAnimalFilter = type;
   document.querySelectorAll('#animals .cat-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderAnimals();
+  btn.classList.add('active'); renderAnimals();
 }
-
 function renderAnimals() {
   const search = document.getElementById('searchAnimal')?.value.toLowerCase() || '';
   let filtered = data.animals.filter(a => a.name.toLowerCase().includes(search));
-  if (currentAnimalFilter !== 'all') filtered = filtered.filter(a => a.category === currentAnimalFilter || a.health === currentAnimalFilter);
-  
-  const tbody = document.getElementById('animalsBody');
-  if (!tbody) return;
-  tbody.innerHTML = '';
-  
-  if (filtered.length === 0) {
-    document.getElementById('animalsTable').style.display = 'none';
-    document.getElementById('animalsEmpty').style.display = 'block';
-    return;
+  if (currentAnimalFilter !== 'all') {
+    if (currentAnimalFilter === 'Male' || currentAnimalFilter === 'Female') filtered = filtered.filter(a => a.gender === currentAnimalFilter);
+    else if (currentAnimalFilter === 'Adult' || currentAnimalFilter === 'Calf') filtered = filtered.filter(a => a.category === currentAnimalFilter);
+    else filtered = filtered.filter(a => a.health === currentAnimalFilter);
   }
+  const tbody = document.getElementById('animalsBody'); if (!tbody) return;
+  tbody.innerHTML = '';
+  if (filtered.length === 0) { document.getElementById('animalsTable').style.display = 'none'; document.getElementById('animalsEmpty').style.display = 'block'; updateAnimalSummary(); return; }
   document.getElementById('animalsTable').style.display = 'table';
   document.getElementById('animalsEmpty').style.display = 'none';
-  
   filtered.forEach(a => {
     const bc = a.health === 'Healthy' ? 'badge-healthy' : a.health === 'Sick' ? 'badge-sick' : 'badge-pregnant';
     const cc = a.category === 'Adult' ? 'badge-adult' : 'badge-calf';
     const gc = a.gender === 'Male' ? 'badge-male' : 'badge-female';
     const photo = a.photo ? `<img src="${a.photo}" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid #4a9d4e;">` : `<div style="width:38px;height:38px;border-radius:50%;background:#4a9d4e;color:white;display:flex;align-items:center;justify-content:center;font-size:17px;">${a.type==='Buffalo'?'🐃':a.type==='Bull'?'🐂':'🐄'}</div>`;
-    
-    tbody.innerHTML += `
-      <tr>
-        <td>${photo}</td>
-        <td><strong>${a.name}</strong></td>
-        <td>${a.type}</td>
-        <td><span class="badge ${cc}">${a.category}</span></td>
-        <td><span class="badge ${gc}">${a.gender}</span></td>
-        <td>${a.age}</td>
-        <td>${a.weight}</td>
-        <td><span class="badge ${bc}">${a.health}</span></td>
-        <td>Rs. ${a.price}</td>
-        <td>
-          <button class="btn btn-info" style="padding:4px 7px;font-size:10px;" onclick="showAnimalProfile(${a.id})">👁️</button>
-          <button class="btn btn-warning" style="padding:4px 7px;font-size:10px;" onclick="editAnimal(${a.id})">✏️</button>
-          <button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteAnimal(${a.id})">🗑️</button>
-        </td>
-      </tr>`;
+    const c = calcAnimalCost(a.name);
+    const mv = calcAnimalMilkValue(a.name);
+    const net = mv - c.total;
+    const nc = net >= 0 ? '#27ae60' : '#e74c3c';
+    tbody.innerHTML += `<tr>
+      <td>${photo}</td>
+      <td><strong>${a.name}</strong></td>
+      <td>${a.type}</td>
+      <td><span class="badge ${cc}">${a.category}</span></td>
+      <td><span class="badge ${gc}">${a.gender}</span></td>
+      <td>${a.age}</td>
+      <td>${a.weight} kg</td>
+      <td><span class="badge ${bc}">${a.health}</span></td>
+      <td>Rs. ${a.price.toLocaleString()}</td>
+      <td style="color:#e74c3c;">Rs. ${c.doctor.toLocaleString()}</td>
+      <td style="color:#e67e22;">Rs. ${c.food.toLocaleString()}</td>
+      <td style="color:#9b59b6;font-weight:700;">Rs. ${c.breeding.toLocaleString()}</td>
+      <td style="color:#27ae60;font-weight:700;">Rs. ${mv.toLocaleString()}</td>
+      <td style="color:${nc};font-weight:800;">Rs. ${net.toLocaleString()}</td>
+      <td>
+        <button class="btn btn-info" style="padding:4px 7px;font-size:10px;" onclick="showAnimalProfile(${a.id})">👁️</button>
+        <button class="btn btn-warning" style="padding:4px 7px;font-size:10px;" onclick="editAnimal(${a.id})">✏️</button>
+        <button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteAnimal(${a.id})">🗑️</button>
+      </td>
+    </tr>`;
   });
+  updateAnimalSummary();
 }
-
+function updateAnimalSummary() {
+  let cA = 0, cC = 0, cP = 0, cS = 0, sA = 0, sC = 0, sP = 0, sS = 0, tDoc = 0, tFood = 0, tBreed = 0, tTotal = 0, tMilk = 0;
+  data.animals.forEach(a => {
+    const c = calcAnimalCost(a.name);
+    const mv = calcAnimalMilkValue(a.name);
+    tDoc += c.doctor; tFood += c.food; tBreed += c.breeding; tTotal += c.total; tMilk += mv;
+    if (a.category === 'Adult') { cA++; sA += c.total; }
+    if (a.category === 'Calf') { cC++; sC += c.total; }
+    if (a.health === 'Pregnant') { cP++; sP += c.total; }
+    if (a.health === 'Sick') { cS++; sS += c.total; }
+  });
+  const set = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+  set('countAdult', cA); set('countCalf', cC); set('countPregnant', cP); set('countSick', cS);
+  set('sumAdultCost', 'Rs. ' + sA.toLocaleString());
+  set('sumCalfCost', 'Rs. ' + sC.toLocaleString());
+  set('sumPregnantCost', 'Rs. ' + sP.toLocaleString());
+  set('sumSickCost', 'Rs. ' + sS.toLocaleString());
+  set('sumTotalAnimalCost', 'Rs. ' + tTotal.toLocaleString());
+  const net = tMilk - tTotal;
+  const np = document.getElementById('sumNetProfit');
+  if (np) { np.textContent = 'Rs. ' + net.toLocaleString(); np.style.color = net >= 0 ? '#27ae60' : '#e74c3c'; }
+  set('grandAnimalCost', 'Rs. ' + tTotal.toLocaleString());
+  set('grandAnimalMilk', 'Rs. ' + tMilk.toLocaleString());
+  set('grandNetProfit', 'Rs. ' + net.toLocaleString());
+}
 function editAnimal(id) {
   openPinVerify(() => {
-    const a = data.animals.find(x => x.id === id);
-    if (!a) return;
+    const a = data.animals.find(x => x.id === id); if (!a) return;
+    editingAnimalId = id;
     document.getElementById('animalName').value = a.name;
     document.getElementById('animalType').value = a.type;
     document.getElementById('animalCategory').value = a.category;
@@ -1251,18 +1184,17 @@ function editAnimal(id) {
     document.getElementById('animalPrice').value = a.price;
     document.getElementById('animalNotes').value = a.notes || '';
     currentPhotoBase64 = a.photo || null;
-    const addBtn = document.querySelector('#animals .btn-primary');
-    addBtn.textContent = '💾 Update Animal';
-    addBtn.onclick = () => updateAnimal(id);
-    addBtn.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('animalFormTitle').textContent = '✏️ Edit: ' + a.name;
+    document.getElementById('animalSubmitBtn').textContent = '💾 Update';
+    document.getElementById('animalSubmitBtn').onclick = updateAnimal;
+    document.getElementById('animalCancelBtn').style.display = 'inline-block';
+    document.querySelector('#animals .form-grid').scrollIntoView({ behavior: 'smooth' });
     showAlert('✏️ Edit mode!', 'success');
   }, "✏️ Edit Animal", "PIN daalein");
 }
-
-function updateAnimal(id) {
+function updateAnimal() {
   openPinVerify(() => {
-    const a = data.animals.find(x => x.id === id);
-    if (!a) return;
+    const a = data.animals.find(x => x.id === editingAnimalId); if (!a) return;
     a.name = document.getElementById('animalName').value.trim() || a.name;
     a.type = document.getElementById('animalType').value;
     a.category = document.getElementById('animalCategory').value;
@@ -1274,63 +1206,52 @@ function updateAnimal(id) {
     a.price = parseFloat(document.getElementById('animalPrice').value) || a.price;
     a.notes = document.getElementById('animalNotes').value || '';
     if (currentPhotoBase64) a.photo = currentPhotoBase64;
-    save();
-    resetAnimalForm();
-    showAlert('✅ Update!');
-    renderAnimals();
-    updateStats();
-  }, "💾 Confirm", "PIN daalein");
+    save(); resetAnimalForm(); showAlert('✅ Update!');
+    renderAnimals(); renderAllSelects(); renderProfitMotherSelect(); updateStats();
+  }, "💾 Update", "PIN daalein");
 }
-
 function resetAnimalForm() {
-  ['animalName','animalAge','animalWeight','animalPrice','animalNotes'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('animalPhoto').value = '';
+  editingAnimalId = null;
+  ['animalName','animalAge','animalWeight','animalPrice','animalNotes'].forEach(id => { const e = document.getElementById(id); if (e) e.value = ''; });
+  const p = document.getElementById('animalPhoto'); if (p) p.value = '';
   currentPhotoBase64 = null;
-  const addBtn = document.querySelector('#animals .btn-primary');
-  addBtn.textContent = '➕ Add Animal';
-  addBtn.onclick = addAnimal;
+  document.getElementById('animalFormTitle').textContent = '➕ Naya Animal Add Karein';
+  document.getElementById('animalSubmitBtn').textContent = '➕ Add Animal';
+  document.getElementById('animalSubmitBtn').onclick = addAnimal;
+  document.getElementById('animalCancelBtn').style.display = 'none';
 }
-
 function deleteAnimal(id) {
   openPinVerify(() => {
-    data.animals = data.animals.filter(a => a.id !== id);
-    save();
-    renderAnimals();
-    renderAllSelects();
-    updateStats();
+    const a = data.animals.find(x => x.id === id); if (!a) return;
+    if (!confirm('Delete "' + a.name + '"?')) return;
+    data.animals = data.animals.filter(x => x.id !== id);
+    save(); renderAnimals(); renderAllSelects(); renderProfitMotherSelect(); updateStats();
     showAlert('🗑️ Delete!');
   }, "🗑️ Delete", "PIN daalein");
 }
-
 function renderAllSelects() {
-  // Milk animal (with MILK ALL)
-  const milkSelect = document.getElementById('milkAnimal');
-  if (milkSelect) {
-    milkSelect.innerHTML = '<option value="__MILK_ALL__">🥛🥛 MILK ALL (Sab Janwar)</option>';
-    data.animals.forEach(a => { milkSelect.innerHTML += `<option value="${a.name}">${a.name} (${a.type})</option>`; });
-  }
-  
-  // Other selects
+  const m = document.getElementById('milkAnimal');
+  if (m) { m.innerHTML = '<option value="__MILK_ALL__">🥛🥛 MILK ALL (Sab Janwar)</option>'; data.animals.forEach(a => { m.innerHTML += `<option value="${a.name}">${a.name} (${a.type})</option>`; }); }
   ['healthAnimal','breedAnimal','saleAnimal'].forEach(id => {
-    const s = document.getElementById(id);
-    if (!s) return;
-    const first = id === 'saleAnimal' ? '<option value="">-- Koi nahi --</option>' : '<option value="">-- Select --</option>';
-    s.innerHTML = first;
+    const s = document.getElementById(id); if (!s) return;
+    s.innerHTML = id === 'saleAnimal' ? '<option value="">-- Koi nahi --</option>' : '<option value="">-- Select --</option>';
     data.animals.forEach(a => { s.innerHTML += `<option value="${a.name}">${a.name} (${a.type})</option>`; });
   });
+}
+function renderProfitMotherSelect() {
+  const s = document.getElementById('profitMother'); if (!s) return;
+  s.innerHTML = '<option value="">-- Select Mother --</option>';
+  data.animals.filter(a => a.gender === 'Female' && a.category === 'Adult').forEach(a => { s.innerHTML += `<option value="${a.name}">${a.name} (${a.type})</option>`; });
 }
 
 // ==================== ANIMAL PROFILE ====================
 function showAnimalProfile(id) {
-  const a = data.animals.find(x => x.id === id);
-  if (!a) return;
+  const a = data.animals.find(x => x.id === id); if (!a) return;
   const milkRecs = data.milk.filter(m => m.animal === a.name);
-  const healthRecs = data.health.filter(h => h.animal === a.name);
   const totalMilk = milkRecs.reduce((s, m) => s + m.weight, 0);
-  const totalHealthCost = healthRecs.reduce((s, h) => s + h.cost, 0);
-  
+  const totalMilkVal = milkRecs.reduce((s, m) => s + m.total, 0);
+  const c = calcAnimalCost(a.name);
   const photoHTML = a.photo ? `<img src="${a.photo}" class="animal-photo">` : `<div class="animal-photo-placeholder">${a.type==='Buffalo'?'🐃':a.type==='Bull'?'🐂':'🐄'}</div>`;
-  
   document.getElementById('profileBox').innerHTML = `
     <button class="modal-close" onclick="closeProfile()">✕</button>
     <div id="profileContent" class="animal-profile">
@@ -1348,7 +1269,11 @@ function showAnimalProfile(id) {
         <div class="profile-item"><label>Health</label><div class="value">${a.health}</div></div>
         <div class="profile-item"><label>Qeemat</label><div class="value">Rs. ${a.price.toLocaleString()}</div></div>
         <div class="profile-item"><label>Kul Doodh</label><div class="value">${totalMilk.toFixed(1)} kg</div></div>
-        <div class="profile-item"><label>Doctor Kharcha</label><div class="value">Rs. ${totalHealthCost.toLocaleString()}</div></div>
+        <div class="profile-item"><label>Doodh Value</label><div class="value" style="color:#27ae60;">Rs. ${totalMilkVal.toLocaleString()}</div></div>
+        <div class="profile-item"><label>Doctor</label><div class="value" style="color:#e74c3c;">Rs. ${c.doctor.toLocaleString()}</div></div>
+        <div class="profile-item"><label>Breeding</label><div class="value" style="color:#e74c3c;">Rs. ${c.breeding.toLocaleString()}</div></div>
+        <div class="profile-item"><label>Kul Kharcha</label><div class="value" style="color:#e74c3c;">Rs. ${c.total.toLocaleString()}</div></div>
+        <div class="profile-item"><label>Net</label><div class="value" style="color:${totalMilkVal - c.total >= 0 ? '#27ae60' : '#e74c3c'};">Rs. ${(totalMilkVal - c.total).toLocaleString()}</div></div>
       </div>
       ${a.notes ? `<div style="margin-top:12px;padding:10px;background:#fff3cd;border-radius:8px;border-left:4px solid #f39c12;font-size:12px;"><strong>📝 Notes:</strong> ${a.notes}</div>` : ''}
     </div>
@@ -1360,520 +1285,448 @@ function showAnimalProfile(id) {
   `;
   document.getElementById('profileModal').classList.add('show');
 }
-
 function closeProfile() { document.getElementById('profileModal').classList.remove('show'); }
-
 async function shareProfileImage() {
-  const content = document.getElementById('profileContent');
+  const c = document.getElementById('profileContent');
   try {
-    const canvas = await html2canvas(content, { scale: 2, backgroundColor: '#ffffff' });
+    const canvas = await html2canvas(c, { scale: 2, backgroundColor: '#ffffff' });
     canvas.toBlob(async blob => {
-      const file = new File([blob], 'animal.png', { type: 'image/png' });
-      if (navigator.share && navigator.canShare({ files: [file] })) {
-        await navigator.share({ files: [file], title: 'Animal Profile' });
-      } else {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'animal-profile.png';
-        a.click();
-      }
+      const f = new File([blob], 'animal.png', { type: 'image/png' });
+      if (navigator.share && navigator.canShare({ files: [f] })) await navigator.share({ files: [f] });
+      else { const u = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = u; a.download = 'animal.png'; a.click(); }
     });
-  } catch(e) { alert('Image fail: ' + e.message); }
+  } catch(e) { alert('Fail: ' + e.message); }
 }
-
 async function shareProfilePDF(id) {
   const a = data.animals.find(x => x.id === id);
-  const content = document.getElementById('profileContent');
+  const c = document.getElementById('profileContent');
   try {
-    const canvas = await html2canvas(content, { scale: 2, backgroundColor: '#ffffff' });
+    const canvas = await html2canvas(c, { scale: 2, backgroundColor: '#ffffff' });
     const imgData = canvas.toDataURL('image/png');
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF('p', 'mm', 'a4');
-    const pdfW = pdf.internal.pageSize.getWidth();
-    const pdfH = pdf.internal.pageSize.getHeight();
-    const imgW = pdfW - 20;
-    const imgH = (canvas.height * imgW) / canvas.width;
-    pdf.setFillColor(74, 157, 78);
-    pdf.rect(0, 0, pdfW, 25, 'F');
-    pdf.setTextColor(255, 255, 255);
-    pdf.setFontSize(18);
+    const pdfW = pdf.internal.pageSize.getWidth(), pdfH = pdf.internal.pageSize.getHeight();
+    const imgW = pdfW - 20, imgH = (canvas.height * imgW) / canvas.width;
+    pdf.setFillColor(74, 157, 78); pdf.rect(0, 0, pdfW, 25, 'F');
+    pdf.setTextColor(255, 255, 255); pdf.setFontSize(18);
     pdf.text('SABIR DAIRY FARM', pdfW / 2, 15, { align: 'center' });
-    pdf.setTextColor(44, 95, 45);
-    pdf.setFontSize(13);
+    pdf.setTextColor(44, 95, 45); pdf.setFontSize(13);
     pdf.text('Animal: ' + a.name, 10, 33);
-    let yPos = 38;
-    let finalH = imgH;
-    if (yPos + imgH > pdfH - 10) finalH = pdfH - yPos - 10;
-    pdf.addImage(imgData, 'PNG', 10, yPos, imgW, finalH);
+    let yP = 38, fH = imgH; if (yP + imgH > pdfH - 10) fH = pdfH - yP - 10;
+    pdf.addImage(imgData, 'PNG', 10, yP, imgW, fH);
     pdf.save('animal-' + a.name + '.pdf');
-  } catch(e) { alert('PDF fail: ' + e.message); }
+  } catch(e) { alert('Fail: ' + e.message); }
 }
-
 function shareWhatsApp(id) {
   const a = data.animals.find(x => x.id === id);
-  const text = `🐄 *SABIR DAIRY FARM*\n\n*Animal:* ${a.name}\n*Type:* ${a.type}\n*Category:* ${a.category}\n*Gender:* ${a.gender}\n*Age:* ${a.age} saal\n*Weight:* ${a.weight} kg\n*Health:* ${a.health}\n*Date:* ${a.date}\n*Qeemat:* Rs. ${a.price}`;
-  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+  const t = `🐄 *SABIR DAIRY FARM*\n\n*Animal:* ${a.name}\n*Type:* ${a.type}\n*Category:* ${a.category}\n*Gender:* ${a.gender}\n*Age:* ${a.age} saal\n*Weight:* ${a.weight} kg\n*Health:* ${a.health}\n*Qeemat:* Rs. ${a.price}`;
+  window.open('https://wa.me/?text=' + encodeURIComponent(t), '_blank');
 }
 
-// ==================== MILK WITH AUTO CALCULATION ====================
+// ==================== MILK ====================
 function calculateMilkTotal() {
-  const weight = parseFloat(document.getElementById('milkWeight').value) || 0;
-  const rate = parseFloat(document.getElementById('milkRate').value) || 0;
-  const total = weight * rate;
-  document.getElementById('milkTotal').value = total.toFixed(0);
+  const w = parseFloat(document.getElementById('milkWeight').value) || 0;
+  const r = parseFloat(document.getElementById('milkRate').value) || 0;
+  document.getElementById('milkTotal').value = (w * r).toFixed(0);
 }
-
 function addMilk() {
-  const animalValue = document.getElementById('milkAnimal').value;
-  const date = document.getElementById('milkDate').value;
-  const weight = parseFloat(document.getElementById('milkWeight').value) || 0;
-  const rate = parseFloat(document.getElementById('milkRate').value) || 0;
-  const total = weight * rate;
-  
-  if (!animalValue || !date) return showAlert('❌ Animal aur Tareekh zaroori!', 'error');
-  if (weight <= 0) return showAlert('❌ Doodh ka weight daalein!', 'error');
-  if (rate <= 0) return showAlert('❌ Rate daalein!', 'error');
-  
-  const isMilkAll = animalValue === MILK_ALL_KEY;
-  const animalName = isMilkAll ? '🥛 MILK ALL' : animalValue;
-  
-  data.milk.push({
-    id: Date.now(),
-    animal: animalName,
-    isMilkAll: isMilkAll,
-    date,
-    weight: weight,
-    rate: rate,
-    total: total,
-    income: total  // For compatibility
-  });
-  
-  save();
-  document.getElementById('milkWeight').value = '';
-  document.getElementById('milkTotal').value = '';
-  showAlert(`✅ ${weight} kg × Rs.${rate} = Rs.${total.toFixed(0)} add ho gaya!`);
-  renderMilk();
-  updateStats();
+  const av = document.getElementById('milkAnimal').value;
+  const d = document.getElementById('milkDate').value;
+  const w = parseFloat(document.getElementById('milkWeight').value) || 0;
+  const r = parseFloat(document.getElementById('milkRate').value) || 0;
+  if (!av || !d) return showAlert('❌ Animal aur Tareekh!', 'error');
+  if (w <= 0) return showAlert('❌ Weight!', 'error');
+  if (r <= 0) return showAlert('❌ Rate!', 'error');
+  const isAll = av === MILK_ALL_KEY;
+  const name = isAll ? '🥛 MILK ALL' : av;
+  data.milk.push({ id: Date.now(), animal: name, isMilkAll: isAll, date: d, weight: w, rate: r, total: w * r });
+  save(); document.getElementById('milkWeight').value = ''; document.getElementById('milkTotal').value = '';
+  showAlert(`✅ ${w}kg × Rs.${r} = Rs.${(w*r).toFixed(0)}!`);
+  renderMilk(); updateStats();
 }
-
 function renderMilk() {
-  const tbody = document.getElementById('milkBody');
-  if (!tbody) return;
+  const tbody = document.getElementById('milkBody'); if (!tbody) return;
   tbody.innerHTML = '';
-  
-  // Update summary cards
-  const today = new Date().toISOString().split('T')[0];
-  const month = today.substring(0, 7);
-  const todayMilk = data.milk.filter(m => m.date === today).reduce((s, m) => s + m.weight, 0);
-  const todayIncome = data.milk.filter(m => m.date === today).reduce((s, m) => s + m.total, 0);
-  const monthMilk = data.milk.filter(m => m.date.startsWith(month)).reduce((s, m) => s + m.weight, 0);
-  const monthIncome = data.milk.filter(m => m.date.startsWith(month)).reduce((s, m) => s + m.total, 0);
-  
-  const el1 = document.getElementById('milkTodayTotal');
-  if (el1) el1.textContent = todayMilk.toFixed(1) + ' kg';
-  const el2 = document.getElementById('milkTodayIncome');
-  if (el2) el2.textContent = 'Rs. ' + todayIncome.toFixed(0);
-  const el3 = document.getElementById('milkMonthTotal');
-  if (el3) el3.textContent = monthMilk.toFixed(1) + ' kg';
-  const el4 = document.getElementById('milkMonthIncome');
-  if (el4) el4.textContent = 'Rs. ' + monthIncome.toFixed(0);
-  
-  if (data.milk.length === 0) {
-    document.querySelector('#milk table').style.display = 'none';
-    document.getElementById('milkEmpty').style.display = 'block';
-    return;
-  }
+  const today = new Date().toISOString().split('T')[0], month = today.substring(0, 7);
+  const set = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+  set('milkTodayTotal', data.milk.filter(m => m.date === today).reduce((s, m) => s + m.weight, 0).toFixed(1) + ' kg');
+  set('milkTodayIncome', 'Rs. ' + data.milk.filter(m => m.date === today).reduce((s, m) => s + m.total, 0).toFixed(0));
+  set('milkMonthTotal', data.milk.filter(m => m.date.startsWith(month)).reduce((s, m) => s + m.weight, 0).toFixed(1) + ' kg');
+  set('milkMonthIncome', 'Rs. ' + data.milk.filter(m => m.date.startsWith(month)).reduce((s, m) => s + m.total, 0).toFixed(0));
+  if (data.milk.length === 0) { document.querySelector('#milk table').style.display = 'none'; document.getElementById('milkEmpty').style.display = 'block'; return; }
   document.querySelector('#milk table').style.display = 'table';
   document.getElementById('milkEmpty').style.display = 'none';
-  
   [...data.milk].reverse().slice(0, 100).forEach(m => {
-    const animalDisplay = m.isMilkAll ? '🥛🥛 <strong style="color:#f39c12;">MILK ALL</strong>' : `<strong>${m.animal}</strong>`;
-    tbody.innerHTML += `
-      <tr>
-        <td>${m.date}</td>
-        <td>${animalDisplay}</td>
-        <td><strong>${m.weight} kg</strong></td>
-        <td>Rs. ${m.rate}/kg</td>
-        <td><strong style="color:#27ae60;">Rs. ${m.total.toFixed(0)}</strong></td>
-        <td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('milk',${m.id})">🗑️</button></td>
-      </tr>`;
+    const aD = m.isMilkAll ? '🥛🥛 <strong style="color:#f39c12;">MILK ALL</strong>' : `<strong>${m.animal}</strong>`;
+    tbody.innerHTML += `<tr><td>${m.date}</td><td>${aD}</td><td><strong>${m.weight} kg</strong></td><td>Rs. ${m.rate}/kg</td><td><strong style="color:#27ae60;">Rs. ${m.total.toFixed(0)}</strong></td><td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('milk',${m.id})">🗑️</button></td></tr>`;
   });
 }
 
 // ==================== HEALTH ====================
 function addHealth() {
-  const animal = document.getElementById('healthAnimal').value;
-  const date = document.getElementById('healthDate').value;
-  if (!animal || !date) return showAlert('❌ Animal aur Tareekh!', 'error');
-  data.health.push({
-    id: Date.now(), animal, date,
-    type: document.getElementById('healthType').value,
-    doctor: document.getElementById('healthDoctor').value || '-',
-    note: document.getElementById('healthNote').value || '-',
-    cost: parseFloat(document.getElementById('healthCost').value) || 0
-  });
-  save();
-  ['healthNote','healthCost','healthDoctor'].forEach(id => document.getElementById(id).value = '');
-  showAlert('✅ Record add!');
-  renderHealth();
-  updateStats();
+  const a = document.getElementById('healthAnimal').value, d = document.getElementById('healthDate').value;
+  if (!a || !d) return showAlert('❌ Animal aur Tareekh!', 'error');
+  data.health.push({ id: Date.now(), animal: a, date: d, type: document.getElementById('healthType').value, doctor: document.getElementById('healthDoctor').value || '-', note: document.getElementById('healthNote').value || '-', cost: parseFloat(document.getElementById('healthCost').value) || 0 });
+  save(); ['healthNote','healthCost','healthDoctor'].forEach(i => document.getElementById(i).value = '');
+  showAlert('✅ Add!'); renderHealth(); updateStats();
 }
-
 function renderHealth() {
-  const tbody = document.getElementById('healthBody');
-  if (!tbody) return;
+  const tbody = document.getElementById('healthBody'); if (!tbody) return;
   tbody.innerHTML = '';
-  if (data.health.length === 0) {
-    document.querySelector('#health table').style.display = 'none';
-    document.getElementById('healthEmpty').style.display = 'block';
-    return;
-  }
+  if (data.health.length === 0) { document.querySelector('#health table').style.display = 'none'; document.getElementById('healthEmpty').style.display = 'block'; return; }
   document.querySelector('#health table').style.display = 'table';
   document.getElementById('healthEmpty').style.display = 'none';
-  [...data.health].reverse().forEach(h => {
-    tbody.innerHTML += `<tr><td>${h.date}</td><td><strong>${h.animal}</strong></td><td>${h.type}</td><td>${h.doctor}</td><td>${h.note}</td><td>Rs.${h.cost}</td><td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('health',${h.id})">🗑️</button></td></tr>`;
-  });
+  [...data.health].reverse().forEach(h => { tbody.innerHTML += `<tr><td>${h.date}</td><td><strong>${h.animal}</strong></td><td>${h.type}</td><td>${h.doctor}</td><td>${h.note}</td><td>Rs.${h.cost}</td><td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('health',${h.id})">🗑️</button></td></tr>`; });
 }
 
 // ==================== FOOD ====================
 function addFood() {
-  const date = document.getElementById('foodDate').value;
-  const cost = parseFloat(document.getElementById('foodCost').value) || 0;
-  if (!date || cost <= 0) return showAlert('❌ Tareekh aur Kharcha!', 'error');
-  data.food.push({
-    id: Date.now(), date,
-    type: document.getElementById('foodType').value,
-    qty: document.getElementById('foodQty').value || '-',
-    foodFor: document.getElementById('foodFor').value,
-    supplier: document.getElementById('foodSupplier').value || '-',
-    cost
-  });
-  save();
-  ['foodQty','foodCost','foodSupplier'].forEach(id => document.getElementById(id).value = '');
-  showAlert('✅ Record add!');
-  renderFood();
-  updateStats();
+  const d = document.getElementById('foodDate').value, c = parseFloat(document.getElementById('foodCost').value) || 0;
+  if (!d || c <= 0) return showAlert('❌ Tareekh aur Kharcha!', 'error');
+  data.food.push({ id: Date.now(), date: d, type: document.getElementById('foodType').value, qty: document.getElementById('foodQty').value || '-', foodFor: document.getElementById('foodFor').value, supplier: document.getElementById('foodSupplier').value || '-', cost: c });
+  save(); ['foodQty','foodCost','foodSupplier'].forEach(i => document.getElementById(i).value = '');
+  showAlert('✅ Add!'); renderFood(); updateStats();
 }
-
 function renderFood() {
-  const tbody = document.getElementById('foodBody');
-  if (!tbody) return;
+  const tbody = document.getElementById('foodBody'); if (!tbody) return;
   tbody.innerHTML = '';
-  if (data.food.length === 0) {
-    document.querySelector('#food table').style.display = 'none';
-    document.getElementById('foodEmpty').style.display = 'block';
-    return;
-  }
+  if (data.food.length === 0) { document.querySelector('#food table').style.display = 'none'; document.getElementById('foodEmpty').style.display = 'block'; return; }
   document.querySelector('#food table').style.display = 'table';
   document.getElementById('foodEmpty').style.display = 'none';
-  [...data.food].reverse().forEach(f => {
-    tbody.innerHTML += `<tr><td>${f.date}</td><td>${f.type}</td><td>${f.qty}</td><td>${f.foodFor}</td><td>${f.supplier}</td><td>Rs.${f.cost}</td><td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('food',${f.id})">🗑️</button></td></tr>`;
-  });
+  [...data.food].reverse().forEach(f => { tbody.innerHTML += `<tr><td>${f.date}</td><td>${f.type}</td><td>${f.qty}</td><td>${f.foodFor}</td><td>${f.supplier}</td><td>Rs.${f.cost}</td><td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('food',${f.id})">🗑️</button></td></tr>`; });
 }
 
 // ==================== LABOR ====================
 function addLabor() {
-  const name = document.getElementById('laborName').value.trim();
-  const date = document.getElementById('laborDate').value;
-  const amount = parseFloat(document.getElementById('laborAmount').value) || 0;
-  if (!name || !date || amount <= 0) return showAlert('❌ Sab fields!', 'error');
-  data.labor.push({
-    id: Date.now(), name, date,
-    work: document.getElementById('laborWork').value,
-    days: document.getElementById('laborDays').value || '-',
-    rate: parseFloat(document.getElementById('laborRate').value) || 0,
-    amount, status: document.getElementById('laborStatus').value
-  });
-  save();
-  ['laborName','laborDays','laborRate','laborAmount'].forEach(id => document.getElementById(id).value = '');
-  showAlert('✅ Record add!');
-  renderLabor();
-  updateStats();
+  const n = document.getElementById('laborName').value.trim(), d = document.getElementById('laborDate').value, a = parseFloat(document.getElementById('laborAmount').value) || 0;
+  if (!n || !d || a <= 0) return showAlert('❌ Sab fields!', 'error');
+  data.labor.push({ id: Date.now(), name: n, date: d, work: document.getElementById('laborWork').value, days: document.getElementById('laborDays').value || '-', rate: parseFloat(document.getElementById('laborRate').value) || 0, amount: a, status: document.getElementById('laborStatus').value });
+  save(); ['laborName','laborDays','laborRate','laborAmount'].forEach(i => document.getElementById(i).value = '');
+  showAlert('✅ Add!'); renderLabor(); updateStats();
 }
-
 function renderLabor() {
-  const tbody = document.getElementById('laborBody');
-  if (!tbody) return;
+  const tbody = document.getElementById('laborBody'); if (!tbody) return;
   tbody.innerHTML = '';
-  if (data.labor.length === 0) {
-    document.querySelector('#labor table').style.display = 'none';
-    document.getElementById('laborEmpty').style.display = 'block';
-    return;
-  }
+  if (data.labor.length === 0) { document.querySelector('#labor table').style.display = 'none'; document.getElementById('laborEmpty').style.display = 'block'; return; }
   document.querySelector('#labor table').style.display = 'table';
   document.getElementById('laborEmpty').style.display = 'none';
-  [...data.labor].reverse().forEach(l => {
-    const sc = l.status === 'Paid' ? 'badge-healthy' : 'badge-pregnant';
-    tbody.innerHTML += `<tr><td>${l.date}</td><td><strong>${l.name}</strong></td><td>${l.work}</td><td>${l.days}</td><td>Rs.${l.amount}</td><td><span class="badge ${sc}">${l.status}</span></td><td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('labor',${l.id})">🗑️</button></td></tr>`;
-  });
+  [...data.labor].reverse().forEach(l => { const sc = l.status === 'Paid' ? 'badge-healthy' : 'badge-pregnant'; tbody.innerHTML += `<tr><td>${l.date}</td><td><strong>${l.name}</strong></td><td>${l.work}</td><td>${l.days}</td><td>Rs.${l.amount}</td><td><span class="badge ${sc}">${l.status}</span></td><td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('labor',${l.id})">🗑️</button></td></tr>`; });
 }
 
 // ==================== CIVIL ====================
 function addCivil() {
-  const date = document.getElementById('civilDate').value;
-  const matCost = parseFloat(document.getElementById('civilMaterialCost').value) || 0;
-  const labCost = parseFloat(document.getElementById('civilLaborCost').value) || 0;
-  if (!date || (matCost === 0 && labCost === 0)) return showAlert('❌ Tareekh aur kharcha!', 'error');
-  data.civil.push({
-    id: Date.now(), date,
-    type: document.getElementById('civilType').value,
-    material: document.getElementById('civilMaterial').value || '-',
-    mistri: document.getElementById('civilMistri').value || '-',
-    materialCost: matCost, laborCost: labCost,
-    total: matCost + labCost
-  });
-  save();
-  ['civilMaterial','civilMistri','civilMaterialCost','civilLaborCost'].forEach(id => document.getElementById(id).value = '');
-  showAlert('✅ Record add!');
-  renderCivil();
-  updateStats();
+  const d = document.getElementById('civilDate').value, m = parseFloat(document.getElementById('civilMaterialCost').value) || 0, l = parseFloat(document.getElementById('civilLaborCost').value) || 0;
+  if (!d || (m === 0 && l === 0)) return showAlert('❌ Tareekh aur kharcha!', 'error');
+  data.civil.push({ id: Date.now(), date: d, type: document.getElementById('civilType').value, material: document.getElementById('civilMaterial').value || '-', mistri: document.getElementById('civilMistri').value || '-', materialCost: m, laborCost: l, total: m + l });
+  save(); ['civilMaterial','civilMistri','civilMaterialCost','civilLaborCost'].forEach(i => document.getElementById(i).value = '');
+  showAlert('✅ Add!'); renderCivil(); updateStats();
 }
-
 function renderCivil() {
-  const tbody = document.getElementById('civilBody');
-  if (!tbody) return;
+  const tbody = document.getElementById('civilBody'); if (!tbody) return;
   tbody.innerHTML = '';
-  if (data.civil.length === 0) {
-    document.querySelector('#civil table').style.display = 'none';
-    document.getElementById('civilEmpty').style.display = 'block';
-    return;
-  }
+  if (data.civil.length === 0) { document.querySelector('#civil table').style.display = 'none'; document.getElementById('civilEmpty').style.display = 'block'; return; }
   document.querySelector('#civil table').style.display = 'table';
   document.getElementById('civilEmpty').style.display = 'none';
-  [...data.civil].reverse().forEach(c => {
-    tbody.innerHTML += `<tr><td>${c.date}</td><td>${c.type}</td><td>${c.material}</td><td>${c.mistri}</td><td>Rs.${c.total}</td><td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('civil',${c.id})">🗑️</button></td></tr>`;
-  });
+  [...data.civil].reverse().forEach(c => { tbody.innerHTML += `<tr><td>${c.date}</td><td>${c.type}</td><td>${c.material}</td><td>${c.mistri}</td><td>Rs.${c.total}</td><td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('civil',${c.id})">🗑️</button></td></tr>`; });
 }
 
 // ==================== BREEDING ====================
 function addBreeding() {
-  const animal = document.getElementById('breedAnimal').value;
-  const date = document.getElementById('breedDate').value;
-  if (!animal || !date) return showAlert('❌ Animal aur Tareekh!', 'error');
-  data.breeding.push({
-    id: Date.now(), animal, date,
-    method: document.getElementById('breedMethod').value,
-    bull: document.getElementById('breedBull').value || '-',
-    expected: document.getElementById('breedExpected').value || '-',
-    cost: parseFloat(document.getElementById('breedCost').value) || 0,
-    status: document.getElementById('breedStatus').value
-  });
-  save();
-  ['breedBull','breedExpected','breedCost'].forEach(id => document.getElementById(id).value = '');
-  showAlert('✅ Record add!');
-  renderBreeding();
-  updateStats();
+  const a = document.getElementById('breedAnimal').value, d = document.getElementById('breedDate').value;
+  if (!a || !d) return showAlert('❌ Animal aur Tareekh!', 'error');
+  data.breeding.push({ id: Date.now(), animal: a, date: d, method: document.getElementById('breedMethod').value, bull: document.getElementById('breedBull').value || '-', expected: document.getElementById('breedExpected').value || '-', cost: parseFloat(document.getElementById('breedCost').value) || 0, status: document.getElementById('breedStatus').value });
+  save(); ['breedBull','breedExpected','breedCost'].forEach(i => document.getElementById(i).value = '');
+  showAlert('✅ Add!'); renderBreeding(); updateStats();
 }
-
 function renderBreeding() {
-  const tbody = document.getElementById('breedingBody');
-  if (!tbody) return;
+  const tbody = document.getElementById('breedingBody'); if (!tbody) return;
   tbody.innerHTML = '';
-  if (data.breeding.length === 0) {
-    document.querySelector('#breeding table').style.display = 'none';
-    document.getElementById('breedingEmpty').style.display = 'block';
-    return;
-  }
+  if (data.breeding.length === 0) { document.querySelector('#breeding table').style.display = 'none'; document.getElementById('breedingEmpty').style.display = 'block'; return; }
   document.querySelector('#breeding table').style.display = 'table';
   document.getElementById('breedingEmpty').style.display = 'none';
-  [...data.breeding].reverse().forEach(b => {
-    const sc = b.status === 'Pregnant' ? 'badge-pregnant' : b.status === 'Delivered' ? 'badge-healthy' : 'badge-sick';
-    tbody.innerHTML += `<tr><td>${b.date}</td><td><strong>${b.animal}</strong></td><td>${b.method}</td><td>${b.bull}</td><td>${b.expected}</td><td>Rs.${b.cost}</td><td><span class="badge ${sc}">${b.status}</span></td><td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('breeding',${b.id})">🗑️</button></td></tr>`;
+  [...data.breeding].reverse().forEach(b => { const sc = b.status === 'Pregnant' ? 'badge-pregnant' : b.status === 'Delivered' ? 'badge-healthy' : 'badge-sick'; tbody.innerHTML += `<tr><td>${b.date}</td><td><strong>${b.animal}</strong></td><td>${b.method}</td><td>${b.bull}</td><td>${b.expected}</td><td>Rs.${b.cost}</td><td><span class="badge ${sc}">${b.status}</span></td><td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('breeding',${b.id})">🗑️</button></td></tr>`; });
+}
+
+// ==================== PROFIT / FAIDA ====================
+function addProfitBaby() {
+  const name = document.getElementById('profitBabyName').value.trim();
+  const value = parseFloat(document.getElementById('profitBabyValue').value) || 0;
+  if (!name) return showAlert('❌ Naam zaroori!', 'error');
+  if (value <= 0) return showAlert('❌ Value zaroori!', 'error');
+  profitBabies.push({
+    id: Date.now(), name,
+    mother: document.getElementById('profitMother').value || '-',
+    gender: document.getElementById('profitBabyGender').value,
+    breed: document.getElementById('profitBabyBreed').value || '-',
+    birth: document.getElementById('profitBabyBirth').value || new Date().toISOString().split('T')[0],
+    age: document.getElementById('profitBabyAge').value || '-',
+    weight: document.getElementById('profitBabyWeight').value || '-',
+    value: value,
+    future: parseFloat(document.getElementById('profitBabyFuture').value) || value,
+    health: document.getElementById('profitBabyHealth').value,
+    status: document.getElementById('profitBabyStatus').value,
+    notes: document.getElementById('profitBabyNotes').value || '',
+    addedAt: new Date().toISOString()
   });
+  saveProfitBabies(); resetProfitForm();
+  showAlert('✅ Bacha add! Faida mein shamil!');
+  renderProfit(); updateStats();
+}
+function resetProfitForm() {
+  editingProfitId = null;
+  ['profitBabyName','profitBabyBreed','profitBabyAge','profitBabyWeight','profitBabyValue','profitBabyFuture','profitBabyNotes'].forEach(id => { const e = document.getElementById(id); if (e) e.value = ''; });
+  const b = document.getElementById('profitBabyBirth'); if (b) b.value = '';
+  document.getElementById('profitSubmitBtn').textContent = '➕ Add Bacha';
+  document.getElementById('profitSubmitBtn').onclick = addProfitBaby;
+  document.getElementById('profitCancelBtn').style.display = 'none';
+}
+function filterProfit(type, btn) {
+  currentProfitFilter = type;
+  document.querySelectorAll('#profit .cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active'); renderProfit();
+}
+function renderProfit() {
+  const tbody = document.getElementById('profitBody'); if (!tbody) return;
+  tbody.innerHTML = '';
+  let filtered = profitBabies;
+  if (currentProfitFilter !== 'all') {
+    if (currentProfitFilter === 'Male' || currentProfitFilter === 'Female') filtered = filtered.filter(b => b.gender === currentProfitFilter);
+    else filtered = filtered.filter(b => b.status === currentProfitFilter);
+  }
+  const males = profitBabies.filter(b => b.gender === 'Male');
+  const females = profitBabies.filter(b => b.gender === 'Female');
+  const mv = males.reduce((s, b) => s + b.value, 0);
+  const fv = females.reduce((s, b) => s + b.value, 0);
+  const tv = mv + fv;
+  const milkV = data.milk.reduce((s, m) => s + m.total, 0);
+  const docC = data.health.reduce((s, h) => s + h.cost, 0);
+  const foodC = data.food.reduce((s, f) => s + f.cost, 0);
+  const breedC = data.breeding.reduce((s, b) => s + b.cost, 0);
+  const labC = data.labor.reduce((s, l) => s + l.amount, 0);
+  const civC = data.civil.reduce((s, c) => s + c.total, 0);
+  const totalC = docC + foodC + breedC + labC + civC;
+  const netF = tv + milkV - totalC;
+  const set = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+  set('profitMaleCount', males.length); set('profitMaleValue', 'Rs. ' + mv.toLocaleString());
+  set('profitFemaleCount', females.length); set('profitFemaleValue', 'Rs. ' + fv.toLocaleString());
+  set('profitBabyTotalValue', 'Rs. ' + tv.toLocaleString());
+  set('profitMilkTotalValue', 'Rs. ' + milkV.toLocaleString());
+  set('profitTotalCost', 'Rs. ' + totalC.toLocaleString());
+  const nf = document.getElementById('profitNetFaida');
+  if (nf) { nf.textContent = 'Rs. ' + netF.toLocaleString(); nf.style.color = netF >= 0 ? '#27ae60' : '#e74c3c'; }
+  set('breakBabyValue', 'Rs. ' + tv.toLocaleString());
+  set('breakMilkValue', 'Rs. ' + milkV.toLocaleString());
+  set('breakTotalCost', 'Rs. ' + totalC.toLocaleString());
+  set('breakNetFaida', 'Rs. ' + netF.toLocaleString());
+  const sold = profitBabies.filter(b => b.status === 'Sold');
+  const sv = sold.reduce((s, b) => s + b.value, 0);
+  const soldEl = document.getElementById('soldBabySummary');
+  if (soldEl) {
+    if (sold.length === 0) soldEl.innerHTML = '<p style="color:#999;font-size:12px;">Abhi koi bacha becha nahi</p>';
+    else soldEl.innerHTML = `<table style="box-shadow:none;font-size:12px;"><tr><td><strong>💵 Kul Bechay:</strong></td><td>${sold.length} bache</td></tr><tr><td><strong>💰 Sale Value:</strong></td><td style="color:#27ae60;font-weight:700;">Rs. ${sv.toLocaleString()}</td></tr><tr><td><strong>📊 Average:</strong></td><td>Rs. ${(sv / sold.length).toFixed(0)} per bacha</td></tr></table>`;
+  }
+  if (filtered.length === 0) { document.getElementById('profitTable').style.display = 'none'; document.getElementById('profitEmpty').style.display = 'block'; return; }
+  document.getElementById('profitTable').style.display = 'table';
+  document.getElementById('profitEmpty').style.display = 'none';
+  [...filtered].reverse().forEach(b => {
+    const gc = b.gender === 'Male' ? 'badge-male' : 'badge-female';
+    const sb = b.status === 'With Us' ? 'badge-healthy' : b.status === 'Sold' ? 'badge-calf' : 'badge-pregnant';
+    tbody.innerHTML += `<tr>
+      <td><strong>${b.name}</strong></td>
+      <td>${b.mother}</td>
+      <td><span class="badge ${gc}">${b.gender === 'Male' ? '👶 Larka' : '👧 Larki'}</span></td>
+      <td>${b.breed}</td>
+      <td>${b.age} months</td>
+      <td>${b.weight} kg</td>
+      <td>${b.birth}</td>
+      <td style="color:#27ae60;font-weight:700;">Rs. ${b.value.toLocaleString()}</td>
+      <td style="color:#3498db;font-weight:700;">Rs. ${b.future.toLocaleString()}</td>
+      <td><span class="badge ${sb}">${b.status}</span></td>
+      <td>
+        <button class="btn btn-warning" style="padding:4px 7px;font-size:10px;" onclick="editProfitBaby(${b.id})">✏️</button>
+        <button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteProfitBaby(${b.id})">🗑️</button>
+      </td>
+    </tr>`;
+  });
+}
+function editProfitBaby(id) {
+  openPinVerify(() => {
+    const b = profitBabies.find(x => x.id === id); if (!b) return;
+    editingProfitId = id;
+    document.getElementById('profitBabyName').value = b.name;
+    document.getElementById('profitMother').value = b.mother;
+    document.getElementById('profitBabyGender').value = b.gender;
+    document.getElementById('profitBabyBreed').value = b.breed;
+    document.getElementById('profitBabyBirth').value = b.birth;
+    document.getElementById('profitBabyAge').value = b.age;
+    document.getElementById('profitBabyWeight').value = b.weight;
+    document.getElementById('profitBabyValue').value = b.value;
+    document.getElementById('profitBabyFuture').value = b.future;
+    document.getElementById('profitBabyHealth').value = b.health;
+    document.getElementById('profitBabyStatus').value = b.status;
+    document.getElementById('profitBabyNotes').value = b.notes || '';
+    document.getElementById('profitSubmitBtn').textContent = '💾 Update';
+    document.getElementById('profitSubmitBtn').onclick = updateProfitBaby;
+    document.getElementById('profitCancelBtn').style.display = 'inline-block';
+    document.querySelector('#profit .form-grid').scrollIntoView({ behavior: 'smooth' });
+    showAlert('✏️ Edit mode!', 'success');
+  }, "✏️ Edit Bacha", "PIN daalein");
+}
+function updateProfitBaby() {
+  openPinVerify(() => {
+    const b = profitBabies.find(x => x.id === editingProfitId); if (!b) return;
+    b.name = document.getElementById('profitBabyName').value.trim() || b.name;
+    b.mother = document.getElementById('profitMother').value || b.mother;
+    b.gender = document.getElementById('profitBabyGender').value;
+    b.breed = document.getElementById('profitBabyBreed').value || b.breed;
+    b.birth = document.getElementById('profitBabyBirth').value || b.birth;
+    b.age = document.getElementById('profitBabyAge').value || b.age;
+    b.weight = document.getElementById('profitBabyWeight').value || b.weight;
+    b.value = parseFloat(document.getElementById('profitBabyValue').value) || b.value;
+    b.future = parseFloat(document.getElementById('profitBabyFuture').value) || b.future;
+    b.health = document.getElementById('profitBabyHealth').value;
+    b.status = document.getElementById('profitBabyStatus').value;
+    b.notes = document.getElementById('profitBabyNotes').value || '';
+    saveProfitBabies(); resetProfitForm();
+    showAlert('✅ Update!'); renderProfit(); updateStats();
+  }, "💾 Update", "PIN daalein");
+}
+function deleteProfitBaby(id) {
+  openPinVerify(() => {
+    const b = profitBabies.find(x => x.id === id); if (!b) return;
+    if (!confirm('Delete "' + b.name + '"?')) return;
+    profitBabies = profitBabies.filter(x => x.id !== id);
+    saveProfitBabies(); renderProfit(); updateStats();
+    showAlert('🗑️ Delete!');
+  }, "🗑️ Delete", "PIN daalein");
 }
 
 // ==================== SALES ====================
 function addSale() {
-  const type = document.getElementById('saleType').value;
-  const category = document.getElementById('saleCategory').value;
-  const date = document.getElementById('saleDate').value;
-  const amount = parseFloat(document.getElementById('saleAmount').value) || 0;
-  if (!date || amount <= 0) return showAlert('❌ Tareekh aur Raqam!', 'error');
-  data.sales.push({
-    id: Date.now(), type, category, date,
-    animal: document.getElementById('saleAnimal').value || '-',
-    party: document.getElementById('saleParty').value || '-',
-    qty: document.getElementById('saleQty').value || '-',
-    rate: parseFloat(document.getElementById('saleRate').value) || 0,
-    amount, payment: document.getElementById('salePayment').value,
-    notes: document.getElementById('saleNotes').value || ''
-  });
-  save();
-  ['saleParty','saleQty','saleRate','saleAmount','saleNotes'].forEach(id => document.getElementById(id).value = '');
-  showAlert('✅ Record add!');
-  renderSales();
-  updateStats();
+  const t = document.getElementById('saleType').value, d = document.getElementById('saleDate').value, a = parseFloat(document.getElementById('saleAmount').value) || 0;
+  if (!d || a <= 0) return showAlert('❌ Tareekh aur Raqam!', 'error');
+  data.sales.push({ id: Date.now(), type: t, category: document.getElementById('saleCategory').value, date: d, animal: document.getElementById('saleAnimal').value || '-', party: document.getElementById('saleParty').value || '-', qty: document.getElementById('saleQty').value || '-', rate: parseFloat(document.getElementById('saleRate').value) || 0, amount: a, payment: document.getElementById('salePayment').value, notes: document.getElementById('saleNotes').value || '' });
+  save(); ['saleParty','saleQty','saleRate','saleAmount','saleNotes'].forEach(i => document.getElementById(i).value = '');
+  showAlert('✅ Add!'); renderSales(); updateStats();
 }
-
 function renderSales() {
-  const tbody = document.getElementById('saleBody');
-  if (!tbody) return;
+  const tbody = document.getElementById('saleBody'); if (!tbody) return;
   tbody.innerHTML = '';
-  
   const today = new Date().toISOString().split('T')[0];
-  const weekAgo = new Date(Date.now() - 7*24*60*60*1000).toISOString().split('T')[0];
-  const month = today.substring(0, 7);
-  
-  const tS = data.sales.filter(s => s.type === 'Sale' && s.date === today).reduce((s, x) => s + x.amount, 0);
-  const wS = data.sales.filter(s => s.type === 'Sale' && s.date >= weekAgo).reduce((s, x) => s + x.amount, 0);
-  const mS = data.sales.filter(s => s.type === 'Sale' && s.date.startsWith(month)).reduce((s, x) => s + x.amount, 0);
-  const tP = data.sales.filter(s => s.type === 'Purchase' && s.date === today).reduce((s, x) => s + x.amount, 0);
-  
-  document.getElementById('saleToday').textContent = 'Rs. ' + tS.toLocaleString();
-  document.getElementById('saleWeek').textContent = 'Rs. ' + wS.toLocaleString();
-  document.getElementById('saleMonth').textContent = 'Rs. ' + mS.toLocaleString();
-  document.getElementById('purchaseToday').textContent = 'Rs. ' + tP.toLocaleString();
-  document.getElementById('saleNet').textContent = 'Rs. ' + (tS - tP).toLocaleString();
-  
-  if (data.sales.length === 0) {
-    document.querySelector('#sales table').style.display = 'none';
-    document.getElementById('saleEmpty').style.display = 'block';
-    return;
-  }
+  const wa = new Date(Date.now() - 7*24*60*60*1000).toISOString().split('T')[0];
+  const m = today.substring(0, 7);
+  const set = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+  set('saleToday', 'Rs. ' + data.sales.filter(s => s.type === 'Sale' && s.date === today).reduce((s, x) => s + x.amount, 0).toLocaleString());
+  set('saleWeek', 'Rs. ' + data.sales.filter(s => s.type === 'Sale' && s.date >= wa).reduce((s, x) => s + x.amount, 0).toLocaleString());
+  set('saleMonth', 'Rs. ' + data.sales.filter(s => s.type === 'Sale' && s.date.startsWith(m)).reduce((s, x) => s + x.amount, 0).toLocaleString());
+  set('purchaseToday', 'Rs. ' + data.sales.filter(s => s.type === 'Purchase' && s.date === today).reduce((s, x) => s + x.amount, 0).toLocaleString());
+  const net = data.sales.filter(s => s.type === 'Sale' && s.date === today).reduce((s, x) => s + x.amount, 0) - data.sales.filter(s => s.type === 'Purchase' && s.date === today).reduce((s, x) => s + x.amount, 0);
+  set('saleNet', 'Rs. ' + net.toLocaleString());
+  if (data.sales.length === 0) { document.querySelector('#sales table').style.display = 'none'; document.getElementById('saleEmpty').style.display = 'block'; return; }
   document.querySelector('#sales table').style.display = 'table';
   document.getElementById('saleEmpty').style.display = 'none';
-  
   [...data.sales].reverse().forEach(s => {
     const tc = s.type === 'Sale' ? '#27ae60' : '#e74c3c';
     const pc = s.payment === 'Paid' ? 'badge-healthy' : 'badge-pregnant';
-    tbody.innerHTML += `<tr>
-      <td>${s.date}</td>
-      <td style="color:${tc};font-weight:700;">${s.type === 'Sale' ? '💵 Sale' : '🛒 Purchase'}</td>
-      <td>${s.category}</td><td>${s.animal}</td><td>${s.party}</td><td>${s.qty}</td>
-      <td style="color:${tc};font-weight:700;">Rs. ${s.amount}</td>
-      <td><span class="badge ${pc}">${s.payment}</span></td>
-      <td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('sales',${s.id})">🗑️</button></td>
-    </tr>`;
+    tbody.innerHTML += `<tr><td>${s.date}</td><td style="color:${tc};font-weight:700;">${s.type === 'Sale' ? '💵 Sale' : '🛒 Purchase'}</td><td>${s.category}</td><td>${s.animal}</td><td>${s.party}</td><td>${s.qty}</td><td style="color:${tc};font-weight:700;">Rs. ${s.amount}</td><td><span class="badge ${pc}">${s.payment}</span></td><td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('sales',${s.id})">🗑️</button></td></tr>`;
   });
 }
 
 // ==================== ASSETS ====================
 function addAsset() {
-  const name = document.getElementById('assetName').value.trim();
-  const value = parseFloat(document.getElementById('assetValue').value) || 0;
-  if (!name || value <= 0) return showAlert('❌ Naam aur Qeemat!', 'error');
-  data.assets.push({
-    id: Date.now(), name,
-    type: document.getElementById('assetType').value,
-    date: document.getElementById('assetDate').value || new Date().toISOString().split('T')[0],
-    value,
-    current: parseFloat(document.getElementById('assetCurrent').value) || value,
-    condition: document.getElementById('assetCondition').value,
-    notes: document.getElementById('assetNotes').value || ''
-  });
-  save();
-  ['assetName','assetValue','assetCurrent','assetNotes'].forEach(id => document.getElementById(id).value = '');
-  showAlert('✅ Asset add!');
-  renderAssets();
-  updateStats();
+  const n = document.getElementById('assetName').value.trim(), v = parseFloat(document.getElementById('assetValue').value) || 0;
+  if (!n || v <= 0) return showAlert('❌ Naam aur Qeemat!', 'error');
+  data.assets.push({ id: Date.now(), name: n, type: document.getElementById('assetType').value, date: document.getElementById('assetDate').value || new Date().toISOString().split('T')[0], value: v, current: parseFloat(document.getElementById('assetCurrent').value) || v, condition: document.getElementById('assetCondition').value, notes: document.getElementById('assetNotes').value || '' });
+  save(); ['assetName','assetValue','assetCurrent','assetNotes'].forEach(i => document.getElementById(i).value = '');
+  showAlert('✅ Add!'); renderAssets(); updateStats();
 }
-
 function renderAssets() {
-  const tbody = document.getElementById('assetBody');
-  if (!tbody) return;
+  const tbody = document.getElementById('assetBody'); if (!tbody) return;
   tbody.innerHTML = '';
-  
-  const total = data.assets.reduce((s, a) => s + a.current, 0);
-  const livestock = data.assets.filter(a => a.type === 'Livestock').reduce((s, a) => s + a.current, 0);
-  const property = data.assets.filter(a => a.type === 'Property').reduce((s, a) => s + a.current, 0);
-  
-  document.getElementById('assetTotalCount').textContent = data.assets.length;
-  document.getElementById('assetTotalValue').textContent = 'Rs. ' + total.toLocaleString();
-  document.getElementById('assetLivestock').textContent = 'Rs. ' + livestock.toLocaleString();
-  document.getElementById('assetProperty').textContent = 'Rs. ' + property.toLocaleString();
-  
-  if (data.assets.length === 0) {
-    document.querySelector('#assets table').style.display = 'none';
-    document.getElementById('assetEmpty').style.display = 'block';
-    return;
-  }
+  const set = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+  set('assetTotalCount', data.assets.length);
+  set('assetTotalValue', 'Rs. ' + data.assets.reduce((s, a) => s + a.current, 0).toLocaleString());
+  set('assetLivestock', 'Rs. ' + data.assets.filter(a => a.type === 'Livestock').reduce((s, a) => s + a.current, 0).toLocaleString());
+  set('assetProperty', 'Rs. ' + data.assets.filter(a => a.type === 'Property').reduce((s, a) => s + a.current, 0).toLocaleString());
+  if (data.assets.length === 0) { document.querySelector('#assets table').style.display = 'none'; document.getElementById('assetEmpty').style.display = 'block'; return; }
   document.querySelector('#assets table').style.display = 'table';
   document.getElementById('assetEmpty').style.display = 'none';
-  
-  [...data.assets].reverse().forEach(a => {
-    const cc = a.condition === 'Good' ? 'badge-healthy' : a.condition === 'Fair' ? 'badge-pregnant' : 'badge-sick';
-    tbody.innerHTML += `<tr><td><strong>${a.name}</strong></td><td>${a.type}</td><td>${a.date}</td><td>Rs.${a.value}</td><td>Rs.${a.current}</td><td><span class="badge ${cc}">${a.condition}</span></td><td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('assets',${a.id})">🗑️</button></td></tr>`;
-  });
+  [...data.assets].reverse().forEach(a => { const cc = a.condition === 'Good' ? 'badge-healthy' : a.condition === 'Fair' ? 'badge-pregnant' : 'badge-sick'; tbody.innerHTML += `<tr><td><strong>${a.name}</strong></td><td>${a.type}</td><td>${a.date}</td><td>Rs.${a.value}</td><td>Rs.${a.current}</td><td><span class="badge ${cc}">${a.condition}</span></td><td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('assets',${a.id})">🗑️</button></td></tr>`; });
 }
 
-// ==================== DELETE RECORD ====================
+// ==================== DELETE ====================
 function deleteRecord(type, id) {
   openPinVerify(() => {
     data[type] = data[type].filter(r => r.id !== id);
     save();
-    const renders = { milk: renderMilk, health: renderHealth, food: renderFood, labor: renderLabor, civil: renderCivil, breeding: renderBreeding, sales: renderSales, assets: renderAssets };
-    if (renders[type]) renders[type]();
-    updateStats();
-    showAlert('🗑️ Delete!');
+    const r = { milk: renderMilk, health: renderHealth, food: renderFood, labor: renderLabor, civil: renderCivil, breeding: renderBreeding, sales: renderSales, assets: renderAssets };
+    if (r[type]) r[type]();
+    updateStats(); showAlert('🗑️ Delete!');
   }, "🗑️ Delete", "PIN daalein");
 }
 
 // ==================== STATS ====================
 function updateStats() {
-  document.getElementById('totalAnimals').textContent = data.animals.length;
-  const today = new Date().toISOString().split('T')[0];
-  const month = today.substring(0, 7);
+  const today = new Date().toISOString().split('T')[0], m = today.substring(0, 7);
+  const set = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+  set('totalAnimals', data.animals.length);
+  const tMilk = data.milk.filter(x => x.date === today).reduce((s, x) => s + x.weight, 0);
+  set('totalMilk', tMilk.toFixed(1) + ' kg');
+  const tMI = data.milk.filter(x => x.date === today).reduce((s, x) => s + x.total, 0);
+  const tSI = data.sales.filter(s => s.type === 'Sale' && s.date === today).reduce((s, x) => s + x.amount, 0);
+  set('todaySale', 'Rs. ' + (tMI + tSI).toLocaleString());
+  set('healthyCount', data.animals.filter(a => a.health === 'Healthy').length);
+  set('pregnantCount', data.animals.filter(a => a.health === 'Pregnant').length);
+  set('sickCount', data.animals.filter(a => a.health === 'Sick').length);
+  set('totalBabies', profitBabies.length);
+  set('assetCount', data.assets.length);
   
-  const todayMilk = data.milk.filter(m => m.date === today).reduce((s, m) => s + m.weight, 0);
-  document.getElementById('totalMilk').textContent = todayMilk.toFixed(1) + ' kg';
-  
-  const todayMilkIncome = data.milk.filter(m => m.date === today).reduce((s, m) => s + m.total, 0);
-  const todaySalesIncome = data.sales.filter(s => s.type === 'Sale' && s.date === today).reduce((s, x) => s + x.amount, 0);
-  document.getElementById('todaySale').textContent = 'Rs. ' + (todayMilkIncome + todaySalesIncome).toLocaleString();
-  
-  document.getElementById('healthyCount').textContent = data.animals.filter(a => a.health === 'Healthy').length;
-  document.getElementById('pregnantCount').textContent = data.animals.filter(a => a.health === 'Pregnant').length;
-  document.getElementById('sickCount').textContent = data.animals.filter(a => a.health === 'Sick').length;
-  document.getElementById('assetCount').textContent = data.assets.length;
-  
-  const healthCost = data.health.reduce((s, h) => s + h.cost, 0);
-  const foodCost = data.food.reduce((s, f) => s + f.cost, 0);
-  const laborCost = data.labor.reduce((s, l) => s + l.amount, 0);
-  const civilCost = data.civil.reduce((s, c) => s + c.total, 0);
-  const breedCost = data.breeding.reduce((s, b) => s + b.cost, 0);
-  const purchaseCost = data.sales.filter(s => s.type === 'Purchase').reduce((s, x) => s + x.amount, 0);
-  const animalBuy = data.animals.reduce((s, a) => s + a.price, 0);
-  const totalExpense = healthCost + foodCost + laborCost + civilCost + breedCost + purchaseCost + animalBuy;
-  const totalIncome = data.milk.reduce((s, m) => s + m.total, 0) + data.sales.filter(s => s.type === 'Sale').reduce((s, x) => s + x.amount, 0);
-  const profit = totalIncome - totalExpense;
-  
-  document.getElementById('totalExpense').textContent = 'Rs. ' + totalExpense.toLocaleString();
-  document.getElementById('netProfitCard').textContent = 'Rs. ' + profit.toLocaleString();
-  document.getElementById('netProfitCard').style.color = profit >= 0 ? '#27ae60' : '#e74c3c';
+  const hC = data.health.reduce((s, h) => s + h.cost, 0);
+  const fC = data.food.reduce((s, f) => s + f.cost, 0);
+  const lC = data.labor.reduce((s, l) => s + l.amount, 0);
+  const cC = data.civil.reduce((s, c) => s + c.total, 0);
+  const bC = data.breeding.reduce((s, b) => s + b.cost, 0);
+  const pC = data.sales.filter(s => s.type === 'Purchase').reduce((s, x) => s + x.amount, 0);
+  const aB = data.animals.reduce((s, a) => s + a.price, 0);
+  const tE = hC + fC + lC + cC + bC + pC + aB;
+  const tI = data.milk.reduce((s, x) => s + x.total, 0) + data.sales.filter(s => s.type === 'Sale').reduce((s, x) => s + x.amount, 0);
+  const pr = tI - tE;
+  set('totalExpense', 'Rs. ' + tE.toLocaleString());
+  const np = document.getElementById('netProfitCard');
+  if (np) { np.textContent = 'Rs. ' + pr.toLocaleString(); np.style.color = pr >= 0 ? '#27ae60' : '#e74c3c'; }
   
   if (document.getElementById('dashTodayMilk')) {
-    const mSale = data.sales.filter(s => s.type === 'Sale' && s.date.startsWith(month)).reduce((s, x) => s + x.amount, 0);
-    const mMilkIncome = data.milk.filter(m => m.date.startsWith(month)).reduce((s, m) => s + m.total, 0);
-    const mHealth = data.health.filter(h => h.date.startsWith(month)).reduce((s, h) => s + h.cost, 0);
-    const mFood = data.food.filter(f => f.date.startsWith(month)).reduce((s, f) => s + f.cost, 0);
-    const mLabor = data.labor.filter(l => l.date.startsWith(month)).reduce((s, l) => s + l.amount, 0);
-    const mCivil = data.civil.filter(c => c.date.startsWith(month)).reduce((s, c) => s + c.total, 0);
-    const mBreed = data.breeding.filter(b => b.date.startsWith(month)).reduce((s, b) => s + b.cost, 0);
-    const mPurchase = data.sales.filter(s => s.type === 'Purchase' && s.date.startsWith(month)).reduce((s, x) => s + x.amount, 0);
-    const mExpense = mHealth + mFood + mLabor + mCivil + mBreed + mPurchase;
-    const mIncome = mSale + mMilkIncome;
-    
-    document.getElementById('dashTodayMilk').textContent = todayMilk.toFixed(1) + ' kg';
-    document.getElementById('dashTodaySale').textContent = 'Rs. ' + (todayMilkIncome + todaySalesIncome).toLocaleString();
-    document.getElementById('dashMonthSale').textContent = 'Rs. ' + mIncome.toLocaleString();
-    document.getElementById('dashMonthExpense').textContent = 'Rs. ' + mExpense.toLocaleString();
-    document.getElementById('dashMonthProfit').textContent = 'Rs. ' + (mIncome - mExpense).toLocaleString();
-    document.getElementById('dashAssetValue').textContent = 'Rs. ' + data.assets.reduce((s, a) => s + a.current, 0).toLocaleString();
+    const mS = data.sales.filter(s => s.type === 'Sale' && s.date.startsWith(m)).reduce((s, x) => s + x.amount, 0);
+    const mMI = data.milk.filter(x => x.date.startsWith(m)).reduce((s, x) => s + x.total, 0);
+    const mH = data.health.filter(x => x.date.startsWith(m)).reduce((s, x) => s + x.cost, 0);
+    const mF = data.food.filter(x => x.date.startsWith(m)).reduce((s, x) => s + x.cost, 0);
+    const mL = data.labor.filter(x => x.date.startsWith(m)).reduce((s, x) => s + x.amount, 0);
+    const mC = data.civil.filter(x => x.date.startsWith(m)).reduce((s, x) => s + x.total, 0);
+    const mB = data.breeding.filter(x => x.date.startsWith(m)).reduce((s, x) => s + x.cost, 0);
+    const mP = data.sales.filter(s => s.type === 'Purchase' && s.date.startsWith(m)).reduce((s, x) => s + x.amount, 0);
+    const mE = mH + mF + mL + mC + mB + mP;
+    const mI = mS + mMI;
+    set('dashTodayMilk', tMilk.toFixed(1) + ' kg');
+    set('dashTodaySale', 'Rs. ' + (tMI + tSI).toLocaleString());
+    set('dashMonthSale', 'Rs. ' + mI.toLocaleString());
+    set('dashMonthExpense', 'Rs. ' + mE.toLocaleString());
+    set('dashMonthProfit', 'Rs. ' + (mI - mE).toLocaleString());
+    set('dashAssetValue', 'Rs. ' + data.assets.reduce((s, a) => s + a.current, 0).toLocaleString());
   }
   
   if (document.getElementById('sumHealth')) {
-    document.getElementById('sumHealth').textContent = 'Rs. ' + healthCost.toLocaleString();
-    document.getElementById('sumFood').textContent = 'Rs. ' + foodCost.toLocaleString();
-    document.getElementById('sumLabor').textContent = 'Rs. ' + laborCost.toLocaleString();
-    document.getElementById('sumCivil').textContent = 'Rs. ' + civilCost.toLocaleString();
-    document.getElementById('sumBreeding').textContent = 'Rs. ' + breedCost.toLocaleString();
-    document.getElementById('sumPurchase').textContent = 'Rs. ' + (purchaseCost + animalBuy).toLocaleString();
-    document.getElementById('grandTotal').textContent = 'Rs. ' + totalExpense.toLocaleString();
-    document.getElementById('grandIncome').textContent = 'Rs. ' + totalIncome.toLocaleString();
-    document.getElementById('netProfit').textContent = 'Rs. ' + profit.toLocaleString();
+    set('sumHealth', 'Rs. ' + hC.toLocaleString());
+    set('sumFood', 'Rs. ' + fC.toLocaleString());
+    set('sumLabor', 'Rs. ' + lC.toLocaleString());
+    set('sumCivil', 'Rs. ' + cC.toLocaleString());
+    set('sumBreeding', 'Rs. ' + bC.toLocaleString());
+    set('sumPurchase', 'Rs. ' + (pC + aB).toLocaleString());
+    set('grandTotal', 'Rs. ' + tE.toLocaleString());
+    set('grandIncome', 'Rs. ' + tI.toLocaleString());
+    set('netProfit', 'Rs. ' + pr.toLocaleString());
   }
   
+  if (document.getElementById('countAdult')) updateAnimalSummary();
   renderReports();
 }
 
@@ -1881,135 +1734,103 @@ function updateStats() {
 function showChart(type, btn) {
   currentChartType = type;
   document.querySelectorAll('.chart-tab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  drawChart(type);
+  btn.classList.add('active'); drawChart(type);
 }
-
 function drawChart(type) {
-  const ctx = document.getElementById('mainChart');
-  if (!ctx) return;
+  const ctx = document.getElementById('mainChart'); if (!ctx) return;
   if (mainChartInstance) mainChartInstance.destroy();
-  
-  const today = new Date();
-  let labels = [], saleData = [], purchaseData = [], milkData = [], openData = [], closeData = [];
-  
+  const t = new Date();
+  let L = [], S = [], P = [], M = [], O = [], C = [];
   if (type === 'daily') {
     for (let i = 29; i >= 0; i--) {
-      const d = new Date(today); d.setDate(d.getDate() - i);
+      const d = new Date(t); d.setDate(d.getDate() - i);
       const ds = d.toISOString().split('T')[0];
-      labels.push(d.toLocaleDateString('en-PK', { day: '2-digit', month: 'short' }));
-      const sale = data.sales.filter(s => s.type === 'Sale' && s.date === ds).reduce((s, x) => s + x.amount, 0);
-      const milkInc = data.milk.filter(m => m.date === ds).reduce((s, m) => s + m.total, 0);
-      const purchase = data.sales.filter(s => s.type === 'Purchase' && s.date === ds).reduce((s, x) => s + x.amount, 0);
-      saleData.push(sale + milkInc);
-      purchaseData.push(purchase);
-      milkData.push(data.milk.filter(m => m.date === ds).reduce((s, m) => s + m.weight, 0));
+      L.push(d.toLocaleDateString('en-PK', { day: '2-digit', month: 'short' }));
+      S.push(data.sales.filter(s => s.type === 'Sale' && s.date === ds).reduce((s, x) => s + x.amount, 0) + data.milk.filter(m => m.date === ds).reduce((s, m) => s + m.total, 0));
+      P.push(data.sales.filter(s => s.type === 'Purchase' && s.date === ds).reduce((s, x) => s + x.amount, 0));
+      M.push(data.milk.filter(m => m.date === ds).reduce((s, m) => s + m.weight, 0));
     }
   } else if (type === 'weekly') {
     for (let i = 11; i >= 0; i--) {
-      const ws = new Date(today); ws.setDate(ws.getDate() - (i * 7));
+      const ws = new Date(t); ws.setDate(ws.getDate() - (i * 7));
       const we = new Date(ws); we.setDate(we.getDate() + 6);
-      const wsS = ws.toISOString().split('T')[0];
-      const weS = we.toISOString().split('T')[0];
-      labels.push('W' + (12 - i));
-      saleData.push(data.sales.filter(s => s.type === 'Sale' && s.date >= wsS && s.date <= weS).reduce((s, x) => s + x.amount, 0) + data.milk.filter(m => m.date >= wsS && m.date <= weS).reduce((s, m) => s + m.total, 0));
-      purchaseData.push(data.sales.filter(s => s.type === 'Purchase' && s.date >= wsS && s.date <= weS).reduce((s, x) => s + x.amount, 0));
-      milkData.push(data.milk.filter(m => m.date >= wsS && m.date <= weS).reduce((s, m) => s + m.weight, 0));
+      const a = ws.toISOString().split('T')[0], b = we.toISOString().split('T')[0];
+      L.push('W' + (12 - i));
+      S.push(data.sales.filter(s => s.type === 'Sale' && s.date >= a && s.date <= b).reduce((s, x) => s + x.amount, 0) + data.milk.filter(m => m.date >= a && m.date <= b).reduce((s, m) => s + m.total, 0));
+      P.push(data.sales.filter(s => s.type === 'Purchase' && s.date >= a && s.date <= b).reduce((s, x) => s + x.amount, 0));
+      M.push(data.milk.filter(m => m.date >= a && m.date <= b).reduce((s, m) => s + m.weight, 0));
     }
   } else if (type === 'monthly') {
     for (let i = 11; i >= 0; i--) {
-      const d = new Date(today.getFullYear(), today.getMonth() - i, 1);
+      const d = new Date(t.getFullYear(), t.getMonth() - i, 1);
       const ms = d.toISOString().substring(0, 7);
-      labels.push(d.toLocaleDateString('en-PK', { month: 'short', year: '2-digit' }));
-      saleData.push(data.sales.filter(s => s.type === 'Sale' && s.date.startsWith(ms)).reduce((s, x) => s + x.amount, 0) + data.milk.filter(m => m.date.startsWith(ms)).reduce((s, m) => s + m.total, 0));
-      purchaseData.push(data.sales.filter(s => s.type === 'Purchase' && s.date.startsWith(ms)).reduce((s, x) => s + x.amount, 0));
-      milkData.push(data.milk.filter(m => m.date.startsWith(ms)).reduce((s, m) => s + m.weight, 0));
+      L.push(d.toLocaleDateString('en-PK', { month: 'short', year: '2-digit' }));
+      S.push(data.sales.filter(s => s.type === 'Sale' && s.date.startsWith(ms)).reduce((s, x) => s + x.amount, 0) + data.milk.filter(m => m.date.startsWith(ms)).reduce((s, m) => s + m.total, 0));
+      P.push(data.sales.filter(s => s.type === 'Purchase' && s.date.startsWith(ms)).reduce((s, x) => s + x.amount, 0));
+      M.push(data.milk.filter(m => m.date.startsWith(ms)).reduce((s, m) => s + m.weight, 0));
     }
   } else if (type === 'candle') {
     for (let i = 13; i >= 0; i--) {
-      const d = new Date(today); d.setDate(d.getDate() - i);
+      const d = new Date(t); d.setDate(d.getDate() - i);
       const ds = d.toISOString().split('T')[0];
-      const recs = data.milk.filter(m => m.date === ds);
-      const open = recs.length > 0 ? recs[0].rate : 120;
-      const close = recs.length > 0 ? recs[recs.length - 1].rate : 120;
-      labels.push(d.toLocaleDateString('en-PK', { day: '2-digit', month: 'short' }));
-      openData.push(open);
-      closeData.push(close);
+      const r = data.milk.filter(m => m.date === ds);
+      L.push(d.toLocaleDateString('en-PK', { day: '2-digit', month: 'short' }));
+      O.push(r.length > 0 ? r[0].rate : 120);
+      C.push(r.length > 0 ? r[r.length - 1].rate : 120);
     }
     mainChartInstance = new Chart(ctx, {
       type: 'bar',
-      data: { labels, datasets: [
-        { label: 'Open Rate', data: openData, backgroundColor: 'rgba(52,152,219,0.7)', borderColor: '#3498db', borderWidth: 2 },
-        { label: 'Close Rate', data: closeData, backgroundColor: 'rgba(231,76,60,0.7)', borderColor: '#e74c3c', borderWidth: 2 }
+      data: { labels: L, datasets: [
+        { label: 'Open', data: O, backgroundColor: 'rgba(52,152,219,0.7)', borderColor: '#3498db', borderWidth: 2 },
+        { label: 'Close', data: C, backgroundColor: 'rgba(231,76,60,0.7)', borderColor: '#e74c3c', borderWidth: 2 }
       ]},
-      options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: '🕯️ Milk Rate Candle Chart', font: { size: 15, weight: 'bold' }, color: '#2c5f2d' } }, scales: { y: { beginAtZero: false } } }
+      options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: '🕯️ Candle Chart', font: { size: 15, weight: 'bold' }, color: '#2c5f2d' } }, scales: { y: { beginAtZero: false } } }
     });
-    
     let html = '<table style="font-size:11px;"><thead><tr><th>Tareekh</th><th>Open</th><th>Close</th><th>Change</th><th>%</th><th>Trend</th></tr></thead><tbody>';
-    labels.forEach((l, i) => {
-      const diff = closeData[i] - openData[i];
-      const pct = openData[i] > 0 ? ((diff / openData[i]) * 100).toFixed(2) : 0;
-      const trend = diff > 0 ? '🟢 UP' : diff < 0 ? '🔴 DOWN' : '⚪ SAME';
-      html += `<tr><td>${l}</td><td>${openData[i]}</td><td>${closeData[i]}</td><td style="color:${diff >= 0 ? 'green' : 'red'};font-weight:700;">${diff >= 0 ? '+' : ''}${diff}</td><td style="color:${diff >= 0 ? 'green' : 'red'};font-weight:700;">${pct}%</td><td>${trend}</td></tr>`;
+    L.forEach((l, i) => {
+      const df = C[i] - O[i], p = O[i] > 0 ? ((df / O[i]) * 100).toFixed(2) : 0;
+      const tr = df > 0 ? '🟢 UP' : df < 0 ? '🔴 DOWN' : '⚪ SAME';
+      html += `<tr><td>${l}</td><td>${O[i]}</td><td>${C[i]}</td><td style="color:${df >= 0 ? 'green' : 'red'};font-weight:700;">${df >= 0 ? '+' : ''}${df}</td><td style="color:${df >= 0 ? 'green' : 'red'};font-weight:700;">${p}%</td><td>${tr}</td></tr>`;
     });
     html += '</tbody></table>';
     document.getElementById('percentAnalysis').innerHTML = html;
     return;
   }
-  
   mainChartInstance = new Chart(ctx, {
     type: 'line',
-    data: { labels, datasets: [
-      { label: '💵 Sale (Rs.)', data: saleData, borderColor: '#27ae60', backgroundColor: 'rgba(39,174,96,0.15)', tension: 0.4, fill: true, borderWidth: 3 },
-      { label: '🛒 Purchase (Rs.)', data: purchaseData, borderColor: '#e74c3c', backgroundColor: 'rgba(231,76,60,0.15)', tension: 0.4, fill: true, borderWidth: 3 },
-      { label: '🥛 Milk (kg)', data: milkData, borderColor: '#3498db', backgroundColor: 'rgba(52,152,219,0.15)', tension: 0.4, fill: true, borderWidth: 3, yAxisID: 'y1' }
+    data: { labels: L, datasets: [
+      { label: '💵 Sale (Rs.)', data: S, borderColor: '#27ae60', backgroundColor: 'rgba(39,174,96,0.15)', tension: 0.4, fill: true, borderWidth: 3 },
+      { label: '🛒 Purchase (Rs.)', data: P, borderColor: '#e74c3c', backgroundColor: 'rgba(231,76,60,0.15)', tension: 0.4, fill: true, borderWidth: 3 },
+      { label: '🥛 Milk (kg)', data: M, borderColor: '#3498db', backgroundColor: 'rgba(52,152,219,0.15)', tension: 0.4, fill: true, borderWidth: 3, yAxisID: 'y1' }
     ]},
-    options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: `${type.toUpperCase()} Sales Analysis`, font: { size: 15, weight: 'bold' }, color: '#2c5f2d' } }, scales: { y: { beginAtZero: true, position: 'left' }, y1: { beginAtZero: true, position: 'right', grid: { drawOnChartArea: false } } } }
+    options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: `${type.toUpperCase()} Analysis`, font: { size: 15, weight: 'bold' }, color: '#2c5f2d' } }, scales: { y: { beginAtZero: true, position: 'left' }, y1: { beginAtZero: true, position: 'right', grid: { drawOnChartArea: false } } } }
   });
-  
-  const tS = saleData.reduce((s, x) => s + x, 0);
-  const tP = purchaseData.reduce((s, x) => s + x, 0);
-  const tM = milkData.reduce((s, x) => s + x, 0);
-  const profit = tS - tP;
-  const margin = tS > 0 ? ((profit / tS) * 100).toFixed(2) : 0;
-  
-  document.getElementById('percentAnalysis').innerHTML = `
-    <table style="font-size:12px;">
-      <tr><td>💵 <strong>Total Sale:</strong></td><td>Rs. ${tS.toLocaleString()}</td></tr>
-      <tr><td>🛒 <strong>Total Purchase:</strong></td><td>Rs. ${tP.toLocaleString()}</td></tr>
-      <tr><td>🥛 <strong>Total Milk:</strong></td><td>${tM.toFixed(1)} kg</td></tr>
-      <tr><td>📈 <strong>Net Profit:</strong></td><td style="color:${profit >= 0 ? 'green' : 'red'};font-weight:700;">Rs. ${profit.toLocaleString()}</td></tr>
-      <tr><td>📊 <strong>Margin:</strong></td><td style="color:${margin >= 0 ? 'green' : 'red'};font-weight:700;">${margin}%</td></tr>
-    </table>
-  `;
+  const tS = S.reduce((s, x) => s + x, 0), tP = P.reduce((s, x) => s + x, 0), tM = M.reduce((s, x) => s + x, 0);
+  const pr = tS - tP, mg = tS > 0 ? ((pr / tS) * 100).toFixed(2) : 0;
+  document.getElementById('percentAnalysis').innerHTML = `<table style="font-size:12px;"><tr><td>💵 <strong>Sale:</strong></td><td>Rs. ${tS.toLocaleString()}</td></tr><tr><td>🛒 <strong>Purchase:</strong></td><td>Rs. ${tP.toLocaleString()}</td></tr><tr><td>🥛 <strong>Milk:</strong></td><td>${tM.toFixed(1)} kg</td></tr><tr><td>📈 <strong>Net:</strong></td><td style="color:${pr >= 0 ? 'green' : 'red'};font-weight:700;">Rs. ${pr.toLocaleString()}</td></tr><tr><td>📊 <strong>Margin:</strong></td><td style="color:${mg >= 0 ? 'green' : 'red'};font-weight:700;">${mg}%</td></tr></table>`;
 }
-
 function drawDashChart() {
-  const ctx = document.getElementById('dashChart');
-  if (!ctx) return;
+  const ctx = document.getElementById('dashChart'); if (!ctx) return;
   if (dashChartInstance) dashChartInstance.destroy();
-  
-  const today = new Date();
-  let labels = [], milkData = [], saleData = [], expenseData = [];
-  
+  const t = new Date();
+  let L = [], M = [], S = [], E = [];
   for (let i = 29; i >= 0; i--) {
-    const d = new Date(today); d.setDate(d.getDate() - i);
+    const d = new Date(t); d.setDate(d.getDate() - i);
     const ds = d.toISOString().split('T')[0];
-    labels.push(d.toLocaleDateString('en-PK', { day: '2-digit', month: 'short' }));
-    milkData.push(data.milk.filter(m => m.date === ds).reduce((s, m) => s + m.weight, 0));
-    saleData.push(data.milk.filter(m => m.date === ds).reduce((s, m) => s + m.total, 0) + data.sales.filter(s => s.type === 'Sale' && s.date === ds).reduce((s, x) => s + x.amount, 0));
+    L.push(d.toLocaleDateString('en-PK', { day: '2-digit', month: 'short' }));
+    M.push(data.milk.filter(m => m.date === ds).reduce((s, m) => s + m.weight, 0));
+    S.push(data.milk.filter(m => m.date === ds).reduce((s, m) => s + m.total, 0) + data.sales.filter(s => s.type === 'Sale' && s.date === ds).reduce((s, x) => s + x.amount, 0));
     const h = data.health.filter(x => x.date === ds).reduce((s, x) => s + x.cost, 0);
     const f = data.food.filter(x => x.date === ds).reduce((s, x) => s + x.cost, 0);
     const l = data.labor.filter(x => x.date === ds).reduce((s, x) => s + x.amount, 0);
-    expenseData.push(h + f + l);
+    E.push(h + f + l);
   }
-  
   dashChartInstance = new Chart(ctx, {
     type: 'line',
-    data: { labels, datasets: [
-      { label: '🥛 Milk (kg)', data: milkData, borderColor: '#3498db', backgroundColor: 'rgba(52,152,219,0.15)', tension: 0.4, fill: true, borderWidth: 3 },
-      { label: '💵 Sale (Rs.)', data: saleData, borderColor: '#27ae60', backgroundColor: 'rgba(39,174,96,0.15)', tension: 0.4, fill: true, borderWidth: 3, yAxisID: 'y1' },
-      { label: '💸 Expense (Rs.)', data: expenseData, borderColor: '#e74c3c', backgroundColor: 'rgba(231,76,60,0.15)', tension: 0.4, fill: true, borderWidth: 3, yAxisID: 'y1' }
+    data: { labels: L, datasets: [
+      { label: '🥛 Milk (kg)', data: M, borderColor: '#3498db', backgroundColor: 'rgba(52,152,219,0.15)', tension: 0.4, fill: true, borderWidth: 3 },
+      { label: '💵 Sale (Rs.)', data: S, borderColor: '#27ae60', backgroundColor: 'rgba(39,174,96,0.15)', tension: 0.4, fill: true, borderWidth: 3, yAxisID: 'y1' },
+      { label: '💸 Expense (Rs.)', data: E, borderColor: '#e74c3c', backgroundColor: 'rgba(231,76,60,0.15)', tension: 0.4, fill: true, borderWidth: 3, yAxisID: 'y1' }
     ]},
     options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: '📊 30 Din Overview', font: { size: 15, weight: 'bold' }, color: '#2c5f2d' } }, scales: { y: { beginAtZero: true, position: 'left' }, y1: { beginAtZero: true, position: 'right', grid: { drawOnChartArea: false } } } }
   });
@@ -2017,108 +1838,81 @@ function drawDashChart() {
 
 // ==================== REPORTS ====================
 function renderReports() {
-  const month = new Date().toISOString().substring(0, 7);
-  const mMilk = data.milk.filter(m => m.date.startsWith(month)).reduce((s, m) => s + m.weight, 0);
-  const mMilkInc = data.milk.filter(m => m.date.startsWith(month)).reduce((s, m) => s + m.total, 0);
-  const mSale = data.sales.filter(s => s.type === 'Sale' && s.date.startsWith(month)).reduce((s, x) => s + x.amount, 0);
-  const mPur = data.sales.filter(s => s.type === 'Purchase' && s.date.startsWith(month)).reduce((s, x) => s + x.amount, 0);
-  const mH = data.health.filter(h => h.date.startsWith(month)).reduce((s, h) => s + h.cost, 0);
-  const mF = data.food.filter(f => f.date.startsWith(month)).reduce((s, f) => s + f.cost, 0);
-  const mL = data.labor.filter(l => l.date.startsWith(month)).reduce((s, l) => s + l.amount, 0);
-  const mC = data.civil.filter(c => c.date.startsWith(month)).reduce((s, c) => s + c.total, 0);
-  const mB = data.breeding.filter(b => b.date.startsWith(month)).reduce((s, b) => s + b.cost, 0);
-  const mInc = mMilkInc + mSale;
-  const mExp = mH + mF + mL + mC + mB + mPur;
-  const mProf = mInc - mExp;
-  
+  const m = new Date().toISOString().substring(0, 7);
+  const mm = data.milk.filter(x => x.date.startsWith(m)).reduce((s, x) => s + x.weight, 0);
+  const mmi = data.milk.filter(x => x.date.startsWith(m)).reduce((s, x) => s + x.total, 0);
+  const ms = data.sales.filter(s => s.type === 'Sale' && s.date.startsWith(m)).reduce((s, x) => s + x.amount, 0);
+  const mp = data.sales.filter(s => s.type === 'Purchase' && s.date.startsWith(m)).reduce((s, x) => s + x.amount, 0);
+  const mh = data.health.filter(x => x.date.startsWith(m)).reduce((s, x) => s + x.cost, 0);
+  const mf = data.food.filter(x => x.date.startsWith(m)).reduce((s, x) => s + x.cost, 0);
+  const ml = data.labor.filter(x => x.date.startsWith(m)).reduce((s, x) => s + x.amount, 0);
+  const mc = data.civil.filter(x => x.date.startsWith(m)).reduce((s, x) => s + x.total, 0);
+  const mb = data.breeding.filter(x => x.date.startsWith(m)).reduce((s, x) => s + x.cost, 0);
+  const mi = mmi + ms, me = mh + mf + ml + mc + mb + mp, mpr = mi - me;
   const el = document.getElementById('monthlyReport');
-  if (el) el.innerHTML = `
-    <table style="box-shadow:none;font-size:12px;">
-      <tr><td><strong>🥛 Doodh:</strong></td><td>${mMilk.toFixed(1)} kg</td></tr>
-      <tr><td><strong>💵 Doodh Income:</strong></td><td style="color:#27ae60;">Rs. ${mMilkInc.toLocaleString()}</td></tr>
-      <tr><td><strong>💵 Sale:</strong></td><td style="color:#27ae60;">Rs. ${mSale.toLocaleString()}</td></tr>
-      <tr><td><strong>💊 Doctor:</strong></td><td style="color:#e74c3c;">Rs. ${mH.toLocaleString()}</td></tr>
-      <tr><td><strong>🌾 Khana:</strong></td><td style="color:#e74c3c;">Rs. ${mF.toLocaleString()}</td></tr>
-      <tr><td><strong>👷 Mazdoori:</strong></td><td style="color:#e74c3c;">Rs. ${mL.toLocaleString()}</td></tr>
-      <tr><td><strong>🏗️ Civil:</strong></td><td style="color:#e74c3c;">Rs. ${mC.toLocaleString()}</td></tr>
-      <tr><td><strong>🐣 Breeding:</strong></td><td style="color:#e74c3c;">Rs. ${mB.toLocaleString()}</td></tr>
-      <tr style="background:#f0f0f0;"><td><strong>📊 Total Kharcha:</strong></td><td><strong>Rs. ${mExp.toLocaleString()}</strong></td></tr>
-      <tr style="background:${mProf >= 0 ? '#d4edda' : '#f8d7da'};"><td><strong>💰 Munfa:</strong></td><td><strong style="color:${mProf >= 0 ? '#155724' : '#721c24'};">Rs. ${mProf.toLocaleString()}</strong></td></tr>
-    </table>
-  `;
-  
-  let alerts = [];
-  const sick = data.animals.filter(a => a.health === 'Sick');
-  if (sick.length > 0) alerts.push(`⚠️ ${sick.length} beemar: ${sick.map(a => a.name).join(', ')}`);
-  const pending = data.labor.filter(l => l.status === 'Pending');
-  if (pending.length > 0) alerts.push(`⚠️ Rs. ${pending.reduce((s, l) => s + l.amount, 0)} mazdoori baqi`);
-  const pSale = data.sales.filter(s => s.payment === 'Pending');
-  if (pSale.length > 0) alerts.push(`⚠️ Rs. ${pSale.reduce((s, x) => s + x.amount, 0)} payment pending`);
+  if (el) el.innerHTML = `<table style="box-shadow:none;font-size:12px;"><tr><td><strong>🥛 Doodh:</strong></td><td>${mm.toFixed(1)} kg</td></tr><tr><td><strong>💵 Doodh Income:</strong></td><td style="color:#27ae60;">Rs. ${mmi.toLocaleString()}</td></tr><tr><td><strong>💵 Sale:</strong></td><td style="color:#27ae60;">Rs. ${ms.toLocaleString()}</td></tr><tr><td><strong>💊 Doctor:</strong></td><td style="color:#e74c3c;">Rs. ${mh.toLocaleString()}</td></tr><tr><td><strong>🌾 Khana:</strong></td><td style="color:#e74c3c;">Rs. ${mf.toLocaleString()}</td></tr><tr><td><strong>👷 Mazdoori:</strong></td><td style="color:#e74c3c;">Rs. ${ml.toLocaleString()}</td></tr><tr><td><strong>🏗️ Civil:</strong></td><td style="color:#e74c3c;">Rs. ${mc.toLocaleString()}</td></tr><tr><td><strong>🐣 Breeding:</strong></td><td style="color:#e74c3c;">Rs. ${mb.toLocaleString()}</td></tr><tr style="background:#f0f0f0;"><td><strong>📊 Total Kharcha:</strong></td><td><strong>Rs. ${me.toLocaleString()}</strong></td></tr><tr style="background:${mpr >= 0 ? '#d4edda' : '#f8d7da'};"><td><strong>💰 Munfa:</strong></td><td><strong style="color:${mpr >= 0 ? '#155724' : '#721c24'};">Rs. ${mpr.toLocaleString()}</strong></td></tr></table>`;
+  let a = [];
+  const sick = data.animals.filter(x => x.health === 'Sick');
+  if (sick.length > 0) a.push(`⚠️ ${sick.length} beemar: ${sick.map(x => x.name).join(', ')}`);
+  const pend = data.labor.filter(x => x.status === 'Pending');
+  if (pend.length > 0) a.push(`⚠️ Rs. ${pend.reduce((s, x) => s + x.amount, 0)} mazdoori baqi`);
+  const pS = data.sales.filter(x => x.payment === 'Pending');
+  if (pS.length > 0) a.push(`⚠️ Rs. ${pS.reduce((s, x) => s + x.amount, 0)} payment pending`);
   data.breeding.forEach(b => {
     if (b.status === 'Pregnant' && b.expected && b.expected !== '-') {
-      const days = Math.ceil((new Date(b.expected) - new Date()) / (1000 * 60 * 60 * 24));
-      if (days >= 0 && days <= 30) alerts.push(`🐄💫 ${b.animal} delivery ${days} din mein`);
+      const d = Math.ceil((new Date(b.expected) - new Date()) / (1000 * 60 * 60 * 24));
+      if (d >= 0 && d <= 30) a.push(`🐄💫 ${b.animal} delivery ${d} din mein`);
     }
   });
-  if (alerts.length === 0) alerts.push('✅ Sab theek hai!');
+  if (a.length === 0) a.push('✅ Sab theek hai!');
   const aEl = document.getElementById('alerts');
-  if (aEl) aEl.innerHTML = alerts.map(a => `<div style="padding:5px 0;font-size:13px;">${a}</div>`).join('');
+  if (aEl) aEl.innerHTML = a.map(x => `<div style="padding:5px 0;font-size:13px;">${x}</div>`).join('');
 }
 
 // ==================== EXPORT/IMPORT ====================
 function exportData() {
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
+  const full = { ...data, profitBabies, userRequests };
+  const b = new Blob([JSON.stringify(full, null, 2)], { type: 'application/json' });
+  const u = URL.createObjectURL(b);
   const a = document.createElement('a');
-  a.href = url;
+  a.href = u;
   a.download = 'sabir-dairy-backup-' + new Date().toISOString().split('T')[0] + '.json';
   a.click();
   showAlert('✅ Export!');
 }
-
 function importData(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => {
     try {
-      const imported = JSON.parse(ev.target.result);
+      const i = JSON.parse(ev.target.result);
       if (confirm('Purana data replace hoga?')) {
-        data = imported;
-        save();
-        renderAll();
-        showAlert('✅ Import!');
+        Object.keys(data).forEach(k => { if (i[k]) data[k] = i[k]; });
+        if (i.profitBabies) profitBabies = i.profitBabies;
+        if (i.userRequests) userRequests = i.userRequests;
+        save(); saveProfitBabies(); saveRequests();
+        renderAll(); showAlert('✅ Import!');
       }
     } catch(err) { showAlert('❌ File sahi nahi!', 'error'); }
   };
-  reader.readAsText(file);
+  r.readAsText(f);
 }
 
 // ==================== RENDER ALL ====================
 function renderAll() {
-  renderAnimals();
-  renderMilk();
-  renderHealth();
-  renderFood();
-  renderLabor();
-  renderCivil();
-  renderBreeding();
-  renderSales();
-  renderAssets();
-  renderAllSelects();
-  updateStats();
-  updateRequestsCount();
+  renderAnimals(); renderMilk(); renderHealth(); renderFood(); renderLabor();
+  renderCivil(); renderBreeding(); renderSales(); renderAssets();
+  renderProfit(); renderProfitMotherSelect();
+  renderAllSelects(); updateStats(); updateRequestsCount();
   setTimeout(() => drawDashChart(), 200);
 }
 
 // ==================== INIT ====================
 async function init() {
   const today = new Date().toISOString().split('T')[0];
-  ['animalDate','milkDate','healthDate','foodDate','laborDate','civilDate','breedDate','saleDate','assetDate'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = today;
+  ['animalDate','milkDate','healthDate','foodDate','laborDate','civilDate','breedDate','saleDate','assetDate','profitBabyBirth'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.value = today;
   });
-  
   await loadPinFromFirebase();
   renderAll();
   setupFirebaseSync();
@@ -2126,17 +1920,22 @@ async function init() {
   setTimeout(() => drawDashChart(), 300);
 }
 
-// Keyboard support
+document.getElementById('animalPhoto')?.addEventListener('change', function(e) {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => { currentPhotoBase64 = ev.target.result; };
+  r.readAsDataURL(f);
+});
+
 document.addEventListener('keydown', (e) => {
-  const lockVisible = !document.getElementById('lockScreen').classList.contains('hide');
-  const verifyVisible = document.getElementById('pinVerifyModal').classList.contains('show');
-  
-  if (lockVisible) {
+  const lv = !document.getElementById('lockScreen').classList.contains('hide');
+  const vv = document.getElementById('pinVerifyModal').classList.contains('show');
+  if (lv) {
     if (/^[0-9]$/.test(e.key)) pinInput(e.key);
     else if (e.key === 'Backspace') pinDelete();
     else if (e.key === 'Enter') pinSubmit();
     else if (e.key === 'Escape') pinClear();
-  } else if (verifyVisible) {
+  } else if (vv) {
     if (/^[0-9]$/.test(e.key)) verifyInput(e.key);
     else if (e.key === 'Backspace') verifyDelete();
     else if (e.key === 'Enter') verifySubmit();
