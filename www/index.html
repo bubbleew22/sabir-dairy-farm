@@ -12,77 +12,45 @@
 
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
-  
-  html, body {
-    overflow-x: hidden !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    position: relative;
-  }
-  
-  body {
-    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1e5c2e);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-    min-height: 100vh;
-    padding: 15px;
-  }
+  html, body { overflow-x: hidden !important; width: 100% !important; max-width: 100vw !important; }
+  body { background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1e5c2e); background-size: 400% 400%; animation: gradientBG 15s ease infinite; min-height: 100vh; padding: 15px; transition: all 0.3s; }
   @keyframes gradientBG { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-  
   * { max-width: 100%; -webkit-tap-highlight-color: transparent; }
-  
-  /* LOCK SCREEN */
-  #lockScreen {
-    position: fixed; top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: linear-gradient(135deg, #1e3c72, #2a5298, #4a9d4e);
-    z-index: 99999;
-    display: flex; justify-content: center; align-items: center;
-    padding: 20px;
-  }
+  body.dark-mode { background: #0a0a0a; color: #e0e0e0; }
+  body.dark-mode .container { background: #1a1a1a; color: #e0e0e0; }
+  body.dark-mode .stat-card, body.dark-mode .summary-card, body.dark-mode .modal-box, body.dark-mode .chart-container, body.dark-mode .request-card { background: #2a2a2a; color: #e0e0e0; }
+  body.dark-mode .form-group input, body.dark-mode .form-group select { background: #333; color: #e0e0e0; border-color: #444; }
+  body.dark-mode td { color: #e0e0e0; border-color: #333; }
+  body.dark-mode tr:hover { background: #2a2a2a; }
+  body.dark-mode .summary-card h4, body.dark-mode .stat-card h3, body.dark-mode .section-header h2 { color: #e0e0e0; }
+  body.dark-mode .tab-content table, body.dark-mode .animal-profile { background: #2a2a2a; }
+  body.dark-mode .profile-item { background: #333; }
+  body.dark-mode .profile-item .value { color: #e0e0e0; }
+  body.dark-mode .preg-card { background: #2a2a2a; }
+
+  #lockScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #1e3c72, #2a5298, #4a9d4e); z-index: 99999; display: flex; justify-content: center; align-items: center; padding: 20px; }
   #lockScreen.hide { display: none; }
-  
-  .lock-box {
-    background: rgba(255,255,255,0.98);
-    border-radius: 30px;
-    padding: 40px 30px;
-    max-width: 420px; width: 100%;
-    text-align: center;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-    position: relative; overflow: hidden;
-  }
-  .lock-box::before {
-    content: ''; position: absolute; top: 0; left: 0;
-    width: 100%; height: 6px;
-    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #4facfe, #00f2fe);
-    background-size: 200% auto;
-    animation: shine 3s linear infinite;
-  }
+  .lock-box { background: rgba(255,255,255,0.98); border-radius: 30px; padding: 40px 30px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,0.5); position: relative; overflow: hidden; }
+  .lock-box::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #4facfe, #00f2fe); background-size: 200% auto; animation: shine 3s linear infinite; }
   @keyframes shine { to { background-position: 200% center; } }
-  
   .lock-logo { font-size: 70px; margin-bottom: 10px; animation: bounce 2s ease-in-out infinite; }
   @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-  
   .lock-box h1 { color: #2c5f2d; font-size: 26px; margin-bottom: 8px; font-weight: 800; }
   .lock-box .subtitle { color: #7f8c8d; font-size: 13px; margin-bottom: 25px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
-  
   .pin-display { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; }
   .pin-dot { width: 18px; height: 18px; border-radius: 50%; background: #e0e6ed; transition: all 0.3s; }
   .pin-dot.filled { background: linear-gradient(135deg, #4a9d4e, #2c8a3e); transform: scale(1.2); box-shadow: 0 0 15px rgba(74,157,78,0.6); }
   .pin-dot.error { background: #e74c3c; animation: shake 0.5s; }
   @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-  
   .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 320px; margin: 0 auto; }
   .key { padding: 18px; font-size: 22px; font-weight: 700; background: linear-gradient(135deg, #f8fafc, #e8ecf1); border: none; border-radius: 15px; cursor: pointer; transition: all 0.2s; color: #2c3e50; box-shadow: 0 3px 10px rgba(0,0,0,0.08); }
   .key:hover { background: linear-gradient(135deg, #e8ecf1, #d5dbe3); transform: translateY(-2px); }
   .key.clear { background: linear-gradient(135deg, #f39c12, #e67e22); color: white; }
   .key.delete { background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; }
-  
   .lock-message { margin-top: 15px; font-size: 13px; font-weight: 700; min-height: 20px; }
   .lock-message.error { color: #e74c3c; }
   .lock-message.success { color: #27ae60; }
-  
-  /* PIN MODAL */
+
   .pin-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 99998; justify-content: center; align-items: center; padding: 20px; }
   .pin-modal-overlay.show { display: flex; }
   .pin-modal { background: white; border-radius: 25px; padding: 35px 25px; max-width: 380px; width: 100%; text-align: center; box-shadow: 0 25px 70px rgba(0,0,0,0.6); animation: modalIn 0.4s; }
@@ -90,52 +58,25 @@
   .pin-modal .icon { font-size: 55px; margin-bottom: 12px; animation: bounce 2s ease-in-out infinite; }
   .pin-modal h3 { color: #2c5f2d; font-size: 20px; margin-bottom: 8px; font-weight: 800; }
   .pin-modal p { color: #7f8c8d; font-size: 13px; margin-bottom: 20px; }
-  
-  /* MAIN APP */
+
   .container { max-width: 1600px; margin: 0 auto; background: #fff; border-radius: 25px; box-shadow: 0 30px 90px rgba(0,0,0,0.5); overflow: hidden; width: 100%; }
-  
-  header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
-    background-size: 400% 400%;
-    animation: headerGradient 8s ease infinite;
-    color: white;
-    padding: 30px 25px 25px;
-    text-align: center;
-    position: relative; overflow: hidden;
-    border-bottom: 5px solid #ffeb3b;
-  }
+  header { background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%); background-size: 400% 400%; animation: headerGradient 8s ease infinite; color: white; padding: 30px 25px 25px; text-align: center; position: relative; overflow: hidden; border-bottom: 5px solid #ffeb3b; }
   @keyframes headerGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-  
-  header h1 {
-    font-size: 40px; font-weight: 900; letter-spacing: 3px;
-    text-shadow: 3px 3px 0 rgba(0,0,0,0.15), 0 0 30px rgba(255,255,255,0.6);
-    background: linear-gradient(90deg, #fff, #ffeb3b, #fff, #ffeb3b, #fff);
-    background-size: 200% auto;
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    animation: shine 4s linear infinite;
-    font-family: 'Georgia', serif;
-    position: relative; z-index: 2;
-  }
+  header h1 { font-size: 40px; font-weight: 900; letter-spacing: 3px; text-shadow: 3px 3px 0 rgba(0,0,0,0.15), 0 0 30px rgba(255,255,255,0.6); background: linear-gradient(90deg, #fff, #ffeb3b, #fff, #ffeb3b, #fff); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shine 4s linear infinite; font-family: 'Georgia', serif; position: relative; z-index: 2; }
   header .subtitle { font-size: 14px; letter-spacing: 4px; margin-top: 5px; position: relative; z-index: 2; }
-  
   .status-badge { position: absolute; top: 12px; right: 15px; padding: 7px 14px; border-radius: 30px; font-size: 11px; font-weight: 700; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); z-index: 10; letter-spacing: 1px; }
   .status-badge.online { background: rgba(46,204,113,0.9); }
   .status-badge.offline { background: rgba(231,76,60,0.9); }
   .status-badge.syncing { background: rgba(243,156,18,0.9); }
-  
-  .lock-btn, .settings-btn, .requests-btn {
-    position: absolute; top: 12px;
-    padding: 7px 14px; border-radius: 30px; font-size: 12px; font-weight: 700;
-    color: white; border: 1px solid rgba(255,255,255,0.3); cursor: pointer;
-    backdrop-filter: blur(10px); z-index: 10; letter-spacing: 1px; transition: all 0.3s;
-  }
+  .lock-btn, .settings-btn, .requests-btn, .theme-btn { position: absolute; top: 12px; padding: 7px 14px; border-radius: 30px; font-size: 12px; font-weight: 700; color: white; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; backdrop-filter: blur(10px); z-index: 10; letter-spacing: 1px; transition: all 0.3s; }
   .lock-btn { left: 15px; background: rgba(231,76,60,0.9); }
   .settings-btn { left: 100px; background: rgba(52,152,219,0.9); }
   .requests-btn { left: 195px; background: rgba(155,89,182,0.9); }
-  .lock-btn:hover, .settings-btn:hover, .requests-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
-  
+  .theme-btn { left: 295px; background: rgba(243,156,18,0.9); }
+  .lock-btn:hover, .settings-btn:hover, .requests-btn:hover, .theme-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
+
   .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; padding: 18px; background: linear-gradient(135deg, #f5f7fa, #e8ecf1); }
-  .stat-card { background: white; padding: 14px 10px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-top: 4px solid #4a9d4e; transition: all 0.3s; }
+  .stat-card { background: white; padding: 14px 10px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-top: 4px solid #4a9d4e; transition: all 0.3s; cursor: pointer; }
   .stat-card:hover { transform: translateY(-5px); }
   .stat-card.blue { border-top-color: #3498db; }
   .stat-card.orange { border-top-color: #e67e22; }
@@ -144,27 +85,32 @@
   .stat-card.teal { border-top-color: #16a085; }
   .stat-card.pink { border-top-color: #e91e63; }
   .stat-card.gold { border-top-color: #f39c12; }
+  .stat-card.dark { border-top-color: #2c3e50; }
   .stat-card .icon { font-size: 22px; margin-bottom: 4px; }
   .stat-card h3 { color: #2c3e50; font-size: 18px; margin-bottom: 2px; font-weight: 800; }
   .stat-card p { color: #7f8c8d; font-size: 10px; font-weight: 700; text-transform: uppercase; }
-  
+
   .tabs { display: flex; background: linear-gradient(135deg, #1e3c72, #2a5298); padding: 8px 10px; overflow-x: auto; gap: 5px; -webkit-overflow-scrolling: touch; }
   .tabs::-webkit-scrollbar { height: 3px; }
   .tabs::-webkit-scrollbar-thumb { background: #4a9d4e; border-radius: 3px; }
   .tab { padding: 11px 14px; border: none; background: rgba(255,255,255,0.1); font-size: 11px; font-weight: 700; color: #e0f2fe; border-radius: 10px; cursor: pointer; transition: all 0.3s; white-space: nowrap; flex-shrink: 0; }
   .tab:hover { background: rgba(255,255,255,0.2); }
   .tab.active { background: linear-gradient(135deg, #ffeb3b, #f39c12); color: #2c3e50; box-shadow: 0 6px 20px rgba(243,156,18,0.5); }
-  
+
   .tab-content { display: none; padding: 22px; }
   .tab-content.active { display: block; animation: fadeIn 0.5s; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-  
+
   .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
-  .form-group { display: flex; flex-direction: column; }
+  .form-group { display: flex; flex-direction: column; position: relative; }
   .form-group label { font-size: 11px; font-weight: 700; color: #2c3e50; margin-bottom: 5px; text-transform: uppercase; }
   .form-group input, .form-group select { padding: 10px 12px; border: 2px solid #e0e6ed; border-radius: 10px; font-size: 13px; transition: all 0.3s; background: #f8fafc; width: 100%; }
   .form-group input:focus, .form-group select:focus { outline: none; border-color: #4a9d4e; background: white; box-shadow: 0 0 0 4px rgba(74,157,78,0.1); }
-  
+  .voice-btn { position: absolute; right: 8px; top: 30px; background: #3498db; color: white; border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+  .voice-btn:hover { background: #2980b9; }
+  .voice-btn.listening { background: #e74c3c; animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+
   .btn { padding: 10px 18px; border: none; border-radius: 10px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.3s; margin: 3px; }
   .btn-primary { background: linear-gradient(135deg, #4a9d4e, #2c8a3e); color: white; box-shadow: 0 4px 15px rgba(74,157,78,0.4); }
   .btn-primary:hover { transform: translateY(-3px); }
@@ -173,13 +119,19 @@
   .btn-warning { background: linear-gradient(135deg, #f39c12, #e67e22); color: white; }
   .btn-success { background: linear-gradient(135deg, #27ae60, #16a085); color: white; }
   .btn-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); color: white; }
-  
+
+  .quick-add { background: linear-gradient(135deg, #fff3cd, #ffe0b2); padding: 15px; border-radius: 15px; margin-bottom: 18px; border-left: 5px solid #f39c12; }
+  .quick-add h4 { color: #856404; font-size: 13px; margin-bottom: 10px; }
+  .quick-add-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .quick-btn { padding: 8px 14px; background: white; border: 2px solid #f39c12; color: #856404; border-radius: 20px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.3s; }
+  .quick-btn:hover { background: #f39c12; color: white; transform: translateY(-2px); }
+
   .table-wrapper { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; box-shadow: 0 5px 25px rgba(0,0,0,0.08); margin-top: 15px; }
   table { width: 100%; border-collapse: collapse; background: white; min-width: 600px; }
   th { background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; padding: 11px 8px; text-align: left; font-size: 10px; text-transform: uppercase; font-weight: 700; white-space: nowrap; }
   td { padding: 10px 8px; border-bottom: 1px solid #eef2f7; font-size: 12px; color: #2c3e50; white-space: nowrap; }
   tr:hover { background: linear-gradient(90deg, #f8f9fa, #e8f5e9); }
-  
+
   .badge { padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; display: inline-block; white-space: nowrap; }
   .badge-healthy { background: linear-gradient(135deg, #d4edda, #a8e6cf); color: #155724; }
   .badge-sick { background: linear-gradient(135deg, #f8d7da, #ffb3ba); color: #721c24; }
@@ -189,15 +141,12 @@
   .badge-male { background: linear-gradient(135deg, #cfe2ff, #a8c8ff); color: #084298; }
   .badge-female { background: linear-gradient(135deg, #f8d7f5, #f5b8e8); color: #8b1f7e; }
   .badge-milkall { background: linear-gradient(135deg, #fff3cd, #ffeb3b); color: #856404; }
-  
+
   .empty { text-align: center; padding: 40px 20px; color: #95a5a6; }
   .empty-icon { font-size: 60px; margin-bottom: 10px; opacity: 0.6; animation: bounce 3s ease-in-out infinite; }
-  
   .search-box { padding: 10px 15px; border: 2px solid #e0e6ed; border-radius: 10px; font-size: 13px; width: 100%; max-width: 280px; margin-bottom: 10px; background: #f8fafc; }
-  
   .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; padding-bottom: 10px; border-bottom: 3px dashed #e0e6ed; }
   .section-header h2 { color: #1e3c72; font-size: 20px; font-weight: 800; }
-  
   .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
   .summary-card { background: linear-gradient(135deg, #ffffff, #f0f4f8); padding: 18px; border-radius: 14px; border-left: 5px solid #4a9d4e; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: all 0.3s; }
   .summary-card:hover { transform: translateY(-4px); }
@@ -207,149 +156,199 @@
   .summary-card .amount.green { color: #27ae60; }
   .summary-card .amount.orange { color: #e67e22; }
   .summary-card .amount.blue { color: #3498db; }
-  
+
   .cat-btn { padding: 7px 14px; border: 2px solid #e0e6ed; background: white; border-radius: 25px; cursor: pointer; font-size: 11px; font-weight: 700; transition: all 0.3s; color: #555; margin: 2px; }
   .cat-btn:hover { border-color: #4a9d4e; color: #4a9d4e; }
   .cat-btn.active { background: linear-gradient(135deg, #4a9d4e, #2c8a3e); color: white; border-color: #4a9d4e; }
-  
+
   .chart-container { background: white; padding: 18px; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.08); margin-bottom: 18px; height: 300px; position: relative; }
   .chart-tabs { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
   .chart-tab { padding: 8px 16px; border: 2px solid #e0e6ed; background: white; border-radius: 25px; cursor: pointer; font-size: 12px; font-weight: 700; color: #555; }
   .chart-tab.active { background: linear-gradient(135deg, #3498db, #2980b9); color: white; border-color: #3498db; }
-  
+
   .alert { padding: 12px 18px; border-radius: 10px; margin-bottom: 12px; font-size: 13px; font-weight: 700; animation: slideDown 0.4s; }
   @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
   .alert-success { background: linear-gradient(135deg, #d4edda, #a8e6cf); color: #155724; border-left: 5px solid #28a745; }
   .alert-error { background: linear-gradient(135deg, #f8d7da, #ffb3ba); color: #721c24; border-left: 5px solid #dc3545; }
-  
+  .alert-info { background: linear-gradient(135deg, #d1ecf1, #a5d8e8); color: #0c5460; border-left: 5px solid #17a2b8; }
+
   .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(5px); }
   .modal-overlay.show { display: flex; }
   .modal-box { background: white; border-radius: 20px; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 30px; position: relative; animation: modalIn 0.4s; }
   .modal-close { position: absolute; top: 15px; right: 15px; background: #e74c3c; color: white; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 18px; cursor: pointer; font-weight: 700; z-index: 10; }
-  
+
   .animal-profile { background: linear-gradient(135deg, #f8f9fa, #e8f5e9); border-radius: 20px; padding: 25px; border: 3px solid #4a9d4e; }
   .animal-profile-header { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 3px dashed #4a9d4e; flex-wrap: wrap; }
   .animal-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 5px solid #4a9d4e; box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
   .animal-photo-placeholder { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #4a9d4e, #2c8a3e); display: flex; align-items: center; justify-content: center; font-size: 60px; border: 5px solid white; box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
   .animal-title h2 { color: #2c5f2d; font-size: 26px; margin-bottom: 5px; }
   .animal-title p { color: #666; font-size: 13px; }
-  
   .profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 18px; }
   .profile-item { background: white; padding: 12px; border-radius: 10px; border-left: 4px solid #4a9d4e; }
   .profile-item label { font-size: 10px; color: #7f8c8d; font-weight: 700; text-transform: uppercase; }
   .profile-item .value { font-size: 15px; color: #2c3e50; font-weight: 700; margin-top: 4px; }
-  
+
   .settings-form { text-align: left; }
   .settings-form .form-group { margin-bottom: 15px; }
   .settings-form input { width: 100%; padding: 12px; border: 2px solid #e0e6ed; border-radius: 10px; font-size: 15px; letter-spacing: 2px; text-align: center; font-weight: 700; }
-  
   .request-card { background: white; border-left: 5px solid #9b59b6; padding: 15px; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 3px 15px rgba(0,0,0,0.08); transition: all 0.3s; }
   .request-card:hover { transform: translateX(5px); }
   .request-card h4 { color: #2c3e50; font-size: 15px; margin-bottom: 6px; }
   .request-card p { color: #666; font-size: 12px; line-height: 1.6; }
-  .request-card .actions { margin-top: 12px; }
-  
   .profit-breakdown { padding: 20px; border-radius: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; color: white; }
   .profit-breakdown .label { font-size: 13px; letter-spacing: 1px; }
   .profit-breakdown .sub { font-size: 11px; opacity: 0.85; margin-top: 4px; }
   .profit-breakdown .value { font-size: 28px; font-weight: 900; }
-  
+  .toast { position: fixed; bottom: 20px; right: 20px; background: linear-gradient(135deg, #27ae60, #16a085); color: white; padding: 15px 25px; border-radius: 12px; font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 99999; animation: slideIn 0.4s; max-width: 350px; }
+  @keyframes slideIn { from { transform: translateX(400px); } to { transform: translateX(0); } }
+
   /* ============================================ */
-  /* MOBILE RESPONSIVE FIX */
+  /* PREGNANT COUNTDOWN CARDS - NEW */
   /* ============================================ */
-  
+  .preg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 15px; margin-top: 15px; }
+  .preg-card {
+    background: linear-gradient(135deg, #ffffff, #fff8e1);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    border-top: 6px solid #e67e22;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .preg-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
+  .preg-card.urgent { border-top-color: #e74c3c; background: linear-gradient(135deg, #fff, #ffe5e5); }
+  .preg-card.warning { border-top-color: #f39c12; background: linear-gradient(135deg, #fff, #fff4e0); }
+  .preg-card.safe { border-top-color: #27ae60; background: linear-gradient(135deg, #fff, #e8f5e9); }
+  .preg-card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 2px dashed #e0e6ed; }
+  .preg-animal-emoji { font-size: 45px; }
+  .preg-animal-name { font-size: 20px; font-weight: 800; color: #2c3e50; margin-bottom: 4px; }
+  .preg-animal-info { font-size: 12px; color: #666; }
+  .preg-countdown {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .preg-countdown.safe { background: linear-gradient(135deg, #27ae60, #16a085); }
+  .preg-countdown.warning { background: linear-gradient(135deg, #f39c12, #e67e22); }
+  .preg-countdown .days { font-size: 38px; font-weight: 900; line-height: 1; }
+  .preg-countdown .days-label { font-size: 12px; opacity: 0.95; margin-top: 5px; letter-spacing: 2px; }
+  .preg-progress { background: #f0f0f0; height: 12px; border-radius: 10px; overflow: hidden; margin: 12px 0; position: relative; }
+  .preg-progress-bar { height: 100%; background: linear-gradient(90deg, #e67e22, #e74c3c); border-radius: 10px; transition: width 0.5s; position: relative; }
+  .preg-progress-bar::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); animation: shimmer 2s infinite; }
+  @keyframes shimmer { to { transform: translateX(100%); } }
+  .preg-info-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 12px; border-bottom: 1px solid #f0f0f0; }
+  .preg-info-row:last-child { border-bottom: none; }
+  .preg-info-row .key { color: #7f8c8d; font-weight: 600; }
+  .preg-info-row .val { color: #2c3e50; font-weight: 700; }
+  .preg-status-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+  .preg-status-badge.urgent { background: #e74c3c; color: white; }
+  .preg-status-badge.warning { background: #f39c12; color: white; }
+  .preg-status-badge.safe { background: #27ae60; color: white; }
+
+  /* DASHBOARD ANALYTICS */
+  .analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 20px; }
+  .analytics-card { background: white; border-radius: 15px; padding: 18px; box-shadow: 0 5px 25px rgba(0,0,0,0.08); border-left: 5px solid #3498db; }
+  .analytics-card h3 { color: #1e3c72; font-size: 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .analytics-card.orange { border-left-color: #e67e22; }
+  .analytics-card.green { border-left-color: #27ae60; }
+  .analytics-card.red { border-left-color: #e74c3c; }
+  .analytics-card.purple { border-left-color: #9b59b6; }
+  .analytics-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed #e0e6ed; font-size: 13px; }
+  .analytics-item:last-child { border-bottom: none; }
+  .analytics-item .name { color: #2c3e50; font-weight: 700; }
+  .analytics-item .val { color: #27ae60; font-weight: 800; }
+  .analytics-item .val.orange { color: #e67e22; }
+  .analytics-item .val.red { color: #e74c3c; }
+  .analytics-item .val.blue { color: #3498db; }
+  .rank-badge { display: inline-block; width: 22px; height: 22px; line-height: 22px; text-align: center; border-radius: 50%; font-size: 10px; font-weight: 800; margin-right: 8px; }
+  .rank-1 { background: #ffd700; color: #856404; }
+  .rank-2 { background: #c0c0c0; color: #333; }
+  .rank-3 { background: #cd7f32; color: white; }
+  .rank-other { background: #e0e6ed; color: #666; }
+
   @media (max-width: 768px) {
     body { padding: 6px !important; font-size: 13px !important; }
     .container { border-radius: 12px !important; }
-    
     header { padding: 55px 12px 15px !important; }
     header h1 { font-size: 18px !important; letter-spacing: 1px !important; }
     header .subtitle { font-size: 9px !important; letter-spacing: 2px !important; }
-    
-    .lock-btn, .settings-btn, .requests-btn { font-size: 9px !important; padding: 5px 8px !important; top: 6px !important; }
+    .lock-btn, .settings-btn, .requests-btn, .theme-btn { font-size: 8px !important; padding: 5px 7px !important; top: 6px !important; }
     .lock-btn { left: 6px !important; }
-    .settings-btn { left: 70px !important; }
-    .requests-btn { left: 135px !important; }
-    
-    .status-badge { top: 6px !important; right: 6px !important; font-size: 9px !important; padding: 5px 8px !important; }
-    
+    .settings-btn { left: 62px !important; }
+    .requests-btn { left: 125px !important; }
+    .theme-btn { left: 195px !important; }
+    .status-badge { top: 6px !important; right: 6px !important; font-size: 8px !important; padding: 5px 7px !important; }
     .stats { padding: 8px !important; gap: 5px !important; grid-template-columns: repeat(3, 1fr) !important; }
     .stat-card { padding: 8px 4px !important; border-radius: 8px !important; border-top-width: 3px !important; }
     .stat-card .icon { font-size: 15px !important; margin-bottom: 2px !important; }
-    .stat-card h3 { font-size: 12px !important; }
-    .stat-card p { font-size: 7px !important; letter-spacing: 0 !important; }
-    
+    .stat-card h3 { font-size: 11px !important; }
+    .stat-card p { font-size: 6px !important; }
     .tabs { padding: 4px !important; gap: 3px !important; }
     .tab { padding: 7px 9px !important; font-size: 9px !important; border-radius: 7px !important; }
-    
     .tab-content { padding: 10px !important; }
-    .section-header { margin-bottom: 12px !important; padding-bottom: 8px !important; }
     .section-header h2 { font-size: 15px !important; }
-    
-    .summary-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 6px !important; margin-bottom: 12px !important; }
+    .summary-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 6px !important; }
     .summary-card { padding: 10px !important; border-radius: 10px !important; border-left-width: 4px !important; }
-    .summary-card h4 { font-size: 9px !important; margin-bottom: 4px !important; }
+    .summary-card h4 { font-size: 9px !important; }
     .summary-card .amount { font-size: 14px !important; }
-    
     .form-grid { grid-template-columns: 1fr !important; gap: 8px !important; }
-    .form-group label { font-size: 9px !important; margin-bottom: 3px !important; }
-    .form-group input, .form-group select { padding: 8px 10px !important; font-size: 12px !important; border-radius: 8px !important; }
-    
-    .btn { padding: 8px 14px !important; font-size: 11px !important; border-radius: 8px !important; }
-    .cat-btn { padding: 5px 10px !important; font-size: 9px !important; margin: 1px !important; }
-    .search-box { font-size: 12px !important; padding: 8px 12px !important; max-width: 100% !important; }
-    
+    .form-group label { font-size: 9px !important; }
+    .form-group input, .form-group select { padding: 8px 10px !important; font-size: 12px !important; }
+    .btn { padding: 8px 14px !important; font-size: 11px !important; }
+    .cat-btn { padding: 5px 10px !important; font-size: 9px !important; }
     table { font-size: 11px !important; min-width: 500px !important; }
-    th { padding: 7px 6px !important; font-size: 9px !important; letter-spacing: 0 !important; }
+    th { padding: 7px 6px !important; font-size: 9px !important; }
     td { padding: 7px 6px !important; font-size: 11px !important; }
-    
-    .profit-breakdown { padding: 12px !important; flex-direction: column !important; gap: 8px !important; text-align: center !important; }
-    .profit-breakdown .label { font-size: 11px !important; }
-    .profit-breakdown .sub { font-size: 9px !important; }
-    .profit-breakdown .value { font-size: 20px !important; }
-    
     .chart-container { height: 220px !important; padding: 8px !important; }
     .chart-tab { padding: 6px 12px !important; font-size: 10px !important; }
-    
-    .modal-box { padding: 18px !important; max-height: 95vh !important; border-radius: 15px !important; }
-    .modal-box h2 { font-size: 16px !important; }
-    .modal-close { width: 30px !important; height: 30px !important; font-size: 15px !important; }
-    
-    .animal-profile { padding: 15px !important; border-width: 2px !important; }
-    .animal-profile-header { gap: 10px !important; padding-bottom: 12px !important; margin-bottom: 12px !important; }
-    .animal-photo, .animal-photo-placeholder { width: 70px !important; height: 70px !important; font-size: 35px !important; border-width: 3px !important; }
+    .modal-box { padding: 18px !important; border-radius: 15px !important; }
+    .animal-profile { padding: 15px !important; }
+    .animal-photo, .animal-photo-placeholder { width: 70px !important; height: 70px !important; font-size: 35px !important; }
     .animal-title h2 { font-size: 18px !important; }
-    .animal-title p { font-size: 11px !important; }
-    
     .profile-grid { grid-template-columns: 1fr 1fr !important; gap: 6px !important; }
-    .profile-item { padding: 8px !important; border-radius: 8px !important; }
+    .profile-item { padding: 8px !important; }
     .profile-item label { font-size: 8px !important; }
     .profile-item .value { font-size: 11px !important; }
-    
     .lock-box { padding: 25px 18px !important; border-radius: 20px !important; }
     .lock-box h1 { font-size: 20px !important; }
-    .lock-box .subtitle { font-size: 11px !important; margin-bottom: 18px !important; }
-    .lock-logo { font-size: 50px !important; margin-bottom: 6px !important; }
+    .lock-logo { font-size: 50px !important; }
     .pin-dot { width: 14px !important; height: 14px !important; }
     .keypad { gap: 8px !important; max-width: 280px !important; }
-    .key { padding: 14px !important; font-size: 18px !important; border-radius: 10px !important; }
-    
-    .pin-modal { padding: 25px 18px !important; border-radius: 18px !important; }
-    .pin-modal .icon { font-size: 42px !important; }
-    .pin-modal h3 { font-size: 16px !important; }
-    .pin-modal p { font-size: 11px !important; }
-    
-    .request-card { padding: 10px !important; border-left-width: 4px !important; }
-    .request-card h4 { font-size: 12px !important; }
-    .request-card p { font-size: 10px !important; line-height: 1.5 !important; }
-    .alert { padding: 10px 14px !important; font-size: 11px !important; }
+    .key { padding: 14px !important; font-size: 18px !important; }
+    .profit-breakdown { padding: 12px !important; flex-direction: column !important; gap: 8px !important; text-align: center !important; }
+    .profit-breakdown .value { font-size: 20px !important; }
+    .voice-btn { top: 26px; width: 24px; height: 24px; font-size: 12px; }
+    .preg-grid { grid-template-columns: 1fr !important; }
+    .preg-countdown .days { font-size: 30px !important; }
+    .analytics-grid { grid-template-columns: 1fr !important; }
   }
-  
   @media (max-width: 400px) {
     .stats { grid-template-columns: repeat(2, 1fr) !important; }
     .summary-grid { grid-template-columns: 1fr !important; }
     .profile-grid { grid-template-columns: 1fr !important; }
     header h1 { font-size: 16px !important; }
+  }
+  @media print {
+    body { background: white !important; padding: 0; }
+    .tabs, .btn, .search-box, .cat-btn, .chart-tabs, .lock-btn, .settings-btn, .requests-btn, .theme-btn, .quick-add, .voice-btn { display: none !important; }
+    .container { box-shadow: none !important; border-radius: 0 !important; }
+    header { background: white !important; color: black !important; border: none !important; padding: 15px !important; }
+    header h1 { color: #2c5f2d !important; -webkit-text-fill-color: #2c5f2d !important; background: none !important; }
+    .stat-card, .summary-card { box-shadow: none !important; border: 1px solid #ddd !important; }
+    .chart-container { page-break-inside: avoid; }
   }
 </style>
 </head>
@@ -451,22 +450,24 @@
 <div class="container">
   <header>
     <button class="lock-btn" onclick="lockApp()">🔒 Lock</button>
-    <button class="settings-btn" onclick="openSettings()">⚙️ Settings</button>
-    <button class="requests-btn" onclick="openRequests()">👥 Requests <span id="reqCount" style="background:#e74c3c;padding:1px 6px;border-radius:10px;font-size:10px;">0</span></button>
+    <button class="settings-btn" onclick="openSettings()">⚙️</button>
+    <button class="requests-btn" onclick="openRequests()">👥 <span id="reqCount">0</span></button>
+    <button class="theme-btn" onclick="toggleTheme()">🌙</button>
     <div class="status-badge syncing" id="statusBadge">🔄 Syncing...</div>
     <h1>🐄 SABIR DAIRY FARM</h1>
     <div class="subtitle">ADVANCED MANAGEMENT SYSTEM</div>
   </header>
   
   <div class="stats">
-    <div class="stat-card"><div class="icon">🐮</div><h3 id="totalAnimals">0</h3><p>Animals</p></div>
-    <div class="stat-card blue"><div class="icon">🥛</div><h3 id="totalMilk">0 kg</h3><p>Aaj Doodh</p></div>
-    <div class="stat-card gold"><div class="icon">💵</div><h3 id="todaySale">Rs. 0</h3><p>Aaj Sale</p></div>
+    <div class="stat-card" onclick="switchTab('animals', document.querySelectorAll('.tab')[1])"><div class="icon">🐮</div><h3 id="totalAnimals">0</h3><p>Animals</p></div>
+    <div class="stat-card blue" onclick="switchTab('milk', document.querySelectorAll('.tab')[2])"><div class="icon">🥛</div><h3 id="totalMilk">0 kg</h3><p>Aaj Doodh</p></div>
+    <div class="stat-card gold" onclick="switchTab('sales', document.querySelectorAll('.tab')[9])"><div class="icon">💵</div><h3 id="todaySale">Rs. 0</h3><p>Aaj Sale</p></div>
     <div class="stat-card"><div class="icon">💚</div><h3 id="healthyCount">0</h3><p>Healthy</p></div>
-    <div class="stat-card orange"><div class="icon">🐄💫</div><h3 id="pregnantCount">0</h3><p>Pregnant</p></div>
+    <div class="stat-card orange" onclick="switchTab('animals', document.querySelectorAll('.tab')[1]); setTimeout(()=>filterAnimals('Pregnant', document.querySelectorAll('#animals .cat-btn')[3]), 200);"><div class="icon">🐄💫</div><h3 id="pregnantCount">0</h3><p>Pregnant</p></div>
     <div class="stat-card red"><div class="icon">💊</div><h3 id="sickCount">0</h3><p>Beemar</p></div>
-    <div class="stat-card purple"><div class="icon">🎁</div><h3 id="totalBabies">0</h3><p>Bache Hue</p></div>
-    <div class="stat-card pink"><div class="icon">💰</div><h3 id="totalExpense">Rs. 0</h3><p>Kharcha</p></div>
+    <div class="stat-card purple" onclick="switchTab('profit', document.querySelectorAll('.tab')[8])"><div class="icon">🎁</div><h3 id="totalBabies">0</h3><p>Bache Hue</p></div>
+    <div class="stat-card dark"><div class="icon">🐄💰</div><h3 id="totalAnimalValue">Rs. 0</h3><p>Animals Value</p></div>
+    <div class="stat-card pink" onclick="switchTab('expenses', document.querySelectorAll('.tab')[12])"><div class="icon">💰</div><h3 id="totalExpense">Rs. 0</h3><p>Kharcha</p></div>
     <div class="stat-card teal"><div class="icon">📈</div><h3 id="netProfitCard">Rs. 0</h3><p>Munfa</p></div>
   </div>
   
@@ -490,15 +491,70 @@
   <!-- DASHBOARD -->
   <div id="dashboard" class="tab-content active">
     <div class="section-header"><h2>📊 Live Dashboard</h2></div>
+    
+    <div class="quick-add">
+      <h4>⚡ Quick Add (One-Click)</h4>
+      <div class="quick-add-btns">
+        <button class="quick-btn" onclick="switchTab('animals', document.querySelectorAll('.tab')[1])">➕ Naya Animal</button>
+        <button class="quick-btn" onclick="switchTab('milk', document.querySelectorAll('.tab')[2])">🥛 Doodh</button>
+        <button class="quick-btn" onclick="switchTab('health', document.querySelectorAll('.tab')[3])">💊 Doctor</button>
+        <button class="quick-btn" onclick="switchTab('food', document.querySelectorAll('.tab')[4])">🌾 Khana</button>
+        <button class="quick-btn" onclick="switchTab('labor', document.querySelectorAll('.tab')[5])">👷 Mazdoor</button>
+        <button class="quick-btn" onclick="switchTab('breeding', document.querySelectorAll('.tab')[7])">🐣 Breeding</button>
+        <button class="quick-btn" onclick="switchTab('profit', document.querySelectorAll('.tab')[8])">🎁 Bacha</button>
+      </div>
+    </div>
+    
     <div class="summary-grid">
       <div class="summary-card"><h4>🥛 Aaj ka Doodh</h4><div class="amount green" id="dashTodayMilk">0 kg</div></div>
       <div class="summary-card"><h4>💵 Aaj ki Sale</h4><div class="amount green" id="dashTodaySale">Rs. 0</div></div>
-      <div class="summary-card"><h4>📅 Is Mahine ki Sale</h4><div class="amount" id="dashMonthSale">Rs. 0</div></div>
+      <div class="summary-card"><h4>📅 Is Mahine ki Sale</h4><div class="amount blue" id="dashMonthSale">Rs. 0</div></div>
       <div class="summary-card"><h4>💰 Is Mahine ka Kharcha</h4><div class="amount red" id="dashMonthExpense">Rs. 0</div></div>
       <div class="summary-card"><h4>📈 Is Mahine ka Munfa</h4><div class="amount green" id="dashMonthProfit">Rs. 0</div></div>
       <div class="summary-card"><h4>🏛️ Total Assets</h4><div class="amount orange" id="dashAssetValue">Rs. 0</div></div>
     </div>
-    <div class="chart-container"><canvas id="dashChart"></canvas></div>
+    
+    <!-- ANALYTICS SECTION -->
+    <div class="section-header" style="margin-top:25px;"><h2>📈 Analytics & Insights</h2></div>
+    <div class="analytics-grid">
+      <!-- Top Milk Producers -->
+      <div class="analytics-card green">
+        <h3>🏆 Top Milk Producers</h3>
+        <div id="topMilkProducers"><p style="color:#999;font-size:12px;">Data nahi</p></div>
+      </div>
+      
+      <!-- Upcoming Deliveries -->
+      <div class="analytics-card orange">
+        <h3>🐄💫 Upcoming Deliveries (30 din)</h3>
+        <div id="upcomingDeliveries"><p style="color:#999;font-size:12px;">Koi delivery nahi</p></div>
+      </div>
+      
+      <!-- Monthly Growth -->
+      <div class="analytics-card purple">
+        <h3>📊 Monthly Comparison</h3>
+        <div id="monthlyComparison"><p style="color:#999;font-size:12px;">Data nahi</p></div>
+      </div>
+      
+      <!-- Top Cost Animals -->
+      <div class="analytics-card red">
+        <h3>💸 Highest Cost Animals</h3>
+        <div id="topCostAnimals"><p style="color:#999;font-size:12px;">Data nahi</p></div>
+      </div>
+      
+      <!-- Health Alerts -->
+      <div class="analytics-card red">
+        <h3>⚠️ Health Alerts</h3>
+        <div id="healthAlerts"><p style="color:#999;font-size:12px;">Sab theek hai</p></div>
+      </div>
+      
+      <!-- Pending Payments -->
+      <div class="analytics-card orange">
+        <h3>⏳ Pending Payments</h3>
+        <div id="pendingPayments"><p style="color:#999;font-size:12px;">Koi pending nahi</p></div>
+      </div>
+    </div>
+    
+    <div class="chart-container" style="margin-top:20px;"><canvas id="dashChart"></canvas></div>
   </div>
   
   <!-- ANIMALS -->
@@ -507,40 +563,22 @@
     <div class="section-header"><h2>🐮 Animals Management</h2></div>
     
     <div class="summary-grid">
-      <div class="summary-card" style="border-left-color:#4a9d4e;">
-        <h4>🐄 Bade Janwar</h4>
-        <div class="amount" id="countAdult">0</div>
-        <div style="font-size:11px;color:#666;margin-top:4px;">Kharcha <span id="sumAdultCost">Rs. 0</span></div>
-      </div>
-      <div class="summary-card" style="border-left-color:#3498db;">
-        <h4>🐮 Bache (Calf)</h4>
-        <div class="amount" id="countCalf">0</div>
-        <div style="font-size:11px;color:#666;margin-top:4px;">Kharcha <span id="sumCalfCost">Rs. 0</span></div>
-      </div>
-      <div class="summary-card" style="border-left-color:#e67e22;">
-        <h4>🐄💫 Pregnant</h4>
-        <div class="amount" id="countPregnant">0</div>
-        <div style="font-size:11px;color:#666;margin-top:4px;">Kharcha <span id="sumPregnantCost">Rs. 0</span></div>
-      </div>
-      <div class="summary-card" style="border-left-color:#e74c3c;">
-        <h4>🤒 Beemar</h4>
-        <div class="amount" id="countSick">0</div>
-        <div style="font-size:11px;color:#666;margin-top:4px;">Kharcha <span id="sumSickCost">Rs. 0</span></div>
-      </div>
-      <div class="summary-card" style="border-left-color:#9b59b6;">
-        <h4>📊 Kul Animal Kharcha</h4>
-        <div class="amount red" id="sumTotalAnimalCost">Rs. 0</div>
-      </div>
-      <div class="summary-card" style="border-left-color:#27ae60;">
-        <h4>📈 Net (Doodh - Kharcha)</h4>
-        <div class="amount green" id="sumNetProfit">Rs. 0</div>
-      </div>
+      <div class="summary-card" style="border-left-color:#4a9d4e;"><h4>🐄 Bade Janwar</h4><div class="amount" id="countAdult">0</div><div style="font-size:11px;color:#666;margin-top:4px;">Kharcha <span id="sumAdultCost">Rs. 0</span></div></div>
+      <div class="summary-card" style="border-left-color:#3498db;"><h4>🐮 Bache (Calf)</h4><div class="amount blue" id="countCalf">0</div><div style="font-size:11px;color:#666;margin-top:4px;">Kharcha <span id="sumCalfCost">Rs. 0</span></div></div>
+      <div class="summary-card" style="border-left-color:#e67e22;"><h4>🐄💫 Pregnant</h4><div class="amount orange" id="countPregnant">0</div><div style="font-size:11px;color:#666;margin-top:4px;">Kharcha <span id="sumPregnantCost">Rs. 0</span></div></div>
+      <div class="summary-card" style="border-left-color:#e74c3c;"><h4>🤒 Beemar</h4><div class="amount red" id="countSick">0</div><div style="font-size:11px;color:#666;margin-top:4px;">Kharcha <span id="sumSickCost">Rs. 0</span></div></div>
+      <div class="summary-card" style="border-left-color:#9b59b6;"><h4>📊 Kul Animal Kharcha</h4><div class="amount red" id="sumTotalAnimalCost">Rs. 0</div></div>
+      <div class="summary-card" style="border-left-color:#27ae60;"><h4>📈 Net (Doodh - Kharcha)</h4><div class="amount green" id="sumNetProfit">Rs. 0</div></div>
     </div>
     
     <div style="background:linear-gradient(135deg,#f0f4f8,#e8f5e9);padding:18px;border-radius:15px;margin-bottom:20px;">
       <h3 id="animalFormTitle" style="color:#1e3c72;margin-bottom:12px;font-size:14px;">➕ Naya Animal Add Karein</h3>
       <div class="form-grid">
-        <div class="form-group"><label>Tag/Naam *</label><input type="text" id="animalName" placeholder="Ganga / T-101"></div>
+        <div class="form-group">
+          <label>Tag/Naam *</label>
+          <input type="text" id="animalName" placeholder="Ganga / T-101">
+          <button class="voice-btn" onclick="startVoice('animalName', this)" title="Bol ke likhein">🎤</button>
+        </div>
         <div class="form-group"><label>Qism *</label>
           <select id="animalType"><option value="Cow">🐄 Cow</option><option value="Buffalo">🐃 Buffalo</option><option value="Calf">🐮 Calf</option><option value="Bull">🐂 Bull</option><option value="Heifer">🐄 Heifer</option></select>
         </div>
@@ -550,14 +588,15 @@
         <div class="form-group"><label>Gender</label>
           <select id="animalGender"><option value="Female">♀️ Mada</option><option value="Male">♂️ Nar</option></select>
         </div>
-        <div class="form-group"><label>Umar (saal)</label><input type="number" id="animalAge" placeholder="3" step="0.1"></div>
+        <div class="form-group"><label>Birth Date</label><input type="date" id="animalBirth" onchange="autoCalcAge()"></div>
+        <div class="form-group"><label>Umar (saal) - Auto</label><input type="number" id="animalAge" placeholder="3" step="0.1" readonly style="background:#e8f5e9;"></div>
         <div class="form-group"><label>Weight (kg)</label><input type="number" id="animalWeight" placeholder="250"></div>
         <div class="form-group"><label>Health</label>
           <select id="animalHealth"><option value="Healthy">💚 Healthy</option><option value="Sick">🤒 Sick</option><option value="Pregnant">🐄💫 Pregnant</option></select>
         </div>
         <div class="form-group"><label>Kharid Date</label><input type="date" id="animalDate"></div>
-        <div class="form-group"><label>Qeemat (Rs.)</label><input type="number" id="animalPrice" placeholder="50000"></div>
-        <div class="form-group"><label>📷 Photo</label><input type="file" id="animalPhoto" accept="image/*"></div>
+        <div class="form-group"><label>Qeemat (Rs.) - Asset</label><input type="number" id="animalPrice" placeholder="50000"></div>
+        <div class="form-group"><label>📷 Photo (Auto-compress)</label><input type="file" id="animalPhoto" accept="image/*"></div>
         <div class="form-group"><label>📝 Notes</label><input type="text" id="animalNotes"></div>
       </div>
       <button class="btn btn-primary" id="animalSubmitBtn" onclick="addAnimal()">➕ Add Animal</button>
@@ -576,18 +615,26 @@
     
     <input type="text" class="search-box" id="searchAnimal" placeholder="🔍 Naam se search karein..." oninput="renderAnimals()">
     
-    <div class="table-wrapper">
-      <table id="animalsTable">
-        <thead>
-          <tr>
-            <th>Photo</th><th>Tag</th><th>Type</th><th>Cat</th><th>Gender</th><th>Age</th><th>Weight</th><th>Health</th>
-            <th>Buy</th><th>Doctor</th><th>Khana</th><th>Breed</th><th>Milk</th><th>Net</th><th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="animalsBody"></tbody>
-      </table>
+    <!-- PREGNANT CARDS VIEW (Jab Pregnant filter select ho) -->
+    <div id="pregnantCards" style="display:none;">
+      <div class="preg-grid" id="pregGrid"></div>
     </div>
-    <div id="animalsEmpty" class="empty"><div class="empty-icon">🐄</div><p>Koi animal nahi</p></div>
+    
+    <!-- NORMAL TABLE VIEW -->
+    <div id="normalAnimalsView">
+      <div class="table-wrapper">
+        <table id="animalsTable">
+          <thead>
+            <tr>
+              <th>Photo</th><th>Tag</th><th>Type</th><th>Cat</th><th>Gender</th><th>Age</th><th>Weight</th><th>Health</th>
+              <th>Buy ₹</th><th>Doctor</th><th>Khana</th><th>Breed</th><th>Milk Value</th><th>Net</th><th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="animalsBody"></tbody>
+        </table>
+      </div>
+      <div id="animalsEmpty" class="empty"><div class="empty-icon">🐄</div><p>Koi animal nahi</p></div>
+    </div>
     
     <div style="margin-top:25px;background:linear-gradient(135deg,#e74c3c,#c0392b);color:white;padding:22px;border-radius:18px;text-align:center;">
       <h3 style="font-size:13px;letter-spacing:2px;">💸 KUL ANIMAL KHARCHA</h3>
@@ -609,7 +656,7 @@
     <div class="summary-grid">
       <div class="summary-card"><h4>🥛 Aaj Kul Doodh</h4><div class="amount green" id="milkTodayTotal">0 kg</div></div>
       <div class="summary-card"><h4>💵 Aaj ki Aamdani</h4><div class="amount green" id="milkTodayIncome">Rs. 0</div></div>
-      <div class="summary-card"><h4>📅 Is Mahine ka Doodh</h4><div class="amount" id="milkMonthTotal">0 kg</div></div>
+      <div class="summary-card"><h4>📅 Is Mahine ka Doodh</h4><div class="amount blue" id="milkMonthTotal">0 kg</div></div>
       <div class="summary-card"><h4>💰 Is Mahine ki Aamdani</h4><div class="amount green" id="milkMonthIncome">Rs. 0</div></div>
     </div>
     <div style="background:linear-gradient(135deg,#fff3cd,#ffe0b2);padding:12px;border-radius:10px;margin-bottom:15px;font-size:12px;color:#856404;border-left:4px solid #f39c12;">
@@ -704,7 +751,10 @@
   
   <!-- BREEDING -->
   <div id="breeding" class="tab-content">
-    <div class="section-header"><h2>🐣 Breeding</h2></div>
+    <div class="section-header"><h2>🐣 Breeding <span class="badge badge-pregnant">KHARCHA MINUS</span></h2></div>
+    <div style="background:linear-gradient(135deg,#f0f4f8,#e8f5e9);padding:12px;border-radius:10px;margin-bottom:15px;font-size:12px;color:#856404;border-left:4px solid #9b59b6;">
+      💡 <strong>Note:</strong> Breeding ka kharcha us animal ke total kharcha mein shamil hoga!
+    </div>
     <div class="form-grid">
       <div class="form-group"><label>Animal *</label><select id="breedAnimal"></select></div>
       <div class="form-group"><label>Tareekh *</label><input type="date" id="breedDate"></div>
@@ -721,43 +771,25 @@
     <div id="breedingEmpty" class="empty"><div class="empty-icon">🐣</div><p>Koi record nahi</p></div>
   </div>
   
-  <!-- PROFIT / FAIDA -->
+  <!-- PROFIT -->
   <div id="profit" class="tab-content">
     <div class="section-header"><h2>🎁 Faida (Profit) - Bachon ki Value</h2></div>
-    
     <div class="summary-grid">
-      <div class="summary-card" style="border-left-color:#3498db;">
-        <h4>👶 Male (Larke)</h4>
-        <div class="amount blue" id="profitMaleCount">0</div>
-        <div style="font-size:11px;color:#666;margin-top:4px;">Value: <span id="profitMaleValue">Rs. 0</span></div>
-      </div>
-      <div class="summary-card" style="border-left-color:#e91e63;">
-        <h4>👧 Female (Larkiyan)</h4>
-        <div class="amount" id="profitFemaleCount" style="color:#e91e63;">0</div>
-        <div style="font-size:11px;color:#666;margin-top:4px;">Value: <span id="profitFemaleValue">Rs. 0</span></div>
-      </div>
-      <div class="summary-card" style="border-left-color:#27ae60;">
-        <h4>💰 Kul Bachon ki Value</h4>
-        <div class="amount green" id="profitBabyTotalValue">Rs. 0</div>
-      </div>
-      <div class="summary-card" style="border-left-color:#f39c12;">
-        <h4>🥛 Doodh Value</h4>
-        <div class="amount orange" id="profitMilkTotalValue">Rs. 0</div>
-      </div>
-      <div class="summary-card" style="border-left-color:#e74c3c;">
-        <h4>💸 Kul Kharcha</h4>
-        <div class="amount red" id="profitTotalCost">Rs. 0</div>
-      </div>
-      <div class="summary-card" style="border-left-color:#9b59b6;">
-        <h4>🎯 NET FAIDA</h4>
-        <div class="amount green" id="profitNetFaida">Rs. 0</div>
-      </div>
+      <div class="summary-card" style="border-left-color:#3498db;"><h4>👶 Male (Larke)</h4><div class="amount blue" id="profitMaleCount">0</div><div style="font-size:11px;color:#666;margin-top:4px;">Value: <span id="profitMaleValue">Rs. 0</span></div></div>
+      <div class="summary-card" style="border-left-color:#e91e63;"><h4>👧 Female (Larkiyan)</h4><div class="amount" id="profitFemaleCount" style="color:#e91e63;">0</div><div style="font-size:11px;color:#666;margin-top:4px;">Value: <span id="profitFemaleValue">Rs. 0</span></div></div>
+      <div class="summary-card" style="border-left-color:#27ae60;"><h4>💰 Kul Bachon ki Value</h4><div class="amount green" id="profitBabyTotalValue">Rs. 0</div></div>
+      <div class="summary-card" style="border-left-color:#f39c12;"><h4>🥛 Doodh Value</h4><div class="amount orange" id="profitMilkTotalValue">Rs. 0</div></div>
+      <div class="summary-card" style="border-left-color:#e74c3c;"><h4>💸 Kul Kharcha</h4><div class="amount red" id="profitTotalCost">Rs. 0</div></div>
+      <div class="summary-card" style="border-left-color:#9b59b6;"><h4>🎯 NET FAIDA</h4><div class="amount green" id="profitNetFaida">Rs. 0</div></div>
     </div>
-    
     <div style="background:linear-gradient(135deg,#f0f4f8,#e8f5e9);padding:18px;border-radius:15px;margin-bottom:20px;">
-      <h3 style="color:#1e3c72;margin-bottom:12px;font-size:14px;">➕ Naya Bacha (Offspring) Add Karein</h3>
+      <h3 style="color:#1e3c72;margin-bottom:12px;font-size:14px;">➕ Naya Bacha Add Karein</h3>
       <div class="form-grid">
-        <div class="form-group"><label>Bache ka Naam/Tag *</label><input type="text" id="profitBabyName" placeholder="e.g. Chotu"></div>
+        <div class="form-group">
+          <label>Bache ka Naam/Tag *</label>
+          <input type="text" id="profitBabyName" placeholder="e.g. Chotu">
+          <button class="voice-btn" onclick="startVoice('profitBabyName', this)">🎤</button>
+        </div>
         <div class="form-group"><label>Ma (Mother)</label><select id="profitMother"><option value="">-- Select --</option></select></div>
         <div class="form-group"><label>Gender *</label><select id="profitBabyGender"><option value="Male">👶 Larka</option><option value="Female">👧 Larki</option></select></div>
         <div class="form-group"><label>Breed</label><input type="text" id="profitBabyBreed" placeholder="Sahiwal, Friesian"></div>
@@ -773,7 +805,6 @@
       <button class="btn btn-primary" id="profitSubmitBtn" onclick="addProfitBaby()">➕ Add Bacha</button>
       <button class="btn btn-danger" id="profitCancelBtn" onclick="resetProfitForm()" style="display:none;">❌ Cancel Edit</button>
     </div>
-    
     <div style="margin-bottom:12px;">
       <button class="cat-btn active" onclick="filterProfit('all', this)">📋 Sab</button>
       <button class="cat-btn" onclick="filterProfit('Male', this)">👶 Larke</button>
@@ -782,45 +813,33 @@
       <button class="cat-btn" onclick="filterProfit('Sold', this)">💵 Bech diye</button>
       <button class="cat-btn" onclick="filterProfit('Reserved', this)">⭐ Reserved</button>
     </div>
-    
     <div class="table-wrapper">
       <table id="profitTable">
-        <thead>
-          <tr>
-            <th>Name</th><th>Mother</th><th>Gender</th><th>Breed</th><th>Age</th><th>Weight</th>
-            <th>Birth</th><th>Current Value</th><th>Future Value</th><th>Status</th><th>Action</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Name</th><th>Mother</th><th>Gender</th><th>Breed</th><th>Age</th><th>Weight</th><th>Birth</th><th>Current</th><th>Future</th><th>Status</th><th>Action</th></tr></thead>
         <tbody id="profitBody"></tbody>
       </table>
     </div>
     <div id="profitEmpty" class="empty"><div class="empty-icon">🎁</div><p>Abhi koi bacha add nahi kiya</p></div>
-    
     <div style="margin-top:25px;">
       <h3 style="color:#1e3c72;margin-bottom:12px;font-size:16px;">📊 FAIDA BREAKDOWN</h3>
-      
       <div class="profit-breakdown" style="background:linear-gradient(135deg,#3498db,#2980b9);">
         <div><div class="label">+ BACHON KI VALUE</div><div class="sub">Male + Female total</div></div>
         <div class="value" id="breakBabyValue">Rs. 0</div>
       </div>
-      
       <div class="profit-breakdown" style="background:linear-gradient(135deg,#27ae60,#16a085);">
         <div><div class="label">+ DOODH KI VALUE</div><div class="sub">Sab animals ka doodh</div></div>
         <div class="value" id="breakMilkValue">Rs. 0</div>
       </div>
-      
       <div class="profit-breakdown" style="background:linear-gradient(135deg,#e74c3c,#c0392b);">
-        <div><div class="label">- KUL KHARCHA</div><div class="sub">Doctor + Khana + Breeding + Labor + Civil</div></div>
+        <div><div class="label">- KUL KHARCHA</div><div class="sub">Doctor + Khana + Breeding + Labor + Civil + Purchase</div></div>
         <div class="value" id="breakTotalCost">Rs. 0</div>
       </div>
-      
       <div style="background:linear-gradient(135deg,#34495e,#2c3e50);color:white;padding:28px;border-radius:18px;text-align:center;margin-top:15px;">
         <h3 style="font-size:14px;letter-spacing:2px;">🎯 NET FAIDA (NET PROFIT)</h3>
         <div style="font-size:44px;font-weight:900;margin-top:8px;" id="breakNetFaida">Rs. 0</div>
         <div style="font-size:12px;margin-top:8px;opacity:0.9;">= Baby Value + Milk Value - Total Cost</div>
       </div>
     </div>
-    
     <div style="margin-top:25px;background:linear-gradient(135deg,#f8f9fa,#e8f5e9);padding:18px;border-radius:15px;border-left:5px solid #27ae60;">
       <h3 style="color:#2c5f2d;margin-bottom:12px;font-size:14px;">💵 Sale se Faida (Sold Babies)</h3>
       <div id="soldBabySummary"></div>
@@ -866,9 +885,9 @@
       <button class="chart-tab" onclick="showChart('candle', this)">🕯️ Candle</button>
     </div>
     <div class="chart-container"><canvas id="mainChart"></canvas></div>
-    <div style="background:linear-gradient(135deg,#f8f9fa,#e8f5e9);padding:18px;border-radius:15px;">
+    <div style="background:linear-gradient(135deg,#f8f9fa,#e8f5e9);padding:18px;border-radius:15px;overflow-x:auto;">
       <h3 style="color:#2c5f2d;margin-bottom:12px;font-size:14px;">📊 Percentage Analysis</h3>
-      <div id="percentAnalysis" style="overflow-x:auto;"></div>
+      <div id="percentAnalysis"></div>
     </div>
   </div>
   
@@ -876,10 +895,15 @@
   <div id="assets" class="tab-content">
     <div class="section-header"><h2>🏛️ Assets</h2></div>
     <div class="summary-grid">
-      <div class="summary-card"><h4>🏛️ Total</h4><div class="amount" id="assetTotalCount">0</div></div>
-      <div class="summary-card"><h4>💰 Value</h4><div class="amount green" id="assetTotalValue">Rs. 0</div></div>
-      <div class="summary-card"><h4>🐄 Livestock</h4><div class="amount orange" id="assetLivestock">Rs. 0</div></div>
+      <div class="summary-card"><h4>🏛️ Manual Assets</h4><div class="amount" id="assetTotalCount">0</div></div>
+      <div class="summary-card"><h4>💰 Manual Value</h4><div class="amount green" id="assetTotalValue">Rs. 0</div></div>
+      <div class="summary-card"><h4>🐄 Livestock Value</h4><div class="amount orange" id="assetLivestock">Rs. 0</div></div>
       <div class="summary-card"><h4>🏗️ Property</h4><div class="amount" id="assetProperty">Rs. 0</div></div>
+    </div>
+    <div style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);padding:18px;border-radius:15px;margin-bottom:20px;border-left:5px solid #4a9d4e;">
+      <h3 style="color:#2c5f2d;font-size:14px;margin-bottom:8px;">🐄 Animals = Assets</h3>
+      <div style="font-size:24px;font-weight:900;color:#2c5f2d;" id="totalAnimalAssetValue">Rs. 0</div>
+      <div style="font-size:11px;color:#555;margin-top:4px;">Janwaron ki kul qeemat (yeh kharcha nahi, ASSET hai)</div>
     </div>
     <div class="form-grid">
       <div class="form-group"><label>Asset Name *</label><input type="text" id="assetName"></div>
@@ -908,6 +932,10 @@
       <div class="summary-card"><h4>🐣 Breeding</h4><div class="amount red" id="sumBreeding">Rs. 0</div></div>
       <div class="summary-card"><h4>🛒 Purchases</h4><div class="amount red" id="sumPurchase">Rs. 0</div></div>
     </div>
+    <div style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);padding:15px;border-radius:15px;margin-bottom:15px;border-left:5px solid #4a9d4e;">
+      <h3 style="color:#2c5f2d;font-size:12px;margin-bottom:5px;">✅ NOTE:</h3>
+      <div style="font-size:12px;color:#555;">Janwar kharidna <strong>Kharcha nahi</strong>, balke <strong>Asset</strong> hai.</div>
+    </div>
     <div style="background:linear-gradient(135deg,#e74c3c,#c0392b);color:white;padding:22px;border-radius:18px;text-align:center;">
       <h3 style="font-size:13px;letter-spacing:2px;">💸 KUL KHARCHA</h3>
       <div style="font-size:38px;font-weight:900;" id="grandTotal">Rs. 0</div>
@@ -919,6 +947,14 @@
     <div style="background:linear-gradient(135deg,#34495e,#2c3e50);color:white;padding:22px;border-radius:18px;margin-top:12px;text-align:center;">
       <h3 style="font-size:13px;letter-spacing:2px;">📊 MUNFA</h3>
       <div style="font-size:38px;font-weight:900;" id="netProfit">Rs. 0</div>
+    </div>
+    <div style="margin-top:20px;background:linear-gradient(135deg,#f0f4f8,#e0e7ff);padding:18px;border-radius:15px;border-left:5px solid #3498db;">
+      <h3 style="color:#1e3c72;font-size:13px;margin-bottom:10px;">💡 Business Assets</h3>
+      <table style="box-shadow:none;font-size:12px;min-width:100%;">
+        <tr><td>🐄 Animals (Live Stock)</td><td style="text-align:right;font-weight:700;" id="exAnimalValue">Rs. 0</td></tr>
+        <tr><td>🏛️ Other Assets</td><td style="text-align:right;font-weight:700;" id="exOtherAssets">Rs. 0</td></tr>
+        <tr style="background:#e8f5e9;"><td><strong>💎 Total Assets</strong></td><td style="text-align:right;font-weight:800;color:#27ae60;" id="exTotalAssets">Rs. 0</td></tr>
+      </table>
     </div>
   </div>
   
@@ -963,11 +999,78 @@ const firebaseConfig = {
 let FIREBASE_ON = false, db = null;
 try { firebase.initializeApp(firebaseConfig); db = firebase.firestore(); FIREBASE_ON = true; } catch(e) { console.log(e); }
 
-// ==================== CONSTANTS ====================
 const MASTER_EMAIL = "hayatsarwar1989@gmail.com";
 const MASTER_PHONE = "923018020176";
 const DEFAULT_PIN = "2015";
 const MILK_ALL_KEY = "__MILK_ALL__";
+const GESTATION_DAYS = 283; // Cow/Buffalo pregnancy days
+
+// ==================== THEME ====================
+function toggleTheme() {
+  document.body.classList.toggle('dark-mode');
+  const isDark = document.body.classList.contains('dark-mode');
+  localStorage.setItem('sdf_theme', isDark ? 'dark' : 'light');
+  document.querySelector('.theme-btn').textContent = isDark ? '☀️' : '🌙';
+}
+if (localStorage.getItem('sdf_theme') === 'dark') {
+  document.body.classList.add('dark-mode');
+  setTimeout(() => { const btn = document.querySelector('.theme-btn'); if (btn) btn.textContent = '☀️'; }, 100);
+}
+
+// ==================== VOICE INPUT ====================
+function startVoice(inputId, btn) {
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) { alert('Voice input support nahi. Chrome use karein.'); return; }
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const r = new SR();
+  r.lang = 'ur-PK';
+  r.continuous = false;
+  r.interimResults = false;
+  btn.classList.add('listening'); btn.textContent = '🔴';
+  r.onresult = (e) => { document.getElementById(inputId).value = e.results[0][0].transcript; btn.classList.remove('listening'); btn.textContent = '🎤'; };
+  r.onerror = () => { btn.classList.remove('listening'); btn.textContent = '🎤'; };
+  r.onend = () => { btn.classList.remove('listening'); btn.textContent = '🎤'; };
+  r.start();
+}
+
+// ==================== AUTO AGE ====================
+function autoCalcAge() {
+  const birth = document.getElementById('animalBirth').value;
+  if (!birth) return;
+  const birthDate = new Date(birth);
+  const now = new Date();
+  const months = (now.getFullYear() - birthDate.getFullYear()) * 12 + (now.getMonth() - birthDate.getMonth());
+  document.getElementById('animalAge').value = (months / 12).toFixed(1);
+}
+
+// ==================== PHOTO COMPRESS ====================
+function compressImage(file, callback) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const MAX = 400;
+      let w = img.width, h = img.height;
+      if (w > h) { if (w > MAX) { h = h * MAX / w; w = MAX; } } else { if (h > MAX) { w = w * MAX / h; h = MAX; } }
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      callback(canvas.toDataURL('image/jpeg', 0.7));
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ==================== BACKUP REMINDER ====================
+function checkBackupReminder() {
+  const lastBackup = localStorage.getItem('sdf_last_backup');
+  if (!lastBackup) { localStorage.setItem('sdf_last_backup', Date.now()); return; }
+  const days = Math.floor((Date.now() - parseInt(lastBackup)) / (1000 * 60 * 60 * 24));
+  if (days >= 7) {
+    setTimeout(() => { if (confirm('📥 7 din se backup nahi liya! Abhi backup lena hai?')) exportData(); }, 3000);
+  }
+}
 
 // ==================== PIN ====================
 function getMasterPin() { return localStorage.getItem('sdf_master_pin') || DEFAULT_PIN; }
@@ -977,12 +1080,8 @@ function setMasterPin(pin) {
 }
 async function loadPinFromFirebase() {
   if (!FIREBASE_ON || !db) return;
-  try {
-    const d = await db.collection('farms').doc('sabir').get();
-    if (d.exists && d.data().masterPin) localStorage.setItem('sdf_master_pin', d.data().masterPin);
-  } catch(e) {}
+  try { const d = await db.collection('farms').doc('sabir').get(); if (d.exists && d.data().masterPin) localStorage.setItem('sdf_master_pin', d.data().masterPin); } catch(e) {}
 }
-
 let currentPinInput = "";
 function pinInput(n) { if (currentPinInput.length >= 4) return; currentPinInput += n; updatePinDots('pinDisplay', currentPinInput); if (currentPinInput.length === 4) setTimeout(pinSubmit, 200); }
 function pinClear() { currentPinInput = ""; updatePinDots('pinDisplay', ""); document.getElementById('lockMessage').textContent = ""; }
@@ -993,7 +1092,7 @@ function pinSubmit() {
   const m = document.getElementById('lockMessage');
   if (currentPinInput === getMasterPin()) {
     m.className = 'lock-message success'; m.textContent = '✅ Sahi PIN!';
-    setTimeout(() => { document.getElementById('lockScreen').classList.add('hide'); currentPinInput = ""; updatePinDots('pinDisplay', ""); m.textContent = ''; }, 500);
+    setTimeout(() => { document.getElementById('lockScreen').classList.add('hide'); currentPinInput = ""; updatePinDots('pinDisplay', ""); m.textContent = ''; checkBackupReminder(); }, 500);
   } else {
     m.className = 'lock-message error'; m.textContent = '❌ Ghalat PIN!';
     document.querySelectorAll('#pinDisplay .pin-dot').forEach(d => d.classList.add('error'));
@@ -1049,10 +1148,7 @@ function changePIN() {
 
 // ==================== REQUESTS ====================
 let userRequests = JSON.parse(localStorage.getItem('sdf_user_requests') || '[]');
-function saveRequests() {
-  localStorage.setItem('sdf_user_requests', JSON.stringify(userRequests));
-  if (FIREBASE_ON && db) db.collection('farms').doc('sabir').set({ userRequests }, { merge: true }).catch(e => console.log(e));
-}
+function saveRequests() { localStorage.setItem('sdf_user_requests', JSON.stringify(userRequests)); if (FIREBASE_ON && db) db.collection('farms').doc('sabir').set({ userRequests }, { merge: true }).catch(e => console.log(e)); }
 function loadRequestsFromFirebase() {
   if (!FIREBASE_ON || !db) return;
   db.collection('farms').doc('sabir').onSnapshot(d => {
@@ -1064,10 +1160,7 @@ function loadRequestsFromFirebase() {
     }
   });
 }
-function updateRequestsCount() {
-  const p = userRequests.filter(r => r.status === 'pending').length;
-  const el = document.getElementById('reqCount'); if (el) el.textContent = p;
-}
+function updateRequestsCount() { const p = userRequests.filter(r => r.status === 'pending').length; const el = document.getElementById('reqCount'); if (el) el.textContent = p; }
 function openRequests() { document.getElementById('requestsModal').classList.add('show'); renderRequests(); }
 function closeRequests() { document.getElementById('requestsModal').classList.remove('show'); }
 function renderRequests() {
@@ -1076,7 +1169,7 @@ function renderRequests() {
   l.innerHTML = '';
   [...userRequests].reverse().forEach(r => {
     const sb = r.status === 'pending' ? '<span style="background:#f39c12;color:white;padding:3px 10px;border-radius:15px;font-size:10px;font-weight:700;">⏳ PENDING</span>' : r.status === 'approved' ? '<span style="background:#27ae60;color:white;padding:3px 10px;border-radius:15px;font-size:10px;font-weight:700;">✅ APPROVED</span>' : '<span style="background:#e74c3c;color:white;padding:3px 10px;border-radius:15px;font-size:10px;font-weight:700;">❌ REJECTED</span>';
-    l.innerHTML += `<div class="request-card"><h4>👤 ${r.name} ${sb}</h4><p>📧 ${r.email || '-'}<br>📱 ${r.phone || '-'}<br>📅 ${r.date}</p>${r.status === 'pending' ? `<div class="actions"><button class="btn btn-success" style="padding:6px 14px;font-size:11px;" onclick="approveRequest(${r.id})">✅ Approve</button><button class="btn btn-danger" style="padding:6px 14px;font-size:11px;" onclick="rejectRequest(${r.id})">❌ Reject</button></div>` : ''}</div>`;
+    l.innerHTML += `<div class="request-card"><h4>👤 ${r.name} ${sb}</h4><p>📧 ${r.email || '-'}<br>📱 ${r.phone || '-'}<br>📅 ${r.date}</p>${r.status === 'pending' ? `<div><button class="btn btn-success" style="padding:6px 14px;font-size:11px;" onclick="approveRequest(${r.id})">✅ Approve</button><button class="btn btn-danger" style="padding:6px 14px;font-size:11px;" onclick="rejectRequest(${r.id})">❌ Reject</button></div>` : ''}</div>`;
   });
 }
 function approveRequest(id) {
@@ -1118,10 +1211,7 @@ function save() {
     db.collection('farms').doc('sabir').set({ data: data, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true }).then(() => updateStatus('online')).catch(() => updateStatus('offline'));
   }
 }
-function saveProfitBabies() {
-  localStorage.setItem('sdf_profit_babies', JSON.stringify(profitBabies));
-  if (FIREBASE_ON && db) db.collection('farms').doc('sabir').set({ profitBabies }, { merge: true }).catch(e => console.log(e));
-}
+function saveProfitBabies() { localStorage.setItem('sdf_profit_babies', JSON.stringify(profitBabies)); if (FIREBASE_ON && db) db.collection('farms').doc('sabir').set({ profitBabies }, { merge: true }).catch(e => console.log(e)); }
 function setupFirebaseSync() {
   if (!FIREBASE_ON || !db) { updateStatus('offline'); return; }
   updateStatus('syncing');
@@ -1148,7 +1238,7 @@ function updateStatus(s) {
 // ==================== HELPERS ====================
 function showAlert(msg, type = 'success') {
   const box = document.getElementById('alertBox');
-  if (!box) { alert(msg); return; }
+  if (!box) { const toast = document.createElement('div'); toast.className = 'toast'; toast.textContent = msg; document.body.appendChild(toast); setTimeout(() => toast.remove(), 3000); return; }
   box.innerHTML = `<div class="alert alert-${type}">${msg}</div>`;
   setTimeout(() => box.innerHTML = '', 3000);
 }
@@ -1159,10 +1249,10 @@ function switchTab(id, btn) {
   document.getElementById(id).classList.add('active');
   updateStats();
   if (id === 'charts') setTimeout(() => drawChart(currentChartType), 100);
-  if (id === 'dashboard') setTimeout(() => drawDashChart(), 100);
+  if (id === 'dashboard') setTimeout(() => { drawDashChart(); renderAnalytics(); }, 100);
   if (id === 'profit') { renderProfit(); renderProfitMotherSelect(); }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
 function calcAnimalCost(name) {
   const doctor = data.health.filter(h => h.animal === name).reduce((s, h) => s + (h.cost || 0), 0);
   const food = data.food.filter(f => f.animal === name).reduce((s, f) => s + (f.cost || 0), 0);
@@ -1170,6 +1260,153 @@ function calcAnimalCost(name) {
   return { doctor, food, breeding, total: doctor + food + breeding };
 }
 function calcAnimalMilkValue(name) { return data.milk.filter(m => m.animal === name).reduce((s, m) => s + (m.total || 0), 0); }
+
+// ==================== PREGNANCY COUNTDOWN ====================
+function getPregnancyInfo(animal) {
+  // Latest breeding record with Pregnant status
+  const breedRecs = data.breeding.filter(b => b.animal === animal.name && b.status === 'Pregnant').sort((a, b) => new Date(b.date) - new Date(a.date));
+  if (breedRecs.length === 0) return null;
+  const latest = breedRecs[0];
+  const breedDate = new Date(latest.date);
+  let expectedDate;
+  if (latest.expected && latest.expected !== '-') expectedDate = new Date(latest.expected);
+  else { expectedDate = new Date(breedDate); expectedDate.setDate(expectedDate.getDate() + GESTATION_DAYS); }
+  const today = new Date();
+  const daysRemaining = Math.ceil((expectedDate - today) / (1000 * 60 * 60 * 24));
+  const daysElapsed = Math.floor((today - breedDate) / (1000 * 60 * 60 * 24));
+  const progress = Math.min(100, Math.max(0, (daysElapsed / GESTATION_DAYS) * 100));
+  return { breedDate: latest.date, expectedDate, daysRemaining, daysElapsed, progress, method: latest.method, bull: latest.bull, cost: latest.cost };
+}
+
+function renderPregnantCards() {
+  const grid = document.getElementById('pregGrid');
+  if (!grid) return;
+  const pregAnimals = data.animals.filter(a => a.health === 'Pregnant');
+  if (pregAnimals.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;background:#fff3cd;border-radius:15px;"><div style="font-size:60px;">🐄</div><p style="font-size:15px;color:#856404;font-weight:700;">Abhi koi pregnant animal nahi</p></div>';
+    return;
+  }
+  grid.innerHTML = '';
+  pregAnimals.forEach(a => {
+    const info = getPregnancyInfo(a);
+    let cardClass = 'safe', statusText = 'SAFE', statusClass = 'safe';
+    let daysDisplay = '?', daysLabel = 'DIN BAQI';
+    if (info) {
+      if (info.daysRemaining < 0) { cardClass = 'urgent'; statusText = 'OVERDUE'; statusClass = 'urgent'; daysDisplay = Math.abs(info.daysRemaining); daysLabel = 'DIN LATE'; }
+      else if (info.daysRemaining <= 7) { cardClass = 'urgent'; statusText = 'URGENT'; statusClass = 'urgent'; daysDisplay = info.daysRemaining; daysLabel = 'DIN BAQI'; }
+      else if (info.daysRemaining <= 30) { cardClass = 'warning'; statusText = 'CLOSE'; statusClass = 'warning'; daysDisplay = info.daysRemaining; daysLabel = 'DIN BAQI'; }
+      else { cardClass = 'safe'; statusText = 'SAFE'; statusClass = 'safe'; daysDisplay = info.daysRemaining; daysLabel = 'DIN BAQI'; }
+    }
+    const photoHTML = a.photo ? `<img src="${a.photo}" style="width:60px;height:60px;border-radius:50%;object-fit:cover;border:3px solid #4a9d4e;">` : `<div style="width:60px;height:60px;border-radius:50%;background:#4a9d4e;color:white;display:flex;align-items:center;justify-content:center;font-size:30px;">${a.type==='Buffalo'?'🐃':'🐄'}</div>`;
+    grid.innerHTML += `
+      <div class="preg-card ${cardClass}">
+        <span class="preg-status-badge ${statusClass}">${statusText}</span>
+        <div class="preg-card-header">
+          ${photoHTML}
+          <div>
+            <div class="preg-animal-name">${a.name}</div>
+            <div class="preg-animal-info">${a.type} • Umar ${a.age} saal • ${a.weight} kg</div>
+          </div>
+        </div>
+        ${info ? `
+          <div class="preg-countdown ${cardClass}">
+            <div class="days">${daysDisplay}</div>
+            <div class="days-label">${daysLabel}</div>
+          </div>
+          <div class="preg-progress">
+            <div class="preg-progress-bar" style="width:${info.progress}%;"></div>
+          </div>
+          <div class="preg-info-row"><span class="key">📅 Breeding Date</span><span class="val">${info.breedDate}</span></div>
+          <div class="preg-info-row"><span class="key">🎯 Expected Delivery</span><span class="val">${info.expectedDate.toLocaleDateString('en-PK')}</span></div>
+          <div class="preg-info-row"><span class="key">📊 Progress</span><span class="val">${info.progress.toFixed(1)}%</span></div>
+          <div class="preg-info-row"><span class="key">💉 Method</span><span class="val">${info.method}</span></div>
+          <div class="preg-info-row"><span class="key">🐂 Bull/Semen</span><span class="val">${info.bull}</span></div>
+          <div class="preg-info-row"><span class="key">💰 Breeding Cost</span><span class="val">Rs. ${(info.cost || 0).toLocaleString()}</span></div>
+          <button class="btn btn-info" style="width:100%;margin-top:12px;" onclick="showAnimalProfile(${a.id})">👁️ Full Profile Dekhein</button>
+        ` : `
+          <div style="text-align:center;padding:15px;background:#f0f4f8;border-radius:10px;font-size:12px;color:#666;">
+            ⚠️ Breeding record nahi mila<br>
+            <small>Breeding tab mein add karein</small>
+          </div>
+        `}
+      </div>
+    `;
+  });
+}
+
+// ==================== ANALYTICS ====================
+function renderAnalytics() {
+  // Top Milk Producers
+  const milkByAnimal = {};
+  data.milk.forEach(m => {
+    if (!m.isMilkAll) milkByAnimal[m.animal] = (milkByAnimal[m.animal] || 0) + m.total;
+  });
+  const topMilk = Object.entries(milkByAnimal).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  const tmEl = document.getElementById('topMilkProducers');
+  if (tmEl) {
+    if (topMilk.length === 0) tmEl.innerHTML = '<p style="color:#999;font-size:12px;">Data nahi</p>';
+    else tmEl.innerHTML = topMilk.map(([name, val], i) => `<div class="analytics-item"><span class="name"><span class="rank-badge rank-${i<3?i+1:'other'}">${i+1}</span>${name}</span><span class="val">Rs. ${val.toLocaleString()}</span></div>`).join('');
+  }
+
+  // Upcoming Deliveries
+  const upcoming = [];
+  data.animals.filter(a => a.health === 'Pregnant').forEach(a => {
+    const info = getPregnancyInfo(a);
+    if (info && info.daysRemaining >= 0 && info.daysRemaining <= 30) upcoming.push({ name: a.name, days: info.daysRemaining, date: info.expectedDate });
+  });
+  upcoming.sort((a, b) => a.days - b.days);
+  const udEl = document.getElementById('upcomingDeliveries');
+  if (udEl) {
+    if (upcoming.length === 0) udEl.innerHTML = '<p style="color:#999;font-size:12px;">Koi delivery nahi</p>';
+    else udEl.innerHTML = upcoming.map(u => `<div class="analytics-item"><span class="name">🐄 ${u.name}</span><span class="val orange">${u.days} din</span></div>`).join('');
+  }
+
+  // Monthly Comparison
+  const now = new Date();
+  const thisMonth = now.toISOString().substring(0, 7);
+  const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1).toISOString().substring(0, 7);
+  const thisMilk = data.milk.filter(m => m.date.startsWith(thisMonth)).reduce((s, m) => s + m.total, 0);
+  const lastMilk = data.milk.filter(m => m.date.startsWith(lastMonth)).reduce((s, m) => s + m.total, 0);
+  const thisSale = data.sales.filter(s => s.type === 'Sale' && s.date.startsWith(thisMonth)).reduce((s, x) => s + x.amount, 0);
+  const lastSale = data.sales.filter(s => s.type === 'Sale' && s.date.startsWith(lastMonth)).reduce((s, x) => s + x.amount, 0);
+  const milkGrowth = lastMilk > 0 ? ((thisMilk - lastMilk) / lastMilk * 100).toFixed(1) : 0;
+  const saleGrowth = lastSale > 0 ? ((thisSale - lastSale) / lastSale * 100).toFixed(1) : 0;
+  const mcEl = document.getElementById('monthlyComparison');
+  if (mcEl) {
+    mcEl.innerHTML = `
+      <div class="analytics-item"><span class="name">🥛 Doodh (Last)</span><span class="val">Rs. ${lastMilk.toLocaleString()}</span></div>
+      <div class="analytics-item"><span class="name">🥛 Doodh (This)</span><span class="val">Rs. ${thisMilk.toLocaleString()}</span></div>
+      <div class="analytics-item"><span class="name">📊 Growth</span><span class="val ${milkGrowth >= 0 ? '' : 'red'}">${milkGrowth >= 0 ? '📈' : '📉'} ${milkGrowth}%</span></div>
+      <div class="analytics-item"><span class="name">💵 Sale Growth</span><span class="val ${saleGrowth >= 0 ? '' : 'red'}">${saleGrowth >= 0 ? '📈' : '📉'} ${saleGrowth}%</span></div>
+    `;
+  }
+
+  // Top Cost Animals
+  const costs = data.animals.map(a => ({ name: a.name, cost: calcAnimalCost(a.name).total })).sort((a, b) => b.cost - a.cost).slice(0, 5);
+  const tcEl = document.getElementById('topCostAnimals');
+  if (tcEl) {
+    if (costs.length === 0 || costs.every(c => c.cost === 0)) tcEl.innerHTML = '<p style="color:#999;font-size:12px;">Data nahi</p>';
+    else tcEl.innerHTML = costs.map((c, i) => `<div class="analytics-item"><span class="name"><span class="rank-badge rank-${i<3?i+1:'other'}">${i+1}</span>${c.name}</span><span class="val red">Rs. ${c.cost.toLocaleString()}</span></div>`).join('');
+  }
+
+  // Health Alerts
+  const sick = data.animals.filter(a => a.health === 'Sick');
+  const haEl = document.getElementById('healthAlerts');
+  if (haEl) {
+    if (sick.length === 0) haEl.innerHTML = '<p style="color:#27ae60;font-size:12px;">✅ Sab theek hai</p>';
+    else haEl.innerHTML = sick.map(a => `<div class="analytics-item"><span class="name">🤒 ${a.name}</span><span class="val red">Beemar</span></div>`).join('');
+  }
+
+  // Pending Payments
+  const pending = [];
+  data.sales.filter(s => s.payment === 'Pending').forEach(s => pending.push({ desc: s.party + ' (' + s.category + ')', amount: s.amount }));
+  data.labor.filter(l => l.status === 'Pending').forEach(l => pending.push({ desc: l.name + ' (Mazdoori)', amount: l.amount }));
+  const ppEl = document.getElementById('pendingPayments');
+  if (ppEl) {
+    if (pending.length === 0) ppEl.innerHTML = '<p style="color:#27ae60;font-size:12px;">✅ Koi pending nahi</p>';
+    else ppEl.innerHTML = pending.slice(0, 5).map(p => `<div class="analytics-item"><span class="name">⏳ ${p.desc}</span><span class="val orange">Rs. ${p.amount.toLocaleString()}</span></div>`).join('') + (pending.length > 5 ? `<div style="text-align:center;font-size:11px;color:#666;margin-top:8px;">+${pending.length - 5} more</div>` : '');
+  }
+}
 
 // ==================== ANIMALS ====================
 function addAnimal() {
@@ -1180,6 +1417,7 @@ function addAnimal() {
     type: document.getElementById('animalType').value,
     category: document.getElementById('animalCategory').value,
     gender: document.getElementById('animalGender').value,
+    birth: document.getElementById('animalBirth').value || '',
     age: document.getElementById('animalAge').value || '-',
     weight: document.getElementById('animalWeight').value || '-',
     health: document.getElementById('animalHealth').value,
@@ -1191,11 +1429,14 @@ function addAnimal() {
   save(); resetAnimalForm(); showAlert('✅ Animal add!');
   renderAnimals(); renderAllSelects(); renderProfitMotherSelect(); updateStats();
 }
+
 function filterAnimals(type, btn) {
   currentAnimalFilter = type;
   document.querySelectorAll('#animals .cat-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active'); renderAnimals();
+  btn.classList.add('active');
+  renderAnimals();
 }
+
 function renderAnimals() {
   const search = document.getElementById('searchAnimal')?.value.toLowerCase() || '';
   let filtered = data.animals.filter(a => a.name.toLowerCase().includes(search));
@@ -1204,6 +1445,19 @@ function renderAnimals() {
     else if (currentAnimalFilter === 'Adult' || currentAnimalFilter === 'Calf') filtered = filtered.filter(a => a.category === currentAnimalFilter);
     else filtered = filtered.filter(a => a.health === currentAnimalFilter);
   }
+  
+  // PREGNANT VIEW - show cards
+  if (currentAnimalFilter === 'Pregnant') {
+    document.getElementById('pregnantCards').style.display = 'block';
+    document.getElementById('normalAnimalsView').style.display = 'none';
+    renderPregnantCards();
+    updateAnimalSummary();
+    return;
+  } else {
+    document.getElementById('pregnantCards').style.display = 'none';
+    document.getElementById('normalAnimalsView').style.display = 'block';
+  }
+  
   const tbody = document.getElementById('animalsBody'); if (!tbody) return;
   tbody.innerHTML = '';
   if (filtered.length === 0) { document.getElementById('animalsTable').style.display = 'none'; document.getElementById('animalsEmpty').style.display = 'block'; updateAnimalSummary(); return; }
@@ -1242,6 +1496,7 @@ function renderAnimals() {
   });
   updateAnimalSummary();
 }
+
 function updateAnimalSummary() {
   let cA = 0, cC = 0, cP = 0, cS = 0, sA = 0, sC = 0, sP = 0, sS = 0, tTotal = 0, tMilk = 0;
   data.animals.forEach(a => {
@@ -1267,6 +1522,7 @@ function updateAnimalSummary() {
   set('grandAnimalMilk', 'Rs. ' + tMilk.toLocaleString());
   set('grandNetProfit', 'Rs. ' + net.toLocaleString());
 }
+
 function editAnimal(id) {
   openPinVerify(() => {
     const a = data.animals.find(x => x.id === id); if (!a) return;
@@ -1275,6 +1531,7 @@ function editAnimal(id) {
     document.getElementById('animalType').value = a.type;
     document.getElementById('animalCategory').value = a.category;
     document.getElementById('animalGender').value = a.gender;
+    document.getElementById('animalBirth').value = a.birth || '';
     document.getElementById('animalAge').value = a.age;
     document.getElementById('animalWeight').value = a.weight;
     document.getElementById('animalHealth').value = a.health;
@@ -1290,6 +1547,7 @@ function editAnimal(id) {
     showAlert('✏️ Edit mode!', 'success');
   }, "✏️ Edit Animal", "PIN daalein");
 }
+
 function updateAnimal() {
   openPinVerify(() => {
     const a = data.animals.find(x => x.id === editingAnimalId); if (!a) return;
@@ -1297,6 +1555,7 @@ function updateAnimal() {
     a.type = document.getElementById('animalType').value;
     a.category = document.getElementById('animalCategory').value;
     a.gender = document.getElementById('animalGender').value;
+    a.birth = document.getElementById('animalBirth').value || a.birth;
     a.age = document.getElementById('animalAge').value || a.age;
     a.weight = document.getElementById('animalWeight').value || a.weight;
     a.health = document.getElementById('animalHealth').value;
@@ -1308,9 +1567,10 @@ function updateAnimal() {
     renderAnimals(); renderAllSelects(); renderProfitMotherSelect(); updateStats();
   }, "💾 Update", "PIN daalein");
 }
+
 function resetAnimalForm() {
   editingAnimalId = null;
-  ['animalName','animalAge','animalWeight','animalPrice','animalNotes'].forEach(id => { const e = document.getElementById(id); if (e) e.value = ''; });
+  ['animalName','animalAge','animalWeight','animalPrice','animalNotes','animalBirth'].forEach(id => { const e = document.getElementById(id); if (e) e.value = ''; });
   const p = document.getElementById('animalPhoto'); if (p) p.value = '';
   currentPhotoBase64 = null;
   document.getElementById('animalFormTitle').textContent = '➕ Naya Animal Add Karein';
@@ -1318,6 +1578,7 @@ function resetAnimalForm() {
   document.getElementById('animalSubmitBtn').onclick = addAnimal;
   document.getElementById('animalCancelBtn').style.display = 'none';
 }
+
 function deleteAnimal(id) {
   openPinVerify(() => {
     const a = data.animals.find(x => x.id === id); if (!a) return;
@@ -1327,6 +1588,7 @@ function deleteAnimal(id) {
     showAlert('🗑️ Delete!');
   }, "🗑️ Delete", "PIN daalein");
 }
+
 function renderAllSelects() {
   const m = document.getElementById('milkAnimal');
   if (m) { m.innerHTML = '<option value="__MILK_ALL__">🥛🥛 MILK ALL (Sab Janwar)</option>'; data.animals.forEach(a => { m.innerHTML += `<option value="${a.name}">${a.name} (${a.type})</option>`; }); }
@@ -1342,14 +1604,23 @@ function renderProfitMotherSelect() {
   data.animals.filter(a => a.gender === 'Female' && a.category === 'Adult').forEach(a => { s.innerHTML += `<option value="${a.name}">${a.name} (${a.type})</option>`; });
 }
 
-// ==================== ANIMAL PROFILE ====================
+// ==================== ANIMAL PROFILE - ENHANCED ====================
 function showAnimalProfile(id) {
   const a = data.animals.find(x => x.id === id); if (!a) return;
   const milkRecs = data.milk.filter(m => m.animal === a.name);
   const totalMilk = milkRecs.reduce((s, m) => s + m.weight, 0);
   const totalMilkVal = milkRecs.reduce((s, m) => s + m.total, 0);
+  const healthRecs = data.health.filter(h => h.animal === a.name);
+  const breedRecs = data.breeding.filter(b => b.animal === a.name);
   const c = calcAnimalCost(a.name);
+  const pregInfo = getPregnancyInfo(a);
   const photoHTML = a.photo ? `<img src="${a.photo}" class="animal-photo">` : `<div class="animal-photo-placeholder">${a.type==='Buffalo'?'🐃':a.type==='Bull'?'🐂':'🐄'}</div>`;
+  
+  // Recent records tables
+  const recentMilk = [...milkRecs].reverse().slice(0, 5);
+  const recentHealth = [...healthRecs].reverse().slice(0, 5);
+  const recentBreed = [...breedRecs].reverse().slice(0, 3);
+  
   document.getElementById('profileBox').innerHTML = `
     <button class="modal-close" onclick="closeProfile()">✕</button>
     <div id="profileContent" class="animal-profile">
@@ -1358,22 +1629,71 @@ function showAnimalProfile(id) {
         <div class="animal-title">
           <h2>${a.name}</h2>
           <p>${a.type} • ${a.category} • ${a.gender}</p>
-          <p style="margin-top:6px;font-size:11px;color:#7f8c8d;">📅 Kharid: ${a.date}</p>
+          <p style="margin-top:6px;font-size:11px;color:#7f8c8d;">📅 Kharid: ${a.date} ${a.birth ? '| 🎂 Birth: ' + a.birth : ''}</p>
         </div>
       </div>
+      
+      ${a.health === 'Pregnant' && pregInfo ? `
+        <div style="background:linear-gradient(135deg,#ffe0b2,#ffcc80);padding:18px;border-radius:15px;margin-bottom:18px;border-left:5px solid #e67e22;">
+          <h3 style="color:#856404;font-size:14px;margin-bottom:10px;">🐄💫 PREGNANCY COUNTDOWN</h3>
+          <div style="text-align:center;font-size:42px;font-weight:900;color:#e74c3c;line-height:1;">${pregInfo.daysRemaining}</div>
+          <div style="text-align:center;font-size:12px;color:#856404;letter-spacing:2px;margin-bottom:12px;">DIN BAQI</div>
+          <div style="background:#fff;height:10px;border-radius:10px;overflow:hidden;">
+            <div style="height:100%;background:linear-gradient(90deg,#e67e22,#e74c3c);width:${pregInfo.progress}%;transition:width 0.5s;"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:#856404;margin-top:8px;">
+            <span>Breeding: ${pregInfo.breedDate}</span>
+            <span>Expected: ${pregInfo.expectedDate.toLocaleDateString('en-PK')}</span>
+          </div>
+        </div>
+      ` : ''}
+      
       <div class="profile-grid">
         <div class="profile-item"><label>Umar</label><div class="value">${a.age} saal</div></div>
         <div class="profile-item"><label>Weight</label><div class="value">${a.weight} kg</div></div>
         <div class="profile-item"><label>Health</label><div class="value">${a.health}</div></div>
-        <div class="profile-item"><label>Qeemat</label><div class="value">Rs. ${a.price.toLocaleString()}</div></div>
+        <div class="profile-item"><label>Qeemat (Asset)</label><div class="value" style="color:#3498db;">Rs. ${a.price.toLocaleString()}</div></div>
         <div class="profile-item"><label>Kul Doodh</label><div class="value">${totalMilk.toFixed(1)} kg</div></div>
         <div class="profile-item"><label>Doodh Value</label><div class="value" style="color:#27ae60;">Rs. ${totalMilkVal.toLocaleString()}</div></div>
-        <div class="profile-item"><label>Doctor</label><div class="value" style="color:#e74c3c;">Rs. ${c.doctor.toLocaleString()}</div></div>
-        <div class="profile-item"><label>Breeding</label><div class="value" style="color:#e74c3c;">Rs. ${c.breeding.toLocaleString()}</div></div>
+        <div class="profile-item"><label>Doctor Records</label><div class="value">${healthRecs.length}</div></div>
+        <div class="profile-item"><label>Doctor Kharcha</label><div class="value" style="color:#e74c3c;">Rs. ${c.doctor.toLocaleString()}</div></div>
+        <div class="profile-item"><label>Breeding Records</label><div class="value">${breedRecs.length}</div></div>
+        <div class="profile-item"><label>Breeding Kharcha</label><div class="value" style="color:#9b59b6;">Rs. ${c.breeding.toLocaleString()}</div></div>
         <div class="profile-item"><label>Kul Kharcha</label><div class="value" style="color:#e74c3c;">Rs. ${c.total.toLocaleString()}</div></div>
-        <div class="profile-item"><label>Net</label><div class="value" style="color:${totalMilkVal - c.total >= 0 ? '#27ae60' : '#e74c3c'};">Rs. ${(totalMilkVal - c.total).toLocaleString()}</div></div>
+        <div class="profile-item"><label>Net Profit</label><div class="value" style="color:${totalMilkVal - c.total >= 0 ? '#27ae60' : '#e74c3c'};">Rs. ${(totalMilkVal - c.total).toLocaleString()}</div></div>
       </div>
-      ${a.notes ? `<div style="margin-top:12px;padding:10px;background:#fff3cd;border-radius:8px;border-left:4px solid #f39c12;font-size:12px;"><strong>📝 Notes:</strong> ${a.notes}</div>` : ''}
+      
+      ${recentMilk.length > 0 ? `
+        <div style="margin-top:20px;">
+          <h3 style="color:#2c5f2d;font-size:13px;margin-bottom:10px;">🥛 Recent Milk Records</h3>
+          <table style="min-width:100%;font-size:11px;box-shadow:none;">
+            <thead><tr><th>Date</th><th>Weight</th><th>Rate</th><th>Total</th></tr></thead>
+            <tbody>${recentMilk.map(m => `<tr><td>${m.date}</td><td>${m.weight} kg</td><td>Rs. ${m.rate}</td><td>Rs. ${m.total.toFixed(0)}</td></tr>`).join('')}</tbody>
+          </table>
+        </div>
+      ` : ''}
+      
+      ${recentHealth.length > 0 ? `
+        <div style="margin-top:20px;">
+          <h3 style="color:#2c5f2d;font-size:13px;margin-bottom:10px;">💊 Recent Health Records</h3>
+          <table style="min-width:100%;font-size:11px;box-shadow:none;">
+            <thead><tr><th>Date</th><th>Type</th><th>Doctor</th><th>Cost</th></tr></thead>
+            <tbody>${recentHealth.map(h => `<tr><td>${h.date}</td><td>${h.type}</td><td>${h.doctor}</td><td>Rs. ${h.cost}</td></tr>`).join('')}</tbody>
+          </table>
+        </div>
+      ` : ''}
+      
+      ${recentBreed.length > 0 ? `
+        <div style="margin-top:20px;">
+          <h3 style="color:#2c5f2d;font-size:13px;margin-bottom:10px;">🐣 Breeding Records</h3>
+          <table style="min-width:100%;font-size:11px;box-shadow:none;">
+            <thead><tr><th>Date</th><th>Method</th><th>Expected</th><th>Status</th><th>Cost</th></tr></thead>
+            <tbody>${recentBreed.map(b => `<tr><td>${b.date}</td><td>${b.method}</td><td>${b.expected}</td><td>${b.status}</td><td>Rs. ${b.cost}</td></tr>`).join('')}</tbody>
+          </table>
+        </div>
+      ` : ''}
+      
+      ${a.notes ? `<div style="margin-top:15px;padding:10px;background:#fff3cd;border-radius:8px;border-left:4px solid #f39c12;font-size:12px;"><strong>📝 Notes:</strong> ${a.notes}</div>` : ''}
     </div>
     <div style="margin-top:20px;text-align:center;">
       <button class="btn btn-success" onclick="shareProfileImage()">📷 Image</button>
@@ -1384,6 +1704,7 @@ function showAnimalProfile(id) {
   document.getElementById('profileModal').classList.add('show');
 }
 function closeProfile() { document.getElementById('profileModal').classList.remove('show'); }
+
 async function shareProfileImage() {
   const c = document.getElementById('profileContent');
   try {
@@ -1542,10 +1863,10 @@ function renderBreeding() {
   if (data.breeding.length === 0) { document.querySelector('#breeding table').style.display = 'none'; document.getElementById('breedingEmpty').style.display = 'block'; return; }
   document.querySelector('#breeding table').style.display = 'table';
   document.getElementById('breedingEmpty').style.display = 'none';
-  [...data.breeding].reverse().forEach(b => { const sc = b.status === 'Pregnant' ? 'badge-pregnant' : b.status === 'Delivered' ? 'badge-healthy' : 'badge-sick'; tbody.innerHTML += `<tr><td>${b.date}</td><td><strong>${b.animal}</strong></td><td>${b.method}</td><td>${b.bull}</td><td>${b.expected}</td><td>Rs.${b.cost}</td><td><span class="badge ${sc}">${b.status}</span></td><td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('breeding',${b.id})">🗑️</button></td></tr>`; });
+  [...data.breeding].reverse().forEach(b => { const sc = b.status === 'Pregnant' ? 'badge-pregnant' : b.status === 'Delivered' ? 'badge-healthy' : 'badge-sick'; tbody.innerHTML += `<tr><td>${b.date}</td><td><strong>${b.animal}</strong></td><td>${b.method}</td><td>${b.bull}</td><td>${b.expected}</td><td style="color:#9b59b6;font-weight:700;">Rs.${b.cost}</td><td><span class="badge ${sc}">${b.status}</span></td><td><button class="btn btn-danger" style="padding:4px 7px;font-size:10px;" onclick="deleteRecord('breeding',${b.id})">🗑️</button></td></tr>`; });
 }
 
-// ==================== PROFIT / FAIDA ====================
+// ==================== PROFIT ====================
 function addProfitBaby() {
   const name = document.getElementById('profitBabyName').value.trim();
   const value = parseFloat(document.getElementById('profitBabyValue').value) || 0;
@@ -1602,7 +1923,8 @@ function renderProfit() {
   const breedC = data.breeding.reduce((s, b) => s + b.cost, 0);
   const labC = data.labor.reduce((s, l) => s + l.amount, 0);
   const civC = data.civil.reduce((s, c) => s + c.total, 0);
-  const totalC = docC + foodC + breedC + labC + civC;
+  const purC = data.sales.filter(s => s.type === 'Purchase').reduce((s, x) => s + x.amount, 0);
+  const totalC = docC + foodC + breedC + labC + civC + purC;
   const netF = tv + milkV - totalC;
   const set = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
   set('profitMaleCount', males.length); set('profitMaleValue', 'Rs. ' + mv.toLocaleString());
@@ -1621,7 +1943,7 @@ function renderProfit() {
   const soldEl = document.getElementById('soldBabySummary');
   if (soldEl) {
     if (sold.length === 0) soldEl.innerHTML = '<p style="color:#999;font-size:12px;">Abhi koi bacha becha nahi</p>';
-    else soldEl.innerHTML = `<table style="box-shadow:none;font-size:12px;"><tr><td><strong>💵 Kul Bechay:</strong></td><td>${sold.length} bache</td></tr><tr><td><strong>💰 Sale Value:</strong></td><td style="color:#27ae60;font-weight:700;">Rs. ${sv.toLocaleString()}</td></tr><tr><td><strong>📊 Average:</strong></td><td>Rs. ${(sv / sold.length).toFixed(0)} per bacha</td></tr></table>`;
+    else soldEl.innerHTML = `<table style="box-shadow:none;font-size:12px;min-width:100%;"><tr><td><strong>💵 Kul Bechay:</strong></td><td style="text-align:right;">${sold.length} bache</td></tr><tr><td><strong>💰 Sale Value:</strong></td><td style="text-align:right;color:#27ae60;font-weight:700;">Rs. ${sv.toLocaleString()}</td></tr><tr><td><strong>📊 Average:</strong></td><td style="text-align:right;">Rs. ${(sv / sold.length).toFixed(0)} per bacha</td></tr></table>`;
   }
   if (filtered.length === 0) { document.getElementById('profitTable').style.display = 'none'; document.getElementById('profitEmpty').style.display = 'block'; return; }
   document.getElementById('profitTable').style.display = 'table';
@@ -1746,6 +2068,7 @@ function renderAssets() {
   set('assetTotalValue', 'Rs. ' + data.assets.reduce((s, a) => s + a.current, 0).toLocaleString());
   set('assetLivestock', 'Rs. ' + data.assets.filter(a => a.type === 'Livestock').reduce((s, a) => s + a.current, 0).toLocaleString());
   set('assetProperty', 'Rs. ' + data.assets.filter(a => a.type === 'Property').reduce((s, a) => s + a.current, 0).toLocaleString());
+  set('totalAnimalAssetValue', 'Rs. ' + data.animals.reduce((s, a) => s + a.price, 0).toLocaleString());
   if (data.assets.length === 0) { document.querySelector('#assets table').style.display = 'none'; document.getElementById('assetEmpty').style.display = 'block'; return; }
   document.querySelector('#assets table').style.display = 'table';
   document.getElementById('assetEmpty').style.display = 'none';
@@ -1778,6 +2101,8 @@ function updateStats() {
   set('sickCount', data.animals.filter(a => a.health === 'Sick').length);
   set('totalBabies', profitBabies.length);
   set('assetCount', data.assets.length);
+  const animalValue = data.animals.reduce((s, a) => s + a.price, 0);
+  set('totalAnimalValue', 'Rs. ' + animalValue.toLocaleString());
   
   const hC = data.health.reduce((s, h) => s + h.cost, 0);
   const fC = data.food.reduce((s, f) => s + f.cost, 0);
@@ -1785,8 +2110,7 @@ function updateStats() {
   const cC = data.civil.reduce((s, c) => s + c.total, 0);
   const bC = data.breeding.reduce((s, b) => s + b.cost, 0);
   const pC = data.sales.filter(s => s.type === 'Purchase').reduce((s, x) => s + x.amount, 0);
-  const aB = data.animals.reduce((s, a) => s + a.price, 0);
-  const tE = hC + fC + lC + cC + bC + pC + aB;
+  const tE = hC + fC + lC + cC + bC + pC;
   const tI = data.milk.reduce((s, x) => s + x.total, 0) + data.sales.filter(s => s.type === 'Sale').reduce((s, x) => s + x.amount, 0);
   const pr = tI - tE;
   set('totalExpense', 'Rs. ' + tE.toLocaleString());
@@ -1818,14 +2142,17 @@ function updateStats() {
     set('sumLabor', 'Rs. ' + lC.toLocaleString());
     set('sumCivil', 'Rs. ' + cC.toLocaleString());
     set('sumBreeding', 'Rs. ' + bC.toLocaleString());
-    set('sumPurchase', 'Rs. ' + (pC + aB).toLocaleString());
+    set('sumPurchase', 'Rs. ' + pC.toLocaleString());
     set('grandTotal', 'Rs. ' + tE.toLocaleString());
     set('grandIncome', 'Rs. ' + tI.toLocaleString());
     set('netProfit', 'Rs. ' + pr.toLocaleString());
+    set('exAnimalValue', 'Rs. ' + animalValue.toLocaleString());
+    set('exOtherAssets', 'Rs. ' + data.assets.reduce((s, a) => s + a.current, 0).toLocaleString());
+    set('exTotalAssets', 'Rs. ' + (animalValue + data.assets.reduce((s, a) => s + a.current, 0)).toLocaleString());
   }
-  
   if (document.getElementById('countAdult')) updateAnimalSummary();
   renderReports();
+  if (document.getElementById('topMilkProducers')) renderAnalytics();
 }
 
 // ==================== CHARTS ====================
@@ -1840,72 +2167,24 @@ function drawChart(type) {
   const t = new Date();
   let L = [], S = [], P = [], M = [], O = [], C = [];
   if (type === 'daily') {
-    for (let i = 29; i >= 0; i--) {
-      const d = new Date(t); d.setDate(d.getDate() - i);
-      const ds = d.toISOString().split('T')[0];
-      L.push(d.toLocaleDateString('en-PK', { day: '2-digit', month: 'short' }));
-      S.push(data.sales.filter(s => s.type === 'Sale' && s.date === ds).reduce((s, x) => s + x.amount, 0) + data.milk.filter(m => m.date === ds).reduce((s, m) => s + m.total, 0));
-      P.push(data.sales.filter(s => s.type === 'Purchase' && s.date === ds).reduce((s, x) => s + x.amount, 0));
-      M.push(data.milk.filter(m => m.date === ds).reduce((s, m) => s + m.weight, 0));
-    }
+    for (let i = 29; i >= 0; i--) { const d = new Date(t); d.setDate(d.getDate() - i); const ds = d.toISOString().split('T')[0]; L.push(d.toLocaleDateString('en-PK', { day: '2-digit', month: 'short' })); S.push(data.sales.filter(s => s.type === 'Sale' && s.date === ds).reduce((s, x) => s + x.amount, 0) + data.milk.filter(m => m.date === ds).reduce((s, m) => s + m.total, 0)); P.push(data.sales.filter(s => s.type === 'Purchase' && s.date === ds).reduce((s, x) => s + x.amount, 0)); M.push(data.milk.filter(m => m.date === ds).reduce((s, m) => s + m.weight, 0)); }
   } else if (type === 'weekly') {
-    for (let i = 11; i >= 0; i--) {
-      const ws = new Date(t); ws.setDate(ws.getDate() - (i * 7));
-      const we = new Date(ws); we.setDate(we.getDate() + 6);
-      const a = ws.toISOString().split('T')[0], b = we.toISOString().split('T')[0];
-      L.push('W' + (12 - i));
-      S.push(data.sales.filter(s => s.type === 'Sale' && s.date >= a && s.date <= b).reduce((s, x) => s + x.amount, 0) + data.milk.filter(m => m.date >= a && m.date <= b).reduce((s, m) => s + m.total, 0));
-      P.push(data.sales.filter(s => s.type === 'Purchase' && s.date >= a && s.date <= b).reduce((s, x) => s + x.amount, 0));
-      M.push(data.milk.filter(m => m.date >= a && m.date <= b).reduce((s, m) => s + m.weight, 0));
-    }
+    for (let i = 11; i >= 0; i--) { const ws = new Date(t); ws.setDate(ws.getDate() - (i * 7)); const we = new Date(ws); we.setDate(we.getDate() + 6); const a = ws.toISOString().split('T')[0], b = we.toISOString().split('T')[0]; L.push('W' + (12 - i)); S.push(data.sales.filter(s => s.type === 'Sale' && s.date >= a && s.date <= b).reduce((s, x) => s + x.amount, 0) + data.milk.filter(m => m.date >= a && m.date <= b).reduce((s, m) => s + m.total, 0)); P.push(data.sales.filter(s => s.type === 'Purchase' && s.date >= a && s.date <= b).reduce((s, x) => s + x.amount, 0)); M.push(data.milk.filter(m => m.date >= a && m.date <= b).reduce((s, m) => s + m.weight, 0)); }
   } else if (type === 'monthly') {
-    for (let i = 11; i >= 0; i--) {
-      const d = new Date(t.getFullYear(), t.getMonth() - i, 1);
-      const ms = d.toISOString().substring(0, 7);
-      L.push(d.toLocaleDateString('en-PK', { month: 'short', year: '2-digit' }));
-      S.push(data.sales.filter(s => s.type === 'Sale' && s.date.startsWith(ms)).reduce((s, x) => s + x.amount, 0) + data.milk.filter(m => m.date.startsWith(ms)).reduce((s, m) => s + m.total, 0));
-      P.push(data.sales.filter(s => s.type === 'Purchase' && s.date.startsWith(ms)).reduce((s, x) => s + x.amount, 0));
-      M.push(data.milk.filter(m => m.date.startsWith(ms)).reduce((s, m) => s + m.weight, 0));
-    }
+    for (let i = 11; i >= 0; i--) { const d = new Date(t.getFullYear(), t.getMonth() - i, 1); const ms = d.toISOString().substring(0, 7); L.push(d.toLocaleDateString('en-PK', { month: 'short', year: '2-digit' })); S.push(data.sales.filter(s => s.type === 'Sale' && s.date.startsWith(ms)).reduce((s, x) => s + x.amount, 0) + data.milk.filter(m => m.date.startsWith(ms)).reduce((s, m) => s + m.total, 0)); P.push(data.sales.filter(s => s.type === 'Purchase' && s.date.startsWith(ms)).reduce((s, x) => s + x.amount, 0)); M.push(data.milk.filter(m => m.date.startsWith(ms)).reduce((s, m) => s + m.weight, 0)); }
   } else if (type === 'candle') {
-    for (let i = 13; i >= 0; i--) {
-      const d = new Date(t); d.setDate(d.getDate() - i);
-      const ds = d.toISOString().split('T')[0];
-      const r = data.milk.filter(m => m.date === ds);
-      L.push(d.toLocaleDateString('en-PK', { day: '2-digit', month: 'short' }));
-      O.push(r.length > 0 ? r[0].rate : 120);
-      C.push(r.length > 0 ? r[r.length - 1].rate : 120);
-    }
-    mainChartInstance = new Chart(ctx, {
-      type: 'bar',
-      data: { labels: L, datasets: [
-        { label: 'Open', data: O, backgroundColor: 'rgba(52,152,219,0.7)', borderColor: '#3498db', borderWidth: 2 },
-        { label: 'Close', data: C, backgroundColor: 'rgba(231,76,60,0.7)', borderColor: '#e74c3c', borderWidth: 2 }
-      ]},
-      options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: '🕯️ Candle Chart', font: { size: 14, weight: 'bold' }, color: '#2c5f2d' }, legend: { labels: { font: { size: 10 } } } }, scales: { y: { beginAtZero: false, ticks: { font: { size: 9 } } }, x: { ticks: { font: { size: 8 } } } } }
-    });
+    for (let i = 13; i >= 0; i--) { const d = new Date(t); d.setDate(d.getDate() - i); const ds = d.toISOString().split('T')[0]; const r = data.milk.filter(m => m.date === ds); L.push(d.toLocaleDateString('en-PK', { day: '2-digit', month: 'short' })); O.push(r.length > 0 ? r[0].rate : 120); C.push(r.length > 0 ? r[r.length - 1].rate : 120); }
+    mainChartInstance = new Chart(ctx, { type: 'bar', data: { labels: L, datasets: [{ label: 'Open', data: O, backgroundColor: 'rgba(52,152,219,0.7)', borderColor: '#3498db', borderWidth: 2 }, { label: 'Close', data: C, backgroundColor: 'rgba(231,76,60,0.7)', borderColor: '#e74c3c', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: '🕯️ Candle Chart', font: { size: 14, weight: 'bold' }, color: '#2c5f2d' }, legend: { labels: { font: { size: 10 } } } }, scales: { y: { beginAtZero: false, ticks: { font: { size: 9 } } }, x: { ticks: { font: { size: 8 } } } } } });
     let html = '<table style="font-size:11px;"><thead><tr><th>Tareekh</th><th>Open</th><th>Close</th><th>Change</th><th>%</th><th>Trend</th></tr></thead><tbody>';
-    L.forEach((l, i) => {
-      const df = C[i] - O[i], p = O[i] > 0 ? ((df / O[i]) * 100).toFixed(2) : 0;
-      const tr = df > 0 ? '🟢 UP' : df < 0 ? '🔴 DOWN' : '⚪ SAME';
-      html += `<tr><td>${l}</td><td>${O[i]}</td><td>${C[i]}</td><td style="color:${df >= 0 ? 'green' : 'red'};font-weight:700;">${df >= 0 ? '+' : ''}${df}</td><td style="color:${df >= 0 ? 'green' : 'red'};font-weight:700;">${p}%</td><td>${tr}</td></tr>`;
-    });
+    L.forEach((l, i) => { const df = C[i] - O[i], p = O[i] > 0 ? ((df / O[i]) * 100).toFixed(2) : 0; const tr = df > 0 ? '🟢 UP' : df < 0 ? '🔴 DOWN' : '⚪ SAME'; html += `<tr><td>${l}</td><td>${O[i]}</td><td>${C[i]}</td><td style="color:${df >= 0 ? 'green' : 'red'};font-weight:700;">${df >= 0 ? '+' : ''}${df}</td><td style="color:${df >= 0 ? 'green' : 'red'};font-weight:700;">${p}%</td><td>${tr}</td></tr>`; });
     html += '</tbody></table>';
     document.getElementById('percentAnalysis').innerHTML = html;
     return;
   }
-  mainChartInstance = new Chart(ctx, {
-    type: 'line',
-    data: { labels: L, datasets: [
-      { label: '💵 Sale', data: S, borderColor: '#27ae60', backgroundColor: 'rgba(39,174,96,0.15)', tension: 0.4, fill: true, borderWidth: 2 },
-      { label: '🛒 Purchase', data: P, borderColor: '#e74c3c', backgroundColor: 'rgba(231,76,60,0.15)', tension: 0.4, fill: true, borderWidth: 2 },
-      { label: '🥛 Milk', data: M, borderColor: '#3498db', backgroundColor: 'rgba(52,152,219,0.15)', tension: 0.4, fill: true, borderWidth: 2, yAxisID: 'y1' }
-    ]},
-    options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: `${type.toUpperCase()} Analysis`, font: { size: 14, weight: 'bold' }, color: '#2c5f2d' }, legend: { labels: { font: { size: 10 } } } }, scales: { y: { beginAtZero: true, position: 'left', ticks: { font: { size: 9 } } }, y1: { beginAtZero: true, position: 'right', grid: { drawOnChartArea: false }, ticks: { font: { size: 9 } } }, x: { ticks: { font: { size: 8 } } } } }
-  });
+  mainChartInstance = new Chart(ctx, { type: 'line', data: { labels: L, datasets: [{ label: '💵 Sale', data: S, borderColor: '#27ae60', backgroundColor: 'rgba(39,174,96,0.15)', tension: 0.4, fill: true, borderWidth: 2 }, { label: '🛒 Purchase', data: P, borderColor: '#e74c3c', backgroundColor: 'rgba(231,76,60,0.15)', tension: 0.4, fill: true, borderWidth: 2 }, { label: '🥛 Milk', data: M, borderColor: '#3498db', backgroundColor: 'rgba(52,152,219,0.15)', tension: 0.4, fill: true, borderWidth: 2, yAxisID: 'y1' }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: `${type.toUpperCase()} Analysis`, font: { size: 14, weight: 'bold' }, color: '#2c5f2d' }, legend: { labels: { font: { size: 10 } } } }, scales: { y: { beginAtZero: true, position: 'left', ticks: { font: { size: 9 } } }, y1: { beginAtZero: true, position: 'right', grid: { drawOnChartArea: false }, ticks: { font: { size: 9 } } }, x: { ticks: { font: { size: 8 } } } } } });
   const tS = S.reduce((s, x) => s + x, 0), tP = P.reduce((s, x) => s + x, 0), tM = M.reduce((s, x) => s + x, 0);
   const pr = tS - tP, mg = tS > 0 ? ((pr / tS) * 100).toFixed(2) : 0;
-  document.getElementById('percentAnalysis').innerHTML = `<table style="font-size:12px;"><tr><td>💵 <strong>Sale:</strong></td><td>Rs. ${tS.toLocaleString()}</td></tr><tr><td>🛒 <strong>Purchase:</strong></td><td>Rs. ${tP.toLocaleString()}</td></tr><tr><td>🥛 <strong>Milk:</strong></td><td>${tM.toFixed(1)} kg</td></tr><tr><td>📈 <strong>Net:</strong></td><td style="color:${pr >= 0 ? 'green' : 'red'};font-weight:700;">Rs. ${pr.toLocaleString()}</td></tr><tr><td>📊 <strong>Margin:</strong></td><td style="color:${mg >= 0 ? 'green' : 'red'};font-weight:700;">${mg}%</td></tr></table>`;
+  document.getElementById('percentAnalysis').innerHTML = `<table style="font-size:12px;min-width:100%;"><tr><td>💵 <strong>Sale:</strong></td><td style="text-align:right;">Rs. ${tS.toLocaleString()}</td></tr><tr><td>🛒 <strong>Purchase:</strong></td><td style="text-align:right;">Rs. ${tP.toLocaleString()}</td></tr><tr><td>🥛 <strong>Milk:</strong></td><td style="text-align:right;">${tM.toFixed(1)} kg</td></tr><tr><td>📈 <strong>Net:</strong></td><td style="text-align:right;color:${pr >= 0 ? 'green' : 'red'};font-weight:700;">Rs. ${pr.toLocaleString()}</td></tr><tr><td>📊 <strong>Margin:</strong></td><td style="text-align:right;color:${mg >= 0 ? 'green' : 'red'};font-weight:700;">${mg}%</td></tr></table>`;
 }
 function drawDashChart() {
   const ctx = document.getElementById('dashChart'); if (!ctx) return;
@@ -1923,15 +2202,7 @@ function drawDashChart() {
     const l = data.labor.filter(x => x.date === ds).reduce((s, x) => s + x.amount, 0);
     E.push(h + f + l);
   }
-  dashChartInstance = new Chart(ctx, {
-    type: 'line',
-    data: { labels: L, datasets: [
-      { label: '🥛 Milk (kg)', data: M, borderColor: '#3498db', backgroundColor: 'rgba(52,152,219,0.15)', tension: 0.4, fill: true, borderWidth: 2 },
-      { label: '💵 Sale', data: S, borderColor: '#27ae60', backgroundColor: 'rgba(39,174,96,0.15)', tension: 0.4, fill: true, borderWidth: 2, yAxisID: 'y1' },
-      { label: '💸 Expense', data: E, borderColor: '#e74c3c', backgroundColor: 'rgba(231,76,60,0.15)', tension: 0.4, fill: true, borderWidth: 2, yAxisID: 'y1' }
-    ]},
-    options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: '📊 30 Din Overview', font: { size: 14, weight: 'bold' }, color: '#2c5f2d' }, legend: { labels: { font: { size: 10 } } } }, scales: { y: { beginAtZero: true, position: 'left', ticks: { font: { size: 9 } } }, y1: { beginAtZero: true, position: 'right', grid: { drawOnChartArea: false }, ticks: { font: { size: 9 } } }, x: { ticks: { font: { size: 8 } } } } }
-  });
+  dashChartInstance = new Chart(ctx, { type: 'line', data: { labels: L, datasets: [{ label: '🥛 Milk (kg)', data: M, borderColor: '#3498db', backgroundColor: 'rgba(52,152,219,0.15)', tension: 0.4, fill: true, borderWidth: 2 }, { label: '💵 Sale', data: S, borderColor: '#27ae60', backgroundColor: 'rgba(39,174,96,0.15)', tension: 0.4, fill: true, borderWidth: 2, yAxisID: 'y1' }, { label: '💸 Expense', data: E, borderColor: '#e74c3c', backgroundColor: 'rgba(231,76,60,0.15)', tension: 0.4, fill: true, borderWidth: 2, yAxisID: 'y1' }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: '📊 30 Din Overview', font: { size: 14, weight: 'bold' }, color: '#2c5f2d' }, legend: { labels: { font: { size: 10 } } } }, scales: { y: { beginAtZero: true, position: 'left', ticks: { font: { size: 9 } } }, y1: { beginAtZero: true, position: 'right', grid: { drawOnChartArea: false }, ticks: { font: { size: 9 } } }, x: { ticks: { font: { size: 8 } } } } } });
 }
 
 // ==================== REPORTS ====================
@@ -1948,7 +2219,7 @@ function renderReports() {
   const mb = data.breeding.filter(x => x.date.startsWith(m)).reduce((s, x) => s + x.cost, 0);
   const mi = mmi + ms, me = mh + mf + ml + mc + mb + mp, mpr = mi - me;
   const el = document.getElementById('monthlyReport');
-  if (el) el.innerHTML = `<table style="box-shadow:none;font-size:12px;min-width:100%;"><tr><td><strong>🥛 Doodh:</strong></td><td>${mm.toFixed(1)} kg</td></tr><tr><td><strong>💵 Doodh Income:</strong></td><td style="color:#27ae60;">Rs. ${mmi.toLocaleString()}</td></tr><tr><td><strong>💵 Sale:</strong></td><td style="color:#27ae60;">Rs. ${ms.toLocaleString()}</td></tr><tr><td><strong>💊 Doctor:</strong></td><td style="color:#e74c3c;">Rs. ${mh.toLocaleString()}</td></tr><tr><td><strong>🌾 Khana:</strong></td><td style="color:#e74c3c;">Rs. ${mf.toLocaleString()}</td></tr><tr><td><strong>👷 Mazdoori:</strong></td><td style="color:#e74c3c;">Rs. ${ml.toLocaleString()}</td></tr><tr><td><strong>🏗️ Civil:</strong></td><td style="color:#e74c3c;">Rs. ${mc.toLocaleString()}</td></tr><tr><td><strong>🐣 Breeding:</strong></td><td style="color:#e74c3c;">Rs. ${mb.toLocaleString()}</td></tr><tr style="background:#f0f0f0;"><td><strong>📊 Total Kharcha:</strong></td><td><strong>Rs. ${me.toLocaleString()}</strong></td></tr><tr style="background:${mpr >= 0 ? '#d4edda' : '#f8d7da'};"><td><strong>💰 Munfa:</strong></td><td><strong style="color:${mpr >= 0 ? '#155724' : '#721c24'};">Rs. ${mpr.toLocaleString()}</strong></td></tr></table>`;
+  if (el) el.innerHTML = `<table style="box-shadow:none;font-size:12px;min-width:100%;"><tr><td><strong>🥛 Doodh:</strong></td><td style="text-align:right;">${mm.toFixed(1)} kg</td></tr><tr><td><strong>💵 Doodh Income:</strong></td><td style="text-align:right;color:#27ae60;">Rs. ${mmi.toLocaleString()}</td></tr><tr><td><strong>💵 Sale:</strong></td><td style="text-align:right;color:#27ae60;">Rs. ${ms.toLocaleString()}</td></tr><tr><td><strong>💊 Doctor:</strong></td><td style="text-align:right;color:#e74c3c;">Rs. ${mh.toLocaleString()}</td></tr><tr><td><strong>🌾 Khana:</strong></td><td style="text-align:right;color:#e74c3c;">Rs. ${mf.toLocaleString()}</td></tr><tr><td><strong>👷 Mazdoori:</strong></td><td style="text-align:right;color:#e74c3c;">Rs. ${ml.toLocaleString()}</td></tr><tr><td><strong>🏗️ Civil:</strong></td><td style="text-align:right;color:#e74c3c;">Rs. ${mc.toLocaleString()}</td></tr><tr><td><strong>🐣 Breeding:</strong></td><td style="text-align:right;color:#9b59b6;">Rs. ${mb.toLocaleString()}</td></tr><tr style="background:#f0f0f0;"><td><strong>📊 Total Kharcha:</strong></td><td style="text-align:right;"><strong>Rs. ${me.toLocaleString()}</strong></td></tr><tr style="background:${mpr >= 0 ? '#d4edda' : '#f8d7da'};"><td><strong>💰 Munfa:</strong></td><td style="text-align:right;"><strong style="color:${mpr >= 0 ? '#155724' : '#721c24'};">Rs. ${mpr.toLocaleString()}</strong></td></tr></table>`;
   let a = [];
   const sick = data.animals.filter(x => x.health === 'Sick');
   if (sick.length > 0) a.push(`⚠️ ${sick.length} beemar: ${sick.map(x => x.name).join(', ')}`);
@@ -1976,7 +2247,8 @@ function exportData() {
   a.href = u;
   a.download = 'sabir-dairy-backup-' + new Date().toISOString().split('T')[0] + '.json';
   a.click();
-  showAlert('✅ Export!');
+  localStorage.setItem('sdf_last_backup', Date.now());
+  showAlert('✅ Export! Backup save!');
 }
 function importData(e) {
   const f = e.target.files[0]; if (!f) return;
@@ -2002,6 +2274,7 @@ function renderAll() {
   renderCivil(); renderBreeding(); renderSales(); renderAssets();
   renderProfit(); renderProfitMotherSelect();
   renderAllSelects(); updateStats(); updateRequestsCount();
+  renderAnalytics();
   setTimeout(() => drawDashChart(), 200);
 }
 
@@ -2016,29 +2289,20 @@ async function init() {
   setupFirebaseSync();
   loadRequestsFromFirebase();
   setTimeout(() => drawDashChart(), 300);
+  // Auto refresh pregnancy countdown every 1 hour
+  setInterval(() => { if (currentAnimalFilter === 'Pregnant') renderPregnantCards(); }, 3600000);
 }
 
 document.getElementById('animalPhoto')?.addEventListener('change', function(e) {
   const f = e.target.files[0]; if (!f) return;
-  const r = new FileReader();
-  r.onload = ev => { currentPhotoBase64 = ev.target.result; };
-  r.readAsDataURL(f);
+  compressImage(f, (compressed) => { currentPhotoBase64 = compressed; });
 });
 
 document.addEventListener('keydown', (e) => {
   const lv = !document.getElementById('lockScreen').classList.contains('hide');
   const vv = document.getElementById('pinVerifyModal').classList.contains('show');
-  if (lv) {
-    if (/^[0-9]$/.test(e.key)) pinInput(e.key);
-    else if (e.key === 'Backspace') pinDelete();
-    else if (e.key === 'Enter') pinSubmit();
-    else if (e.key === 'Escape') pinClear();
-  } else if (vv) {
-    if (/^[0-9]$/.test(e.key)) verifyInput(e.key);
-    else if (e.key === 'Backspace') verifyDelete();
-    else if (e.key === 'Enter') verifySubmit();
-    else if (e.key === 'Escape') closePinVerify();
-  }
+  if (lv) { if (/^[0-9]$/.test(e.key)) pinInput(e.key); else if (e.key === 'Backspace') pinDelete(); else if (e.key === 'Enter') pinSubmit(); else if (e.key === 'Escape') pinClear(); }
+  else if (vv) { if (/^[0-9]$/.test(e.key)) verifyInput(e.key); else if (e.key === 'Backspace') verifyDelete(); else if (e.key === 'Enter') verifySubmit(); else if (e.key === 'Escape') closePinVerify(); }
 });
 
 init();
